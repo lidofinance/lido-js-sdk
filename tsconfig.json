@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "baseUrl": ".",
+    "declaration": true,
+    "moduleResolution": "node"
+  },
+  "include": ["**/src/*.ts"],
+  "exclude": ["node_modules"]
+}
