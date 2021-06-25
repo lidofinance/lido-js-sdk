@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["esnext"],
     "strict": true,
     "strictNullChecks": true,
     "noImplicitReturns": true,

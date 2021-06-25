@@ -1,0 +1,36 @@
+{
+  "name": "@lido-sdk/fetch",
+  "version": "0.0.0-semantic-release",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "license": "MIT",
+  "homepage": "https://github.com/lidofinance/lido-js-sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lidofinance/lido-js-sdk.git",
+    "directory": "packages/fetch"
+  },
+  "bugs": {
+    "url": "https://github.com/lidofinance/lido-js-sdk/issues"
+  },
+  "keywords": [
+    "lido",
+    "lido-sdk",
+    "lido-js-sdk",
+    "lidofinance"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/node-fetch": "^2"
+  },
+  "dependencies": {
+    "@ethersproject/providers": "5",
+    "@lido-sdk/constants": "workspace:*",
+    "node-fetch": "2",
+    "tiny-invariant": "1"
+  }
+}

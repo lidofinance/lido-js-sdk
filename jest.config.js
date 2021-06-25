@@ -9,7 +9,8 @@ module.exports = {
       statements: 95,
     },
   },
+  collectCoverageFrom: ['packages/**/src/**/*.{ts,tsx}'],
   transform: {
-    '^.+\\.tsx?$': 'babel-jest',
+    '^.+\\.(tsx?)$': 'babel-jest',
   },
 };

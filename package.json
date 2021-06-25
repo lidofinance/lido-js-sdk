@@ -5,9 +5,11 @@
   "workspaces": [
     "packages/*"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "rollup -c",
     "test": "jest --coverage",
+    "test:watch": "jest --watch --coverage",
     "lint": "eslint --ext ts,tsx .",
     "postinstall": "husky install"
   },
