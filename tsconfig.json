@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["esnext"],
+    "lib": ["dom", "esnext"],
     "strict": true,
     "strictNullChecks": true,
     "noImplicitReturns": true,
@@ -8,8 +8,11 @@
     "noImplicitAny": true,
     "baseUrl": ".",
     "declaration": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "target": "es5"
   },
-  "include": ["**/src/*.ts"],
+  "include": ["**/src/**/*"],
   "exclude": ["node_modules"]
 }

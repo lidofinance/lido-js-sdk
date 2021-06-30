@@ -35,8 +35,6 @@ const result = await response.json();
 
 ## Fetch RPC
 
-RPC fetcher with
-
 ```ts
 import { fetchRPC } from '@lido-sdk/fetch';
 
@@ -51,7 +49,7 @@ const options = {
   },
 };
 
-// get chainId and body from request
+// chainId and body from request
 const chainId = Number(req.query.chainId);
 const body = JSON.stringify(req.body);
 

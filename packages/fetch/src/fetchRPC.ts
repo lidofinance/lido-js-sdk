@@ -1,7 +1,7 @@
 import invariant from 'tiny-invariant';
 import { CHAINS } from '@lido-sdk/constants';
 import { fetchWithFallbacks } from './fetchWithFallbacks';
-import { getRPCUrls, RPCProvidersKeys } from './providersRPC';
+import { getRPCUrls, RPCProvidersKeys } from './providersUrls';
 import { RequestInit, Response } from './fetch';
 
 export type FetRPCUrl = (chainId: CHAINS) => string;

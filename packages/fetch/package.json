@@ -28,7 +28,6 @@
     "@types/node-fetch": "^2"
   },
   "dependencies": {
-    "@ethersproject/providers": "5",
     "@lido-sdk/constants": "workspace:*",
     "node-fetch": "2",
     "tiny-invariant": "1"

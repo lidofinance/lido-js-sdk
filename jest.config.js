@@ -10,7 +10,9 @@ module.exports = {
     },
   },
   collectCoverageFrom: ['packages/**/src/**/*.{ts,tsx}'],
+  coveragePathIgnorePatterns: ['src/generated'],
   transform: {
     '^.+\\.(tsx?)$': 'babel-jest',
   },
+  testEnvironment: 'jest-environment-jsdom',
 };

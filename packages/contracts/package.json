@@ -1,0 +1,48 @@
+{
+  "name": "@lido-sdk/contracts",
+  "version": "0.0.0-semantic-release",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "license": "MIT",
+  "homepage": "https://github.com/lidofinance/lido-js-sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lidofinance/lido-js-sdk.git",
+    "directory": "packages/contracts"
+  },
+  "bugs": {
+    "url": "https://github.com/lidofinance/lido-js-sdk/issues"
+  },
+  "keywords": [
+    "lido",
+    "lido-sdk",
+    "lido-js-sdk",
+    "lidofinance"
+  ],
+  "scripts": {
+    "typechain": "typechain --target=ethers-v5 --out-dir ./src/generated './src/abi/*.json'",
+    "postinstall": "yarn typechain"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@ethersproject/abi": "^5.4.0",
+    "@ethersproject/bytes": "^5.4.0",
+    "@ethersproject/providers": "^5.4.0",
+    "@lido-sdk/fetch": "workspace:*",
+    "@lido-sdk/providers": "workspace:*",
+    "@typechain/ethers-v5": "^7.0.1",
+    "@types/jest": "^26.0.23",
+    "typechain": "^5.1.1",
+    "typescript": "^4.3.4"
+  },
+  "dependencies": {
+    "@ethersproject/abstract-signer": "^5.4.0",
+    "@ethersproject/contracts": "^5.4.0",
+    "@lido-sdk/constants": "workspace:*",
+    "ethers": "5",
+    "tiny-invariant": "1"
+  }
+}

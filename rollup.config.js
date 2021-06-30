@@ -5,10 +5,11 @@ import ts from 'typescript';
 import { topologicallySort, listWorkspaces } from 'yarn-workspaces-list';
 import typescript from 'rollup-plugin-typescript2';
 import del from 'rollup-plugin-delete';
+import copy from 'rollup-plugin-copy';
 import resolve from '@rollup/plugin-node-resolve';
 
 const excludedWorkspaces = ['.'];
-const extensions = ['.ts', '.tsx'];
+const extensions = ['.ts', '.tsx', '.d.ts'];
 const commonExternal = ['react/jsx-runtime'];
 
 export default async () => {
@@ -29,17 +30,22 @@ export default async () => {
       ...Object.keys({ ...dependencies, ...peerDependencies }),
     ];
 
+    const cjsDir = path.join(packageDir, path.dirname(packageJson.main));
+    const esmDir = path.join(packageDir, path.dirname(packageJson.module));
+
     return {
       input: path.join(packageDir, 'src/index'),
       output: [
         {
-          dir: path.join(packageDir, path.dirname(packageJson.main)),
+          dir: cjsDir,
+          preserveModulesRoot: path.join(packageDir, 'src'),
           preserveModules: true,
           format: 'cjs',
           exports: 'named',
         },
         {
-          dir: path.join(packageDir, path.dirname(packageJson.module)),
+          dir: esmDir,
+          preserveModulesRoot: path.join(packageDir, 'src'),
           preserveModules: true,
           format: 'es',
           exports: 'named',
@@ -47,6 +53,18 @@ export default async () => {
       ],
       plugins: [
         del({ targets: path.join(packageDir, 'dist/*'), runOnce: true }),
+        copy({
+          targets: [
+            {
+              src: path.join(packageDir, 'src/generated/*.d.ts'),
+              dest: [
+                path.join(cjsDir, 'generated'),
+                path.join(esmDir, 'generated'),
+              ],
+            },
+          ],
+          copyOnce: true,
+        }),
         resolve({ extensions }),
         typescript({
           tslib,
