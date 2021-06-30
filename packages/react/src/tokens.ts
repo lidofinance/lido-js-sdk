@@ -1,41 +1,61 @@
-import { TOKENS } from '@lido-sdk/constants';
+import { BigNumber } from '@ethersproject/bignumber';
+import { TOKENS, CHAINS, getTokenAddress } from '@lido-sdk/constants';
 import {
+  SWRResponse,
   useAllowance,
-  useTokenAddress,
+  useDecimals,
+  useSDK,
   useTokenBalance,
   useTotalSupply,
 } from './hooks';
 
-const hooksFactory = (token: TOKENS) => {
+export const hooksFactory = (
+  getTokenAddress: (chainId: CHAINS) => string,
+): {
+  useTokenBalance: () => SWRResponse<BigNumber>;
+  useTotalSupply: () => SWRResponse<BigNumber>;
+  useDecimals: () => SWRResponse<number>;
+  useAllowance: (spender: string) => SWRResponse<BigNumber>;
+} => {
   return {
     useTokenBalance: () => {
-      return useTokenBalance(useTokenAddress(token));
+      const { chainId } = useSDK();
+      const tokenAddress = getTokenAddress(chainId);
+      return useTokenBalance(tokenAddress);
     },
     useTotalSupply: () => {
-      return useTotalSupply(useTokenAddress(token));
+      const { chainId } = useSDK();
+      const tokenAddress = getTokenAddress(chainId);
+      return useTotalSupply(tokenAddress);
     },
     useDecimals: () => {
-      return useTotalSupply(useTokenAddress(token));
+      const { chainId } = useSDK();
+      const tokenAddress = getTokenAddress(chainId);
+      return useDecimals(tokenAddress);
     },
     useAllowance: (spender: string) => {
-      return useAllowance(useTokenAddress(token), spender);
+      const { chainId } = useSDK();
+      const tokenAddress = getTokenAddress(chainId);
+      return useAllowance(tokenAddress, spender);
     },
   };
 };
 
-const wsteth = hooksFactory(TOKENS.WSTETH);
+const wsteth = hooksFactory((chainId) =>
+  getTokenAddress(chainId, TOKENS.WSTETH),
+);
 export const useWSTETHBalance = wsteth.useTokenBalance;
 export const useWSTETHTotalSupply = wsteth.useTotalSupply;
 export const useWSTETHDecimals = wsteth.useDecimals;
 export const useWSTETHAllowance = wsteth.useAllowance;
 
-const steth = hooksFactory(TOKENS.STETH);
+const steth = hooksFactory((chainId) => getTokenAddress(chainId, TOKENS.STETH));
 export const useSTETHBalance = steth.useTokenBalance;
 export const useSTETHTotalSupply = steth.useTotalSupply;
 export const useSTETHDecimals = steth.useDecimals;
 export const useSTETHAllowance = steth.useAllowance;
 
-const ldo = hooksFactory(TOKENS.LDO);
+const ldo = hooksFactory((chainId) => getTokenAddress(chainId, TOKENS.LDO));
 export const useLDOBalance = ldo.useTokenBalance;
 export const useLDOTotalSupply = ldo.useTotalSupply;
 export const useLDODecimals = ldo.useDecimals;

@@ -1,6 +1,6 @@
 # Providers
 
-Fetchers for Lido Finance projects.
+Providers for Lido Finance projects.
 Part of [Lido JS SDK](https://github.com/lidofinance/lido-js-sdk/#readme)
 
 ## Install

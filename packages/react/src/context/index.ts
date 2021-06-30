@@ -1,2 +1,2 @@
 export * from './SDK';
-export { default as SDKProvider } from './SDK';
+export { default as ProviderSDK } from './SDK';

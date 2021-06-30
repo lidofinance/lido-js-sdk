@@ -29,5 +29,16 @@ const color = getChainColor(CHAINS.Goerli);
 ```ts
 import { CHAINS, TOKENS } from '@lido-sdk/constants';
 
-const stethAddress = getTokenAddress(CHAINS.Mainnet, TOKENS.steth);
+const stethAddress = getTokenAddress(CHAINS.Mainnet, TOKENS.STETH);
+```
+
+## Aggregator
+
+EACAggregatorProxy https://etherscan.io/address/0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419  
+It is used to get the ETH price
+
+```ts
+import { CHAINS, getAggregatorAddress } from '@lido-sdk/constants';
+
+const aggregatorAddress = getAggregatorAddress(CHAINS.Mainnet);
 ```
