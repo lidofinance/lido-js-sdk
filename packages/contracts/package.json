@@ -39,8 +39,8 @@
     "typescript": "^4.3.4"
   },
   "dependencies": {
-    "@ethersproject/abstract-signer": "^5.4.0",
-    "@ethersproject/contracts": "^5.4.0",
+    "@ethersproject/abstract-signer": "5",
+    "@ethersproject/contracts": "5",
     "@lido-sdk/constants": "workspace:*",
     "ethers": "5",
     "tiny-invariant": "1"
