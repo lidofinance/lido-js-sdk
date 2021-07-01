@@ -19,7 +19,7 @@ export const web3ContractHookFactory = <C extends BaseContract>(
     const tokenAddress = getTokenAddress(chainId);
 
     if (!providerWeb3) return null;
-    return getContract(tokenAddress, providerWeb3);
+    return getContract(tokenAddress, providerWeb3.getSigner());
   };
 };
 

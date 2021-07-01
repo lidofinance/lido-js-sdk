@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { ProviderWrapper } from '../hooks/testUtils';
-import { getDefaultProvider } from '@ethersproject/providers';
+import { Web3Provider } from '@ethersproject/providers';
 import { Contract } from '@ethersproject/contracts';
 import * as contractsExport from './contracts';
 
@@ -15,7 +15,10 @@ describe('contracts', () => {
 
     test(`${name} should work`, async () => {
       const wrapper: FC = (props) => (
-        <ProviderWrapper providerWeb3={getDefaultProvider()} {...props} />
+        <ProviderWrapper
+          providerWeb3={new Web3Provider(async () => void 0)}
+          {...props}
+        />
       );
 
       const { result } = renderHook(() => hook(), { wrapper });

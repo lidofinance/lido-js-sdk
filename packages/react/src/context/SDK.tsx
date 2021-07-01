@@ -1,8 +1,8 @@
 import invariant from 'tiny-invariant';
 import { CHAINS } from '@lido-sdk/constants';
 import {
-  Provider,
   BaseProvider,
+  Web3Provider,
   getDefaultProvider,
 } from '@ethersproject/providers';
 import { createContext, memo, useMemo, FC } from 'react';
@@ -12,7 +12,7 @@ export interface SDKContextProps {
   chainId: CHAINS;
   supportedChainIds: CHAINS[];
   providerRpc?: BaseProvider;
-  providerWeb3?: Provider;
+  providerWeb3?: Web3Provider;
   swrConfig?: SWRConfiguration;
   account?: string;
 }
@@ -21,7 +21,7 @@ export interface SDKContextValue {
   chainId: CHAINS;
   supportedChainIds: CHAINS[];
   providerRpc: BaseProvider;
-  providerWeb3?: Provider;
+  providerWeb3?: Web3Provider;
   swrConfig?: SWRConfiguration;
   account?: string;
 }
@@ -39,7 +39,7 @@ const ProviderSDK: FC<SDKContextProps> = (props) => {
   } = props;
 
   invariant(chainId !== null, 'Chain is not supported');
-  invariant(supportedChainIds.length > 0, 'Supported chains are required');
+  invariant(supportedChainIds?.length, 'Supported chains are required');
 
   const providerRpc = useMemo(() => {
     return props.providerRpc ?? getDefaultProvider();
