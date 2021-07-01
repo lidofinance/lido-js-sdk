@@ -1780,7 +1780,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/providers@npm:5, @ethersproject/providers@npm:5.4.0, @ethersproject/providers@npm:^5.4.0":
+"@ethersproject/providers@npm:5.4.0, @ethersproject/providers@npm:^5.4.0":
   version: 5.4.0
   resolution: "@ethersproject/providers@npm:5.4.0"
   dependencies:
@@ -2248,9 +2248,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lido-sdk/providers@workspace:packages/providers"
   dependencies:
-    "@ethersproject/providers": 5
+    "@ethersproject/providers": ^5.4.0
     "@lido-sdk/constants": "workspace:*"
     "@types/jest": ^26.0.23
+  peerDependencies:
+    "@ethersproject/providers": 5
   languageName: unknown
   linkType: soft
 
@@ -2270,7 +2272,7 @@ __metadata:
     "@types/react-dom": ^17
     react: ^17.0.2
     react-dom: ^17.0.2
-    swr: 0
+    swr: ^0.5.6
     tiny-invariant: 1
     tiny-warning: 1
   peerDependencies:
@@ -2279,6 +2281,7 @@ __metadata:
     "@ethersproject/providers": 5
     react: 16 || 17 || 18
     react-dom: 16 || 17 || 18
+    swr: 0
   languageName: unknown
   linkType: soft
 
@@ -11126,7 +11129,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"swr@npm:0":
+"swr@npm:^0.5.6":
   version: 0.5.6
   resolution: "swr@npm:0.5.6"
   dependencies:

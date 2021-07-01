@@ -33,13 +33,13 @@
     "@types/react": "^17",
     "@types/react-dom": "^17",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "swr": "^0.5.6"
   },
   "dependencies": {
     "@lido-sdk/constants": "workspace:*",
     "@lido-sdk/contracts": "workspace:*",
     "@lido-sdk/helpers": "workspace:*",
-    "swr": "0",
     "tiny-invariant": "1",
     "tiny-warning": "1"
   },
@@ -48,6 +48,7 @@
     "@ethersproject/contracts": "5",
     "@ethersproject/providers": "5",
     "react": "16 || 17 || 18",
-    "react-dom": "16 || 17 || 18"
+    "react-dom": "16 || 17 || 18",
+    "swr": "0"
   }
 }

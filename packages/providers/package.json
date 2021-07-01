@@ -25,10 +25,13 @@
     "access": "public"
   },
   "devDependencies": {
+    "@ethersproject/providers": "^5.4.0",
     "@types/jest": "^26.0.23"
   },
   "dependencies": {
-    "@ethersproject/providers": "5",
     "@lido-sdk/constants": "workspace:*"
+  },
+  "peerDependencies": {
+    "@ethersproject/providers": "5"
   }
 }
