@@ -1586,7 +1586,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/abstract-signer@npm:5.4.0, @ethersproject/abstract-signer@npm:^5.4.0":
+"@ethersproject/abstract-signer@npm:5, @ethersproject/abstract-signer@npm:5.4.0, @ethersproject/abstract-signer@npm:^5.4.0":
   version: 5.4.0
   resolution: "@ethersproject/abstract-signer@npm:5.4.0"
   dependencies:
@@ -1631,7 +1631,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/bignumber@npm:5.4.0, @ethersproject/bignumber@npm:^5.4.0":
+"@ethersproject/bignumber@npm:5, @ethersproject/bignumber@npm:5.4.0, @ethersproject/bignumber@npm:^5.4.0":
   version: 5.4.0
   resolution: "@ethersproject/bignumber@npm:5.4.0"
   dependencies:
@@ -1660,7 +1660,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/contracts@npm:5.4.0, @ethersproject/contracts@npm:^5.4.0":
+"@ethersproject/contracts@npm:5, @ethersproject/contracts@npm:5.4.0":
   version: 5.4.0
   resolution: "@ethersproject/contracts@npm:5.4.0"
   dependencies:
@@ -2201,9 +2201,9 @@ __metadata:
   resolution: "@lido-sdk/contracts@workspace:packages/contracts"
   dependencies:
     "@ethersproject/abi": ^5.4.0
-    "@ethersproject/abstract-signer": ^5.4.0
+    "@ethersproject/abstract-signer": 5
     "@ethersproject/bytes": ^5.4.0
-    "@ethersproject/contracts": ^5.4.0
+    "@ethersproject/contracts": 5
     "@ethersproject/providers": ^5.4.0
     "@lido-sdk/constants": "workspace:*"
     "@lido-sdk/fetch": "workspace:*"
@@ -2253,7 +2253,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lido-sdk/react@workspace:packages/react"
   dependencies:
-    "@ethersproject/bignumber": ^5.4.0
+    "@ethersproject/bignumber": 5
     "@ethersproject/providers": 5
     "@lido-sdk/constants": "workspace:*"
     "@lido-sdk/contracts": "workspace:*"
@@ -2264,9 +2264,9 @@ __metadata:
     "@types/react-dom": ^17
     react: ^17.0.2
     react-dom: ^17.0.2
-    swr: ^0.5.6
+    swr: 0
     tiny-invariant: 1
-    tiny-warning: ^1.0.3
+    tiny-warning: 1
   peerDependencies:
     react: 16 || 17 || 18
     react-dom: 16 || 17 || 18
@@ -11117,7 +11117,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"swr@npm:^0.5.6":
+"swr@npm:0":
   version: 0.5.6
   resolution: "swr@npm:0.5.6"
   dependencies:
@@ -11275,7 +11275,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tiny-warning@npm:^1.0.3":
+"tiny-warning@npm:1":
   version: 1.0.3
   resolution: "tiny-warning@npm:1.0.3"
   checksum: 6cf9f66cb765b893976b8cd1c1310338861f30fb04d02ef2c8e0a748cbc2ed5acd8bb1954b78c15f640ad4116def67134d7d705f2a0c9bf27e6e2eb3e92bff29
