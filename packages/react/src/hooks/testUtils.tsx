@@ -6,9 +6,9 @@ export const sleep = (time: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, time));
 };
 
-const supportedChainsIds = [CHAINS.Rinkeby];
+const supportedChainIds = [CHAINS.Rinkeby];
 const chainId = CHAINS.Rinkeby;
-const providerProps = { supportedChainsIds, chainId };
+const providerProps = { supportedChainIds, chainId };
 
 export const ProviderWrapper: FC<Partial<SDKContextProps>> = (props) => (
   <ProviderSDK {...providerProps} {...props} />

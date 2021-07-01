@@ -17,7 +17,7 @@ To use ERC20 hooks, your app must be wrapped with `<ProviderSDK />`.
 import { ProviderSDK } from '@lido-sdk/react';
 import { CHAINS } from '@lido-sdk/constants';
 
-const supportedChainsIds = [CHAINS.Mainnet];
+const supportedChainIds = [CHAINS.Mainnet];
 const defaultChainId = CHAINS.Mainnet;
 const providerRpc = getRpcProvider(CHAINS.Mainnet, '/api/rpc');
 
@@ -27,7 +27,7 @@ const App = ({ children }) => {
   return (
     <ProviderSDK
       chainId={chainId || defaultChainId}
-      supportedChainsIds={supportedChainsIds}
+      supportedChainIds={supportedChainIds}
       providerRpc={providerRpc}
       providerWeb3={providerWeb3}
     >
