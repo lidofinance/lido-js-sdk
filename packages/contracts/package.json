@@ -25,6 +25,7 @@
     "postinstall": "yarn typechain"
   },
   "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "devDependencies": {
