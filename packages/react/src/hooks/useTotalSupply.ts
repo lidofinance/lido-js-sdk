@@ -4,7 +4,7 @@ import { useCallback, useEffect } from 'react';
 import { BigNumber } from '@ethersproject/bignumber';
 import { getERC20Contract } from '@lido-sdk/contracts';
 import { useContractSWR } from './useContractSWR';
-import { SWRResponse } from './useLidoSwr';
+import { SWRResponse } from './useLidoSWR';
 import { useSDK } from './useSDK';
 
 export const useTotalSupply = (token: string): SWRResponse<BigNumber> => {

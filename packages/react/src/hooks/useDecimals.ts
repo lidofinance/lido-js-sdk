@@ -1,7 +1,7 @@
 import invariant from 'tiny-invariant';
 import { getERC20Contract } from '@lido-sdk/contracts';
 import { useContractSWR } from './useContractSWR';
-import { SWRResponse } from './useLidoSwr';
+import { SWRResponse } from './useLidoSWR';
 import { useSDK } from './useSDK';
 
 export const useDecimals = (token: string): SWRResponse<number> => {
