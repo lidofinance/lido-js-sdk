@@ -11,7 +11,8 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch --coverage",
     "lint": "eslint --ext ts,tsx .",
-    "postinstall": "husky install"
+    "postinstall": "husky install && yarn typechain",
+    "typechain": "yarn workspace @lido-sdk/contracts run typechain"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",

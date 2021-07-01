@@ -21,8 +21,7 @@
     "lidofinance"
   ],
   "scripts": {
-    "typechain": "typechain --target=ethers-v5 --out-dir ./src/generated './src/abi/*.json'",
-    "postinstall": "yarn typechain"
+    "typechain": "typechain --target=ethers-v5 --out-dir ./src/generated './src/abi/*.json'"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
