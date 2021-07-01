@@ -7,7 +7,7 @@ import {
   useSDK,
   useTokenBalance,
   useTotalSupply,
-} from './hooks';
+} from '../hooks';
 
 export const hooksFactory = (
   getTokenAddress: (chainId: CHAINS) => string,

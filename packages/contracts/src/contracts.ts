@@ -8,14 +8,16 @@ import {
   WstethAbiFactory,
 } from './factories';
 
-interface Factory<C extends BaseContract> {
+export interface Factory<C extends BaseContract> {
   connect(address: string, signerOrProvider: Signer | Provider): C;
 }
 
-const createContractGetter = <C extends BaseContract>(factory: Factory<C>) => {
+export const createContractGetter = <C extends BaseContract>(
+  factory: Factory<C>,
+): ((address: string, signerOrProvider: Signer | Provider) => C) => {
   const providerCache = new WeakMap<Signer | Provider, Record<string, C>>();
 
-  return (address: string, signerOrProvider: Signer | Provider): C => {
+  return (address, signerOrProvider) => {
     let cacheByAddress = providerCache.get(signerOrProvider);
     let contract = cacheByAddress?.[address];
 

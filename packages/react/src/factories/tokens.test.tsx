@@ -2,8 +2,10 @@ jest.mock('@lido-sdk/contracts');
 
 import { renderHook } from '@testing-library/react-hooks';
 import { getERC20Contract } from '@lido-sdk/contracts';
-import { ProviderWrapper } from './hooks/testUtils';
-import * as hooks from './tokens';
+import { ProviderWrapper } from '../hooks/testUtils';
+import * as tokensExport from './tokens';
+
+const { hooksFactory, ...hooks } = tokensExport;
 
 const mockGetter = getERC20Contract as jest.MockedFunction<
   typeof getERC20Contract
