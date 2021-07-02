@@ -35,19 +35,19 @@ export const contractHooksFactory = <C extends BaseContract>(
   };
 };
 
-export const wsteth = contractHooksFactory(WstethAbiFactory, (chainId) =>
+const wsteth = contractHooksFactory(WstethAbiFactory, (chainId) =>
   getTokenAddress(chainId, TOKENS.WSTETH),
 );
 export const useWSTETHContractRPC = wsteth.useContractRPC;
 export const useWSTETHContractWeb3 = wsteth.useContractWeb3;
 
-export const steth = contractHooksFactory(StethAbiFactory, (chainId) =>
+const steth = contractHooksFactory(StethAbiFactory, (chainId) =>
   getTokenAddress(chainId, TOKENS.STETH),
 );
 export const useSTETHContractRPC = steth.useContractRPC;
 export const useSTETHContractWeb3 = steth.useContractWeb3;
 
-export const ldo = contractHooksFactory(LdoAbiFactory, (chainId) =>
+const ldo = contractHooksFactory(LdoAbiFactory, (chainId) =>
   getTokenAddress(chainId, TOKENS.LDO),
 );
 export const useLDOContractRPC = ldo.useContractRPC;

@@ -6,12 +6,23 @@ import { Contract } from '@ethersproject/contracts';
 import {
   useSTETHContractRPC,
   useWSTETHContractRPC,
+  useLDOContractRPC,
   useSTETHContractWeb3,
   useWSTETHContractWeb3,
+  useLDOContractWeb3,
 } from './contracts';
 
-const hooksRpc = { useSTETHContractRPC, useWSTETHContractRPC };
-const hooksWeb3 = { useSTETHContractWeb3, useWSTETHContractWeb3 };
+const hooksRpc = {
+  useSTETHContractRPC,
+  useWSTETHContractRPC,
+  useLDOContractRPC,
+};
+
+const hooksWeb3 = {
+  useSTETHContractWeb3,
+  useWSTETHContractWeb3,
+  useLDOContractWeb3,
+};
 
 describe('web3 contracts', () => {
   Object.entries(hooksWeb3).map(([name, hook]) => {

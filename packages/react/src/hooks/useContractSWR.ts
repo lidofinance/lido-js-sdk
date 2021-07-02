@@ -1,12 +1,12 @@
 import invariant from 'tiny-invariant';
 import { BaseContract } from '@ethersproject/contracts';
 import { useLidoSWR, SWRResponse } from './useLidoSWR';
-import { FilterMethods, UnpackedPromise } from './types';
+import { FilterAsyncMethods, UnpackedPromise } from './types';
 import { SWRConfiguration } from 'swr';
 
 export const useContractSWR = <
   C extends BaseContract,
-  M extends FilterMethods<C>,
+  M extends FilterAsyncMethods<C>,
   R extends UnpackedPromise<ReturnType<C[M]>>,
   F extends boolean,
 >(props: {
