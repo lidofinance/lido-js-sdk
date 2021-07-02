@@ -224,3 +224,31 @@ const Component = () => {
   return <div>{loading ? 'loading...' : balance}</div>;
 };
 ```
+
+## useEthereumSWR
+
+`useLidoSWR` for RPC provider
+
+```tsx
+import { useEthereumSWR } from '@lido-sdk/react';
+
+const Component = () => {
+  const { data, loading } = useEthereumSWR({ method: 'getGasPrice' });
+  const gasPrice = data?.toString();
+
+  return <div>{loading ? 'loading...' : gasPrice}</div>;
+};
+```
+
+## useEthereumBalance
+
+```tsx
+import { useEthereumBalance } from '@lido-sdk/react';
+
+const Component = () => {
+  const { data, loading } = useEthereumBalance();
+  const gasPrice = data?.toString();
+
+  return <div>{loading ? 'loading...' : gasPrice}</div>;
+};
+```

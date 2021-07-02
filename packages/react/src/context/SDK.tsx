@@ -15,6 +15,7 @@ export interface SDKContextProps {
   providerWeb3?: Web3Provider;
   swrConfig?: SWRConfiguration;
   account?: string;
+  onError?: (error: Error) => void;
 }
 
 export interface SDKContextValue {
@@ -24,6 +25,7 @@ export interface SDKContextValue {
   providerWeb3?: Web3Provider;
   swrConfig?: SWRConfiguration;
   account?: string;
+  onError: (error: Error) => void;
 }
 
 export const SDKContext = createContext({} as SDKContextValue);
@@ -45,6 +47,10 @@ const ProviderSDK: FC<SDKContextProps> = (props) => {
     return props.providerRpc ?? getDefaultProvider();
   }, [props.providerRpc]);
 
+  const onError = useMemo(() => {
+    return props.onError ?? console.error;
+  }, [props.onError]);
+
   const value = useMemo(
     () => ({
       account,
@@ -53,8 +59,17 @@ const ProviderSDK: FC<SDKContextProps> = (props) => {
       providerRpc,
       providerWeb3,
       swrConfig,
+      onError,
     }),
-    [account, chainId, supportedChainIds, providerRpc, providerWeb3, swrConfig],
+    [
+      account,
+      chainId,
+      supportedChainIds,
+      providerRpc,
+      providerWeb3,
+      swrConfig,
+      onError,
+    ],
   );
 
   return <SDKContext.Provider value={value}>{children}</SDKContext.Provider>;
