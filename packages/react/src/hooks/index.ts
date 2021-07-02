@@ -1,6 +1,7 @@
 export * from './useAllowance';
 export * from './useContractSWR';
 export * from './useDecimals';
+export * from './useEthereumBalance';
 export * from './useEthereumSWR';
 export * from './useEtherscanOpen';
 export * from './useLidoSWR';
