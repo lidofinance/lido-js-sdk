@@ -8,27 +8,40 @@ import {
 } from '@lido-sdk/contracts';
 import { useSDK } from '../hooks';
 
-export const web3ContractHookFactory = <C extends BaseContract>(
+export const contractHooksFactory = <C extends BaseContract>(
   factory: Factory<C>,
   getTokenAddress: (chainId: CHAINS) => string,
-): (() => C | null) => {
+): {
+  useContractRPC: () => C;
+  useContractWeb3: () => C | null;
+} => {
   const getContract = createContractGetter(factory);
 
-  return () => {
-    const { chainId, providerWeb3 } = useSDK();
-    const tokenAddress = getTokenAddress(chainId);
+  return {
+    useContractRPC: () => {
+      const { chainId, providerRpc } = useSDK();
+      const tokenAddress = getTokenAddress(chainId);
 
-    if (!providerWeb3) return null;
-    return getContract(tokenAddress, providerWeb3.getSigner());
+      return getContract(tokenAddress, providerRpc);
+    },
+    useContractWeb3: () => {
+      const { chainId, providerWeb3 } = useSDK();
+      const tokenAddress = getTokenAddress(chainId);
+
+      if (!providerWeb3) return null;
+      return getContract(tokenAddress, providerWeb3.getSigner());
+    },
   };
 };
 
-export const useWSTETHContract = web3ContractHookFactory(
-  WstethAbiFactory,
-  (chainId) => getTokenAddress(chainId, TOKENS.WSTETH),
+export const wsteth = contractHooksFactory(WstethAbiFactory, (chainId) =>
+  getTokenAddress(chainId, TOKENS.WSTETH),
 );
+export const useWSTETHContractRPC = wsteth.useContractRPC;
+export const useWSTETHContractWeb3 = wsteth.useContractWeb3;
 
-export const useSTETHContract = web3ContractHookFactory(
-  StethAbiFactory,
-  (chainId) => getTokenAddress(chainId, TOKENS.STETH),
+export const steth = contractHooksFactory(StethAbiFactory, (chainId) =>
+  getTokenAddress(chainId, TOKENS.STETH),
 );
+export const useSTETHContractRPC = steth.useContractRPC;
+export const useSTETHContractWeb3 = steth.useContractWeb3;

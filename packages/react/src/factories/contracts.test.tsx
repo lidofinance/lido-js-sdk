@@ -3,12 +3,18 @@ import { renderHook } from '@testing-library/react-hooks';
 import { ProviderWrapper } from '../hooks/testUtils';
 import { Web3Provider } from '@ethersproject/providers';
 import { Contract } from '@ethersproject/contracts';
-import * as contractsExport from './contracts';
+import {
+  useSTETHContractRPC,
+  useWSTETHContractRPC,
+  useSTETHContractWeb3,
+  useWSTETHContractWeb3,
+} from './contracts';
 
-const { web3ContractHookFactory, ...hooks } = contractsExport;
+const hooksRpc = { useSTETHContractRPC, useWSTETHContractRPC };
+const hooksWeb3 = { useSTETHContractWeb3, useWSTETHContractWeb3 };
 
-describe('contracts', () => {
-  Object.entries(hooks).map(([name, hook]) => {
+describe('web3 contracts', () => {
+  Object.entries(hooksWeb3).map(([name, hook]) => {
     test(`${name} should be a function`, async () => {
       expect(hook).toBeInstanceOf(Function);
     });
@@ -30,6 +36,21 @@ describe('contracts', () => {
 
       const { result } = renderHook(() => hook(), { wrapper });
       expect(result.current).toBeNull();
+    });
+  });
+});
+
+describe('RPC contracts', () => {
+  Object.entries(hooksRpc).map(([name, hook]) => {
+    test(`${name} should be a function`, async () => {
+      expect(hook).toBeInstanceOf(Function);
+    });
+
+    test(`${name} should return a contract`, async () => {
+      const wrapper = ProviderWrapper;
+
+      const { result } = renderHook(() => hook(), { wrapper });
+      expect(result.current).toBeInstanceOf(Contract);
     });
   });
 });
