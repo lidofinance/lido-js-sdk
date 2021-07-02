@@ -102,9 +102,48 @@ const Component = () => {
 };
 ```
 
+## Factories
+
+### Contracts factory
+
+Use `contractHooksFactory` to create hooks, which return RPC and web3 contracts.
+
+```ts
+// use typechain package to generate factories for your contracts
+import { YOUR_ABI_FACTORY } from 'your/abi/folder';
+import { contractHooksFactory } from '@lido-sdk/react';
+import { CHAINS, TOKENS } from '@lido-sdk/constants';
+
+const getMyContractAddress = (chainId) => {
+  // get token address by chainId
+};
+
+const { useContractRPC, useContractWeb3 } = contractHooksFactory(
+  YOUR_ABI_FACTORY,
+  getMyContractAddress,
+);
+```
+
+Hooks for `WSTETH`, `STETH` and `LDO` contracts:
+
+```ts
+useWSTETHContractRPC();
+useWSTETHContractWeb3();
+```
+
+```ts
+useSTETHContractRPC();
+useSTETHContractWeb3();
+```
+
+```ts
+useLDOContractRPC();
+useLDOContractWeb3();
+```
+
 ### ERC20 Sets
 
-You can use `hooksFactory` to create the ERC20 set of hooks for your token.
+Use `hooksFactory` to create the ERC20 set of hooks for your token.
 
 ```ts
 import { hooksFactory } from '@lido-sdk/react';

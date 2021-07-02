@@ -6,6 +6,7 @@ import {
   Erc20AbiFactory,
   StethAbiFactory,
   WstethAbiFactory,
+  LdoAbiFactory,
 } from './factories';
 
 export interface Factory<C extends BaseContract> {
@@ -39,3 +40,4 @@ export const getAggregatorContract = createContractGetter(AggregatorAbiFactory);
 export const getERC20Contract = createContractGetter(Erc20AbiFactory);
 export const getSTETHContract = createContractGetter(StethAbiFactory);
 export const getWSTETHContract = createContractGetter(WstethAbiFactory);
+export const getLDOContract = createContractGetter(LdoAbiFactory);

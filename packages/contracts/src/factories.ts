@@ -3,4 +3,5 @@ export {
   Erc20Abi__factory as Erc20AbiFactory,
   StethAbi__factory as StethAbiFactory,
   WstethAbi__factory as WstethAbiFactory,
+  LdoAbi__factory as LdoAbiFactory,
 } from './generated';

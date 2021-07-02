@@ -19,4 +19,12 @@ const stethAddress = getTokenAddress(CHAINS.Mainnet, TOKENS.STETH);
 const contract = getERC20Contract(stethAddress, providerRPC);
 ```
 
-Available getters: `getAggregatorContract`, `getERC20Contract`, `getSTETHContract`, `getWSTETHContract`
+Available getters:
+
+```ts
+getAggregatorContract();
+getERC20Contract();
+getWSTETHContract();
+getSTETHContract();
+getLDOContract();
+```

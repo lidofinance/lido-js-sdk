@@ -3,6 +3,7 @@ import { TOKENS, CHAINS, getTokenAddress } from '@lido-sdk/constants';
 import {
   WstethAbiFactory,
   StethAbiFactory,
+  LdoAbiFactory,
   Factory,
   createContractGetter,
 } from '@lido-sdk/contracts';
@@ -45,3 +46,9 @@ export const steth = contractHooksFactory(StethAbiFactory, (chainId) =>
 );
 export const useSTETHContractRPC = steth.useContractRPC;
 export const useSTETHContractWeb3 = steth.useContractWeb3;
+
+export const ldo = contractHooksFactory(LdoAbiFactory, (chainId) =>
+  getTokenAddress(chainId, TOKENS.LDO),
+);
+export const useLDOContractRPC = ldo.useContractRPC;
+export const useLDOContractWeb3 = ldo.useContractWeb3;
