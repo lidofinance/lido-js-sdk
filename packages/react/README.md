@@ -247,8 +247,50 @@ import { useEthereumBalance } from '@lido-sdk/react';
 
 const Component = () => {
   const { data, loading } = useEthereumBalance();
-  const gasPrice = data?.toString();
+  const balance = data?.toString();
 
-  return <div>{loading ? 'loading...' : gasPrice}</div>;
+  return <div>{loading ? 'loading...' : balance}</div>;
+};
+```
+
+## useEthPrice
+
+```tsx
+import { useEthPrice } from '@lido-sdk/react';
+
+const Component = () => {
+  const { data, loading } = useEthPrice();
+  const ethPrice = data?.toString();
+
+  return <div>{loading ? 'loading...' : ethPrice}</div>;
+};
+```
+
+## useTxPrice
+
+```tsx
+import { useTxPrice } from '@lido-sdk/react';
+
+const gasLimit = 10_000;
+
+const Component = () => {
+  const { data, loading } = useTxPrice(gasLimit);
+  const txPrice = data?.toString();
+
+  return <div>{loading ? 'loading...' : txPrice}</div>;
+};
+```
+
+## useTokenToWallet
+
+```tsx
+import { useTokenToWallet } from '@lido-sdk/react';
+
+const tokenAddress = getTokenAddress(CHAINS.Mainnet, TOKENS.STETH);
+
+const Component = () => {
+  const { addToken } = useTokenToWallet(tokenAddress);
+
+  return <button onClick={addToken}>Add token</div>;
 };
 ```
