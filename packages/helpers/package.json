@@ -25,10 +25,14 @@
     "access": "public"
   },
   "devDependencies": {
+    "@ethersproject/bignumber": "^5.4.0",
     "@types/jest": "^26.0.23"
   },
   "dependencies": {
     "@lido-sdk/constants": "workspace:*",
     "tiny-invariant": "1"
+  },
+  "peerDependencies": {
+    "@ethersproject/bignumber": "5"
   }
 }

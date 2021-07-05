@@ -32,10 +32,12 @@ export const useEthPrice = (): {
   const error = decimals.error || latestAnswer.error;
 
   const data = useMemo(() => {
-    if (latestAnswer.data == null || decimals.data == null) return undefined;
+    if (error || latestAnswer.data == null || decimals.data == null) {
+      return undefined;
+    }
 
     return divide(latestAnswer.data, BigNumber.from(10).pow(decimals.data));
-  }, [latestAnswer.data, decimals.data]);
+  }, [latestAnswer.data, decimals.data, error]);
 
   const updateDecimals = decimals.update;
   const updateLatestAnswer = latestAnswer.update;

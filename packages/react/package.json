@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@ethersproject/bignumber": "^5.4.0",
+    "@ethersproject/constants": "^5.4.0",
     "@ethersproject/contracts": "^5.4.0",
     "@ethersproject/providers": "^5.4.0",
     "@testing-library/react-hooks": "^7.0.0",
@@ -45,6 +46,7 @@
   },
   "peerDependencies": {
     "@ethersproject/bignumber": "5",
+    "@ethersproject/constants": "5",
     "@ethersproject/contracts": "5",
     "@ethersproject/providers": "5",
     "react": "16 || 17 || 18",
