@@ -22,6 +22,11 @@ const common = {
 };
 
 describe('useTxPrice', () => {
+  beforeEach(() => {
+    mockUseEthPrice.mockReset();
+    mockUseEthereumSWR.mockReset();
+  });
+
   const ethPrice = 1000;
   const gasLimit = 10;
 

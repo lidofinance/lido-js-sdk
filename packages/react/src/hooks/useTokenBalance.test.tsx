@@ -14,6 +14,11 @@ const mockGetter = getERC20Contract as jest.MockedFunction<
 const mockWarning = warning as jest.MockedFunction<typeof warning>;
 
 describe('useTokenBalance', () => {
+  beforeEach(() => {
+    mockGetter.mockReset();
+    mockWarning.mockReset();
+  });
+
   test('should fetch data', async () => {
     const expected = 1;
     const wrapper = ProviderWrapper;

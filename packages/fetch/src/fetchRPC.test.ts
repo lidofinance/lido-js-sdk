@@ -12,7 +12,7 @@ describe('fetchRPC', () => {
   const expected = 42;
 
   beforeEach(() => {
-    mockFetch.mockClear();
+    mockFetch.mockReset();
   });
 
   test('should throw if providers or urls are not passed', () => {

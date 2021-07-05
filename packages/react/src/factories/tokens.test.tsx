@@ -12,6 +12,10 @@ const mockGetter = getERC20Contract as jest.MockedFunction<
 >;
 
 describe('tokens', () => {
+  beforeEach(() => {
+    mockGetter.mockReset();
+  });
+
   Object.entries(hooks).map(([name, hook]) => {
     test(`${name} should be a function`, async () => {
       expect(hook).toBeInstanceOf(Function);

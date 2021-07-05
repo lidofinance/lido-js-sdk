@@ -9,6 +9,10 @@ import { FC } from 'react';
 const mockWarning = warning as jest.MockedFunction<typeof warning>;
 
 describe('useEthereumBalance', () => {
+  beforeEach(() => {
+    mockWarning.mockReset();
+  });
+
   test('should fetch data', async () => {
     const expected = 1;
     const mockGetBalance = jest.fn(() => expected);

@@ -13,7 +13,7 @@ describe('fetchWithFallbacks', () => {
   const expected = 42;
 
   beforeEach(() => {
-    mockFetch.mockClear();
+    mockFetch.mockReset();
   });
 
   test('should throw if inputs are not passed', async () => {

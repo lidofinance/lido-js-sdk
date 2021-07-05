@@ -20,6 +20,10 @@ const convertToBig = (number: number, decimals: number) => {
 };
 
 describe('useEthPrice', () => {
+  beforeEach(() => {
+    mockGetter.mockReset();
+  });
+
   test('should fetch data', async () => {
     const expected = 1000;
     const decimals = 18;

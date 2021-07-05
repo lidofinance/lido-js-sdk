@@ -10,6 +10,10 @@ const mockGetter = getERC20Contract as jest.MockedFunction<
 >;
 
 describe('useDecimals', () => {
+  beforeEach(() => {
+    mockGetter.mockReset();
+  });
+
   test('should fetch data', async () => {
     const expected = 1;
     const wrapper = ProviderWrapper;
