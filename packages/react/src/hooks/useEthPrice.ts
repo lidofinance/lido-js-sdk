@@ -13,9 +13,9 @@ export const useEthPrice = (): {
   error: Error | undefined;
   update: () => void;
 } => {
-  const { providerRpc } = useSDK();
+  const { providerMainnetRpc } = useSDK();
   const address = getAggregatorAddress(CHAINS.Mainnet);
-  const aggregatorContract = getAggregatorContract(address, providerRpc);
+  const aggregatorContract = getAggregatorContract(address, providerMainnetRpc);
 
   const decimals = useContractSWR({
     contract: aggregatorContract,

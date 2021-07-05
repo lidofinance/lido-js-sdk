@@ -11,6 +11,7 @@ import { SWRConfiguration } from 'swr';
 export interface SDKContextProps {
   chainId: CHAINS;
   supportedChainIds: CHAINS[];
+  providerMainnetRpc?: BaseProvider;
   providerRpc?: BaseProvider;
   providerWeb3?: Web3Provider;
   swrConfig?: SWRConfiguration;
@@ -21,6 +22,7 @@ export interface SDKContextProps {
 export interface SDKContextValue {
   chainId: CHAINS;
   supportedChainIds: CHAINS[];
+  providerMainnetRpc: BaseProvider;
   providerRpc: BaseProvider;
   providerWeb3?: Web3Provider;
   swrConfig?: SWRConfiguration;
@@ -44,8 +46,15 @@ const ProviderSDK: FC<SDKContextProps> = (props) => {
   invariant(supportedChainIds?.length, 'Supported chains are required');
 
   const providerRpc = useMemo(() => {
-    return props.providerRpc ?? getDefaultProvider();
-  }, [props.providerRpc]);
+    return (
+      props.providerRpc ??
+      getDefaultProvider(CHAINS[chainId].toLocaleLowerCase())
+    );
+  }, [props.providerRpc, chainId]);
+
+  const providerMainnetRpc = useMemo(() => {
+    return props.providerMainnetRpc ?? getDefaultProvider('mainnet');
+  }, [props.providerMainnetRpc]);
 
   const onError = useMemo(() => {
     return props.onError ?? console.error;
@@ -56,6 +65,7 @@ const ProviderSDK: FC<SDKContextProps> = (props) => {
       account,
       chainId,
       supportedChainIds,
+      providerMainnetRpc,
       providerRpc,
       providerWeb3,
       swrConfig,
@@ -65,6 +75,7 @@ const ProviderSDK: FC<SDKContextProps> = (props) => {
       account,
       chainId,
       supportedChainIds,
+      providerMainnetRpc,
       providerRpc,
       providerWeb3,
       swrConfig,
