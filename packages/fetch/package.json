@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
-    "@types/node-fetch": "^2"
+    "@types/node-fetch": "^2.5.10"
   },
   "dependencies": {
     "@lido-sdk/constants": "workspace:*",
