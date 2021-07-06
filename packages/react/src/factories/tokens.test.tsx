@@ -1,6 +1,7 @@
 jest.mock('@lido-sdk/contracts');
 
 import { renderHook } from '@testing-library/react-hooks';
+import { Zero } from '@ethersproject/constants';
 import { getERC20Contract } from '@lido-sdk/contracts';
 import { ProviderWrapper } from '../hooks/testUtils';
 import * as tokensExport from './tokens';
@@ -21,12 +22,20 @@ describe('tokens', () => {
       expect(hook).toBeInstanceOf(Function);
     });
 
-    test(`${name} should work`, async () => {
+    test(`${name} should wrap hook correctly`, async () => {
       const wrapper = ProviderWrapper;
 
       mockGetter.mockReturnValue({} as any);
 
-      const { result } = renderHook(() => hook('spender'), { wrapper });
+      const getArguments = (name: string) => {
+        if (name.endsWith('Allowance')) return ['spender'];
+        if (name.endsWith('Approve')) return [Zero, 'spender'];
+        return [];
+      };
+
+      const { result } = renderHook(() => hook(...getArguments(name)), {
+        wrapper,
+      });
       expect(result.error).toBeUndefined();
     });
   });

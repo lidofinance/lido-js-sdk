@@ -9,7 +9,7 @@ Part of [Lido JS SDK](https://github.com/lidofinance/lido-js-sdk/#readme)
 yarn add @lido-sdk/contracts
 ```
 
-## Contracts
+## Usage
 
 ```ts
 import { getERC20Contract } from '@lido-sdk/contracts';
@@ -22,9 +22,9 @@ const contract = getERC20Contract(stethAddress, providerRPC);
 Available getters:
 
 ```ts
-getAggregatorContract();
-getERC20Contract();
-getWSTETHContract();
-getSTETHContract();
-getLDOContract();
+getAggregatorContract(address: string, signerOrProvider: Signer | Provider);
+getERC20Contract(address: string, signerOrProvider: Signer | Provider);
+getWSTETHContract(address: string, signerOrProvider: Signer | Provider);
+getSTETHContract(address: string, signerOrProvider: Signer | Provider);
+getLDOContract(address: string, signerOrProvider: Signer | Provider);
 ```

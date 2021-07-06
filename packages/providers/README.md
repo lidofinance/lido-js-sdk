@@ -9,7 +9,7 @@ Part of [Lido JS SDK](https://github.com/lidofinance/lido-js-sdk/#readme)
 yarn add @lido-sdk/providers
 ```
 
-## RPC Providers
+## Usage
 
 ```ts
 import { CHAINS } from '@lido-sdk/constants';

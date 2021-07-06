@@ -3,13 +3,119 @@
 React helpers for Lido Finance projects.
 Part of [Lido JS SDK](https://github.com/lidofinance/lido-js-sdk/#readme)
 
+- [Install](#install)
+- [Factories](#factories)
+  - [Contracts factory](#contracts-factory)
+  - [ERC20 hooks factory](#erc20-hooks-factory)
+- [ERC20 hooks](#erc20-hooks)
+  - [ProviderSDK](#providersdk)
+  - [useTotalSupply](#usetotalsupply)
+  - [useTokenBalance](#usetokenbalance)
+  - [useAllowance](#useallowance)
+  - [useApprove](#usepprove)
+  - [useDecimals](#usedecimals)
+- [SWR hooks](#swr-hooks)
+  - [useLidoSWR](#uselidoswr)
+  - [useContractSWR](#usecontractswr)
+  - [useEthereumSWR](#useethereumswr)
+  - [useEthereumBalance](#useethereumbalance)
+- [Price hooks](#price-hooks)
+  - [useEthPrice](#useethprice)
+  - [useTxPrice](#usetxprice)
+- [Other hooks](#other-hooks)
+  - [useTokenToWallet](#usetokentowallet)
+
 ## Install
 
 ```bash
 yarn add @lido-sdk/react
 ```
 
+## Factories
+
+### Contracts factory
+
+`contractHooksFactory` creates set of hooks, which return RPC and Web3 contracts.
+
+```ts
+// use typechain package to generate factories for your contracts
+import { YOUR_ABI_FACTORY } from 'your/abi/folder';
+import { contractHooksFactory } from '@lido-sdk/react';
+import { CHAINS, TOKENS } from '@lido-sdk/constants';
+
+const getMyContractAddress = (chainId) => {
+  // should return contract address
+};
+
+const { useContractRPC, useContractWeb3 } = contractHooksFactory(
+  YOUR_ABI_FACTORY,
+  getMyContractAddress,
+);
+```
+
+Package `@lido-sdk/react` exports hooks for `WSTETH`, `STETH` and `LDO` contracts:
+
+```ts
+useWSTETHContractRPC();
+useWSTETHContractWeb3();
+```
+
+```ts
+useSTETHContractRPC();
+useSTETHContractWeb3();
+```
+
+```ts
+useLDOContractRPC();
+useLDOContractWeb3();
+```
+
+### ERC20 hooks factory
+
+`hooksFactory` creates the ERC20 set of hooks.
+
+```ts
+import { hooksFactory } from '@lido-sdk/react';
+
+const getMyContractAddress = (chainId) => {
+  // should return contract address
+};
+
+const {
+  useTokenBalance,
+  useTotalSupply,
+  useDecimals,
+  useAllowance,
+  useApprove,
+} = hooksFactory(getMyContractAddress);
+```
+
+Hooks for tokens `WSTETH`, `STETH` and `LDO` with attached addresses:
+
+```ts
+useWSTETHBalance()
+useWSTETHTotalSupply()
+useWSTETHDecimals()
+useWSTETHAllowance(spender: string)
+```
+
+```ts
+useSTETHBalance()
+useSTETHTotalSupply()
+useSTETHDecimals()
+useSTETHAllowance(spender: string)
+```
+
+```ts
+useLDOBalance()
+useLDOTotalSupply()
+useLDODecimals()
+useLDOAllowance(spender: string)
+```
+
 ## ERC20 hooks
+
+### ProviderSDK
 
 To use ERC20 hooks, your app must be wrapped with `<ProviderSDK />`.
 
@@ -50,12 +156,10 @@ const App = ({ children }) => {
 
 ```tsx
 import { useTotalSupply } from '@lido-sdk/react';
-import { CHAINS, TOKENS } from '@lido-sdk/constants';
-
-const tokenAddress = getTokenAddress(CHAINS.Mainnet, TOKENS.STETH);
 
 const Component = () => {
-  const { data, loading } = useTotalSupply(tokenAddress);
+  const token = 'token address';
+  const { data, loading } = useTotalSupply(token);
   const totalSupply = data?.toString();
 
   return <div>{loading ? 'loading...' : totalSupply}</div>;
@@ -66,13 +170,11 @@ const Component = () => {
 
 ```tsx
 import { useTokenBalance } from '@lido-sdk/react';
-import { CHAINS, TOKENS } from '@lido-sdk/constants';
-
-const tokenAddress = getTokenAddress(CHAINS.Mainnet, TOKENS.STETH);
 
 const Component = () => {
-  const accountAddress = 'your address';
-  const { data, loading } = useTokenBalance(tokenAddress, accountAddress);
+  const token = 'token address';
+  const account = 'account address';
+  const { data, loading } = useTokenBalance(token, account);
   const balance = data?.toString();
 
   return <div>{loading ? 'loading...' : balance}</div>;
@@ -83,16 +185,30 @@ const Component = () => {
 
 ```tsx
 import { useAllowance } from '@lido-sdk/react';
-import { CHAINS, TOKENS } from '@lido-sdk/constants';
-
-const tokenAddress = getTokenAddress(CHAINS.Mainnet, TOKENS.STETH);
 
 const Component = () => {
+  const token = 'token address';
   const spender = 'spender address';
-  const { data, loading } = useAllowance(tokenAddress, spender);
+  const { data, loading } = useAllowance(token, spender);
   const balance = data?.toString();
 
   return <div>{loading ? 'loading...' : balance}</div>;
+};
+```
+
+### useApprove
+
+```tsx
+import { useApprove } from '@lido-sdk/react';
+import { BigNumber } from '@ethersproject/bignumber';
+
+const Component = () => {
+  const amount = BigNumber.from(10);
+  const token = 'token address';
+  const spender = 'spender address';
+  const { approve } = useApprove(amount, token, spender);
+
+  return <button onClick={approve}>Approve</div>;
 };
 ```
 
@@ -100,99 +216,18 @@ const Component = () => {
 
 ```tsx
 import { useDecimals } from '@lido-sdk/react';
-import { CHAINS, TOKENS } from '@lido-sdk/constants';
-
-const stethAddress = getTokenAddress(CHAINS.Mainnet, TOKENS.STETH);
 
 const Component = () => {
-  const { data, loading } = useDecimals(stethAddress);
+  const token = 'token address';
+  const { data, loading } = useDecimals(token);
 
   return <div>{loading ? 'loading...' : data}</div>;
 };
 ```
 
-## Factories
+## SWR hooks
 
-### Contracts factory
-
-Use `contractHooksFactory` to create hooks, which return RPC and web3 contracts.
-
-```ts
-// use typechain package to generate factories for your contracts
-import { YOUR_ABI_FACTORY } from 'your/abi/folder';
-import { contractHooksFactory } from '@lido-sdk/react';
-import { CHAINS, TOKENS } from '@lido-sdk/constants';
-
-const getMyContractAddress = (chainId) => {
-  // get token address by chainId
-};
-
-const { useContractRPC, useContractWeb3 } = contractHooksFactory(
-  YOUR_ABI_FACTORY,
-  getMyContractAddress,
-);
-```
-
-Hooks for `WSTETH`, `STETH` and `LDO` contracts:
-
-```ts
-useWSTETHContractRPC();
-useWSTETHContractWeb3();
-```
-
-```ts
-useSTETHContractRPC();
-useSTETHContractWeb3();
-```
-
-```ts
-useLDOContractRPC();
-useLDOContractWeb3();
-```
-
-### ERC20 Sets
-
-Use `hooksFactory` to create the ERC20 set of hooks for your token.
-
-```ts
-import { hooksFactory } from '@lido-sdk/react';
-import { CHAINS, TOKENS } from '@lido-sdk/constants';
-
-const getXETHTokenAddress = (chainId) => {
-  // get token address by chainId
-};
-
-const xeth = hooksFactory(getXETHTokenAddress);
-export const useXETHBalance = xeth.useTokenBalance;
-export const useXETHTotalSupply = xeth.useTotalSupply;
-export const useXETHDecimals = xeth.useDecimals;
-export const useXETHAllowance = xeth.useAllowance;
-```
-
-Hooks for tokens `WSTETH`, `STETH` and `LDO` with attached addresses:
-
-```ts
-  useWSTETHBalance()
-  useWSTETHTotalSupply()
-  useWSTETHDecimals()
-  useWSTETHAllowance(spender: string)
-```
-
-```ts
-  useSTETHBalance()
-  useSTETHTotalSupply()
-  useSTETHDecimals()
-  useSTETHAllowance(spender: string)
-```
-
-```ts
-  useLDOBalance()
-  useLDOTotalSupply()
-  useLDODecimals()
-  useLDOAllowance(spender: string)
-```
-
-## useLidoSWR
+### useLidoSWR
 
 `useLidoSWR` hook is a wrapped `useSWR`. The hook additionally returns:
 
@@ -209,7 +244,7 @@ const Component = () => {
 };
 ```
 
-## useContractSWR
+### useContractSWR
 
 `useLidoSWR` for contracts
 
@@ -234,7 +269,7 @@ const Component = () => {
 };
 ```
 
-## useEthereumSWR
+### useEthereumSWR
 
 `useLidoSWR` for RPC provider
 
@@ -249,7 +284,7 @@ const Component = () => {
 };
 ```
 
-## useEthereumBalance
+### useEthereumBalance
 
 ```tsx
 import { useEthereumBalance } from '@lido-sdk/react';
@@ -262,7 +297,9 @@ const Component = () => {
 };
 ```
 
-## useEthPrice
+## Price hooks
+
+### useEthPrice
 
 ```tsx
 import { useEthPrice } from '@lido-sdk/react';
@@ -275,14 +312,13 @@ const Component = () => {
 };
 ```
 
-## useTxPrice
+### useTxPrice
 
 ```tsx
 import { useTxPrice } from '@lido-sdk/react';
 
-const gasLimit = 10_000;
-
 const Component = () => {
+  const gasLimit = 10_000;
   const { data, loading } = useTxPrice(gasLimit);
   const txPrice = data?.toString();
 
@@ -290,15 +326,16 @@ const Component = () => {
 };
 ```
 
-## useTokenToWallet
+## Other hooks
+
+### useTokenToWallet
 
 ```tsx
 import { useTokenToWallet } from '@lido-sdk/react';
 
-const tokenAddress = getTokenAddress(CHAINS.Mainnet, TOKENS.STETH);
-
 const Component = () => {
-  const { addToken } = useTokenToWallet(tokenAddress);
+  const token = 'token address';
+  const { addToken } = useTokenToWallet(token);
 
   return <button onClick={addToken}>Add token</div>;
 };

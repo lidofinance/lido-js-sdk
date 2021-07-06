@@ -15,15 +15,7 @@ const defaultWrapper = async (callback: TransactionCallback) => {
   return await transaction.wait();
 };
 
-export const useApprove = (
-  amount: BigNumber,
-  token: string,
-  spender: string,
-  owner?: string,
-  wrapper: (
-    callback: TransactionCallback,
-  ) => Promise<ContractReceipt | undefined> = defaultWrapper,
-): {
+export type UseApproveResponse = {
   approve: () => Promise<void>;
   approving: boolean;
   needsApprove: boolean;
@@ -31,7 +23,19 @@ export const useApprove = (
   allowance: BigNumber;
   loading: boolean;
   error: unknown;
-} => {
+};
+
+export type UseApproveWrapper = (
+  callback: TransactionCallback,
+) => Promise<ContractReceipt | undefined>;
+
+export const useApprove = (
+  amount: BigNumber,
+  token: string,
+  spender: string,
+  owner?: string,
+  wrapper: UseApproveWrapper = defaultWrapper,
+): UseApproveResponse => {
   const { providerWeb3, account, onError } = useSDK();
   const mergedOwner = owner ?? account;
 
