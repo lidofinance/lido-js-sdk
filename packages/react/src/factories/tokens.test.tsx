@@ -12,7 +12,7 @@ const mockGetter = getERC20Contract as jest.MockedFunction<
 >;
 
 describe('tokens', () => {
-  beforeEach(() => {
+  afterEach(() => {
     mockGetter.mockReset();
   });
 

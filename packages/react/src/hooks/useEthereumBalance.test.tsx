@@ -1,15 +1,15 @@
 jest.mock('tiny-warning');
 
 import warning from 'tiny-warning';
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-hooks';
 import { useEthereumBalance } from './useEthereumBalance';
-import { sleep, ProviderWrapper } from './testUtils';
+import { ProviderWrapper } from './testUtils';
 import { FC } from 'react';
 
 const mockWarning = warning as jest.MockedFunction<typeof warning>;
 
 describe('useEthereumBalance', () => {
-  beforeEach(() => {
+  afterEach(() => {
     mockWarning.mockReset();
   });
 
@@ -28,12 +28,15 @@ describe('useEthereumBalance', () => {
         {...props}
       />
     );
-    const { result } = renderHook(() => useEthereumBalance('account'), {
-      wrapper,
-    });
+    const { result, waitForNextUpdate } = renderHook(
+      () => useEthereumBalance('account'),
+      {
+        wrapper,
+      },
+    );
 
     expect(result.current.data).toBeUndefined();
-    await act(() => sleep(0));
+    await waitForNextUpdate();
     expect(result.current.data).toBe(expected);
   });
 

@@ -12,7 +12,7 @@ describe('fetchWithFallbacks', () => {
   const urlSecond = 'https://second.com';
   const expected = 42;
 
-  beforeEach(() => {
+  afterEach(() => {
     mockFetch.mockReset();
   });
 

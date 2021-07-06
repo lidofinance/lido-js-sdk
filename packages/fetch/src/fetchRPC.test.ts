@@ -11,7 +11,7 @@ describe('fetchRPC', () => {
   const params = { method: 'POST' };
   const expected = 42;
 
-  beforeEach(() => {
+  afterEach(() => {
     mockFetch.mockReset();
   });
 

@@ -11,7 +11,7 @@ const mockGetter = getERC20Contract as jest.MockedFunction<
 >;
 
 describe('useTokenToWallet', () => {
-  beforeEach(() => {
+  afterEach(() => {
     mockGetter.mockReset();
   });
 

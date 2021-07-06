@@ -5,6 +5,7 @@ import { useMountedState } from './useMountedState';
 
 export const useTokenToWallet = (
   address: string,
+  image?: string,
 ): {
   addToken?: () => Promise<boolean>;
   loading: boolean;
@@ -33,6 +34,7 @@ export const useTokenToWallet = (
             address,
             symbol,
             decimals,
+            image,
           },
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any,
@@ -45,7 +47,7 @@ export const useTokenToWallet = (
     } finally {
       setLoading(false);
     }
-  }, [address, providerWeb3, providerRpc, setLoading, onError]);
+  }, [address, image, providerWeb3, providerRpc, setLoading, onError]);
 
   const canAdd = !!providerWeb3?.provider.isMetaMask;
   const addToken = canAdd ? handleAdd : undefined;

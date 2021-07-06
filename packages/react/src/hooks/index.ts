@@ -1,4 +1,5 @@
 export * from './useAllowance';
+export * from './useApprove';
 export * from './useContractSWR';
 export * from './useDecimals';
 export * from './useEthereumBalance';

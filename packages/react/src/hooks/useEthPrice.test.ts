@@ -3,7 +3,6 @@ jest.mock('@lido-sdk/contracts');
 import { renderHook, act } from '@testing-library/react-hooks';
 import { getAggregatorContract } from '@lido-sdk/contracts';
 import { useEthPrice } from './useEthPrice';
-import { sleep } from './testUtils';
 import { BigNumber } from '@ethersproject/bignumber';
 
 const mockGetter = getAggregatorContract as jest.MockedFunction<
@@ -20,50 +19,84 @@ const convertToBig = (number: number, decimals: number) => {
 };
 
 describe('useEthPrice', () => {
+  const expected = 1000;
+  const decimals = 18;
+  const latestAnswer = convertToBig(expected, decimals);
+
+  const mockDecimals = jest.fn(async () => decimals);
+  const mockLatestAnswer = jest.fn(async () => latestAnswer);
+
   beforeEach(() => {
+    mockGetter.mockReturnValue({
+      decimals: mockDecimals,
+      latestAnswer: mockLatestAnswer,
+    } as any);
+  });
+
+  afterEach(() => {
     mockGetter.mockReset();
   });
 
   test('should fetch data', async () => {
-    const expected = 1000;
-    const decimals = 18;
-    const latestAnswer = convertToBig(expected, decimals);
-
-    mockGetter.mockReturnValue({
-      decimals: async () => decimals,
-      latestAnswer: async () => latestAnswer,
-    } as any);
-
-    const { result } = renderHook(() => useEthPrice());
+    const { result, waitForNextUpdate } = renderHook(() => useEthPrice());
 
     expect(result.current.data).toBeUndefined();
-    await act(() => sleep(0));
+    await waitForNextUpdate();
     expect(result.current.data).toBe(expected);
   });
 
   test('should update', async () => {
-    const decimals = 18;
+    const expectedFirst = 1234.56;
+    const expectedSecond = 234.567;
 
-    mockGetter.mockReturnValue({
-      decimals: async () => decimals,
-      latestAnswer: async () => convertToBig(1234.56, decimals),
-    } as any);
+    mockLatestAnswer.mockReturnValue(
+      Promise.resolve(convertToBig(expectedFirst, decimals)),
+    );
 
-    const { result } = renderHook(() => useEthPrice());
-
-    expect(result.current.data).toBeUndefined();
-    await act(() => sleep(0));
-    expect(result.current.data).toBe(1234.56);
-
-    mockGetter.mockReturnValue({
-      decimals: async () => decimals,
-      latestAnswer: async () => convertToBig(2345.67, decimals),
-    } as any);
-
-    act(() => result.current.update());
+    const { result, waitForNextUpdate } = renderHook(() => useEthPrice());
 
     expect(result.current.data).toBeUndefined();
-    await act(() => sleep(0));
-    expect(result.current.data).toBe(2345.67);
+    await waitForNextUpdate();
+    expect(result.current.data).toBe(expectedFirst);
+
+    mockLatestAnswer.mockReturnValue(
+      Promise.resolve(convertToBig(expectedSecond, decimals)),
+    );
+
+    await act(async () => {
+      await expect(result.current.update()).resolves.toBe(expectedSecond);
+    });
+    expect(result.current.data).toBe(expectedSecond);
+  });
+
+  test('should set loading', async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useEthPrice());
+
+    expect(result.current.loading).toBe(true);
+    await waitForNextUpdate();
+    expect(result.current.loading).toBe(false);
+  });
+
+  test('should set initial loading', async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useEthPrice());
+
+    expect(result.current.initialLoading).toBe(true);
+    await waitForNextUpdate();
+    expect(result.current.initialLoading).toBe(false);
+  });
+
+  test('should catch an error', async () => {
+    mockGetter.mockReturnValue({
+      decimals: async () => {
+        throw new Error();
+      },
+      latestAnswer: mockLatestAnswer,
+    } as any);
+
+    const { result, waitForNextUpdate } = renderHook(() => useEthPrice());
+
+    expect(result.current.error).toBeUndefined();
+    await waitForNextUpdate();
+    expect(result.current.error).toBeInstanceOf(Error);
   });
 });

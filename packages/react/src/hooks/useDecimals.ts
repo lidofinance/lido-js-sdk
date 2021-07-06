@@ -7,7 +7,7 @@ import { useSDK } from './useSDK';
 export const useDecimals = (token: string): SWRResponse<number> => {
   const { providerRpc } = useSDK();
 
-  invariant(token != null, 'Token is required');
+  invariant(token != null, 'Token address is required');
 
   const contract = getERC20Contract(token, providerRpc);
   const result = useContractSWR({ contract, method: 'decimals' });

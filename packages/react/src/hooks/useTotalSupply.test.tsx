@@ -6,7 +6,7 @@ import warning from 'tiny-warning';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { getERC20Contract } from '@lido-sdk/contracts';
 import { useTotalSupply } from './useTotalSupply';
-import { sleep, ProviderWrapper } from './testUtils';
+import { ProviderWrapper } from './testUtils';
 
 const mockGetter = getERC20Contract as jest.MockedFunction<
   typeof getERC20Contract
@@ -14,7 +14,7 @@ const mockGetter = getERC20Contract as jest.MockedFunction<
 const mockWarning = warning as jest.MockedFunction<typeof warning>;
 
 describe('useTotalSupply', () => {
-  beforeEach(() => {
+  afterEach(() => {
     mockGetter.mockReset();
     mockWarning.mockReset();
   });
@@ -24,10 +24,13 @@ describe('useTotalSupply', () => {
     const wrapper = ProviderWrapper;
 
     mockGetter.mockReturnValue({ totalSupply: async () => expected } as any);
-    const { result } = renderHook(() => useTotalSupply('token'), { wrapper });
+    const { result, waitForNextUpdate } = renderHook(
+      () => useTotalSupply('token'),
+      { wrapper },
+    );
 
     expect(result.current.data).toBeUndefined();
-    await act(() => sleep(0));
+    await waitForNextUpdate();
     expect(result.current.data).toBe(expected);
   });
 

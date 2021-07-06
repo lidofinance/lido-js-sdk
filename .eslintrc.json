@@ -37,6 +37,12 @@
       "rules": {
         "@typescript-eslint/no-explicit-any": "off"
       }
+    },
+    {
+      "files": ["*.js"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
     }
   ],
   "settings": {
