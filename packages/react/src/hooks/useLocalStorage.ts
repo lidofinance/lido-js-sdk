@@ -12,15 +12,14 @@ export const useLocalStorage = <T>(
   initialValue: T,
 ): [storedValue: T, setValue: Dispatch<SetStateAction<T>>] => {
   const readValue = useCallback(() => {
-    if (typeof window === 'undefined') {
-      return initialValue;
-    }
-
     try {
       const item = window.localStorage.getItem(key);
       return item ? (JSON.parse(item) as T) : initialValue;
     } catch (error) {
-      warning(false, `Error reading localStorage key "${key}"`);
+      warning(
+        typeof window === 'undefined',
+        `Error reading localStorage key "${key}"`,
+      );
       return initialValue;
     }
   }, [initialValue, key]);
@@ -29,16 +28,14 @@ export const useLocalStorage = <T>(
 
   const saveToStorage = useCallback(
     (newValue) => {
-      warning(
-        typeof window !== 'undefined',
-        `Tried setting localStorage key "${key}" even though environment is not a client`,
-      );
-
       try {
         window.localStorage.setItem(key, JSON.stringify(newValue));
         window.dispatchEvent(new Event('local-storage'));
       } catch (error) {
-        warning(false, `Error setting localStorage key "${key}"`);
+        warning(
+          typeof window === 'undefined',
+          `Error setting localStorage key "${key}"`,
+        );
       }
     },
     [key],

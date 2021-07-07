@@ -57,7 +57,7 @@ const useEagerConnector = (connectors: ConnectorsContextValue): void => {
   }, [activate, getEagerConnector, active]);
 };
 
-const useSaveConnectorToLS = () => {
+export const useSaveConnectorToLS = (): void => {
   const [, saveConnector] = useConnectorStorage();
   const { isInjected, isImToken, isTrust, isWalletConnect, isCoinbase } =
     useConnectorInfo();
@@ -71,7 +71,7 @@ const useSaveConnectorToLS = () => {
   }, [isInjected, isDappBrowser, isCoinbase, isWalletConnect, saveConnector]);
 };
 
-const useDeleteConnectorFromLS = () => {
+export const useDeleteConnectorFromLS = (): void => {
   const [, saveConnector] = useConnectorStorage();
   const { active } = useWeb3React();
 
@@ -89,7 +89,7 @@ const useDeleteConnectorFromLS = () => {
   }, [active, saveConnector]);
 };
 
-const useWatchConnectorInLS = () => {
+export const useWatchConnectorInLS = (): void => {
   const [savedConnector] = useConnectorStorage();
   const disconnect = useDisconnect();
   const lastConnector = useRef(savedConnector);

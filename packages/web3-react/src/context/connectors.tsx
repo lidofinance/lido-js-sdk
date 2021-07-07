@@ -57,8 +57,8 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
               supportedChainIds,
             }),
 
-      // only mainnet
       [CONNECTOR_NAMES.COINBASE]: new WalletLinkConnector({
+        // only mainnet
         url: rpc[CHAINS.Mainnet],
         supportedChainIds,
         appName,

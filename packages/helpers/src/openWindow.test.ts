@@ -15,7 +15,7 @@ describe('openWindow', () => {
     const url = 'http://foo.bar';
     const spy = jest
       .spyOn(global, 'window', 'get')
-      .mockImplementation(undefined);
+      .mockReturnValue(undefined as any);
 
     expect(() => openWindow(url)).not.toThrow();
 
