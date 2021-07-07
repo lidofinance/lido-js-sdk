@@ -11,6 +11,12 @@ JS SDK for Lido Finance projects.
 - [@lido-sdk/providers](/packages/providers/README.md). RPC provider getters with cache
 - [@lido-sdk/react](/packages/react/README.md). React hooks and providers. SSR ready
 
+## Install
+
+```
+yarn && yarn postinstall
+```
+
 ## Usage
 
 - `yarn build` — Build all packages
@@ -18,9 +24,3 @@ JS SDK for Lido Finance projects.
 - `yarn test` — Run tests across packages
 - `yarn test:watch` — Run tests in watch mode
 - `yarn typechain` — Generate types
-
-## Install
-
-```
-yarn && yarn postinstall
-```

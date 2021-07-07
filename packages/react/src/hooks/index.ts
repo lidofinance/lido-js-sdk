@@ -7,6 +7,7 @@ export * from './useEthereumSWR';
 export * from './useEtherscanOpen';
 export * from './useEthPrice';
 export * from './useLidoSWR';
+export * from './useLocalStorage';
 export * from './useMountedState';
 export * from './useSDK';
 export * from './useTokenAddress';

@@ -1,0 +1,53 @@
+{
+  "name": "@lido-sdk/web3-react",
+  "version": "0.0.0-semantic-release",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "license": "MIT",
+  "homepage": "https://github.com/lidofinance/lido-js-sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lidofinance/lido-js-sdk.git",
+    "directory": "packages/web3-react"
+  },
+  "bugs": {
+    "url": "https://github.com/lidofinance/lido-js-sdk/issues"
+  },
+  "sideEffects": false,
+  "keywords": [
+    "lido",
+    "lido-sdk",
+    "lido-js-sdk",
+    "lidofinance"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "devDependencies": {
+    "@ethersproject/providers": "^5.4.1",
+    "@gnosis.pm/safe-apps-web3-react": "^0.3.0",
+    "@web3-react/abstract-connector": "^6.0.7",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
+    "@web3-react/walletconnect-connector": "^6.2.0",
+    "@web3-react/walletlink-connector": "^6.2.0"
+  },
+  "dependencies": {
+    "@gnosis.pm/safe-apps-web3-react": "0",
+    "@lido-sdk/providers": "workspace:*",
+    "@lido-sdk/react": "workspace:*",
+    "@web3-react/abstract-connector": "6",
+    "@web3-react/core": "6",
+    "@web3-react/injected-connector": "6",
+    "@web3-react/walletconnect-connector": "6",
+    "@web3-react/walletlink-connector": "6",
+    "tiny-invariant": "1"
+  },
+  "peerDependencies": {
+    "@ethersproject/providers": "5",
+    "react": "16 || 17 || 18",
+    "react-dom": "16 || 17 || 18"
+  }
+}

@@ -4,6 +4,7 @@ import {
   BaseProvider,
   Web3Provider,
   getDefaultProvider,
+  getNetwork,
 } from '@ethersproject/providers';
 import { createContext, memo, useMemo, FC } from 'react';
 import { SWRConfiguration } from 'swr';
@@ -46,10 +47,7 @@ const ProviderSDK: FC<SDKContextProps> = (props) => {
   invariant(supportedChainIds?.length, 'Supported chains are required');
 
   const providerRpc = useMemo(() => {
-    return (
-      props.providerRpc ??
-      getDefaultProvider(CHAINS[chainId].toLocaleLowerCase())
-    );
+    return props.providerRpc ?? getDefaultProvider(getNetwork(chainId));
   }, [props.providerRpc, chainId]);
 
   const providerMainnetRpc = useMemo(() => {
