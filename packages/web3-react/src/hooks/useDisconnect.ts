@@ -1,19 +1,21 @@
 import { useWeb3React } from '@web3-react/core';
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
-import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { useConnectorInfo } from './useConnectorInfo';
 import { useCallback } from 'react';
+import { AbstractConnector } from '@web3-react/abstract-connector';
+
+type ExtendedConnector =
+  | (AbstractConnector & { close?: () => Promise<void> })
+  | undefined;
 
 export const useDisconnect = (): (() => void) | undefined => {
   const { deactivate, active, connector } = useWeb3React();
+  const extendedConnector = connector as ExtendedConnector;
 
   const disconnect = useCallback(() => {
     deactivate();
-    connector?.deactivate();
-
-    if (connector instanceof WalletConnectConnector) connector.close();
-    if (connector instanceof WalletLinkConnector) connector.close();
-  }, [deactivate, connector]);
+    extendedConnector?.deactivate();
+    extendedConnector?.close?.();
+  }, [deactivate, extendedConnector]);
 
   const { isGnosis, isImToken, isTrust } = useConnectorInfo();
   const canDisconnect = active && !isGnosis && !isImToken && !isTrust;

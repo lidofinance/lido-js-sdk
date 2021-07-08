@@ -15,7 +15,7 @@ export const useAutoConnect = (connectors: ConnectorsContextValue): void => {
   useWatchConnectorInLS();
 };
 
-const useEagerConnector = (connectors: ConnectorsContextValue): void => {
+export const useEagerConnector = (connectors: ConnectorsContextValue): void => {
   const { active, activate } = useWeb3React();
   const [savedConnector] = useConnectorStorage();
   const tried = useRef(false);
