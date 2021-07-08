@@ -25,11 +25,11 @@ export type Connector = keyof ConnectorsContextValue;
 
 export const ConnectorsContext = createContext({} as ConnectorsContextValue);
 
-const BASE_URL = typeof window === 'undefined' ? '' : window.location.origin;
-const DEFAULT_LOGO = `${BASE_URL}/apple-touch-icon.png`;
-const DEFAULT_NAME = 'Lido';
-
 const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
+  const BASE_URL = typeof window === 'undefined' ? '' : window.location.origin;
+  const DEFAULT_LOGO = `${BASE_URL}/apple-touch-icon.png`;
+  const DEFAULT_NAME = 'Lido';
+
   const {
     rpc,
     children,
@@ -50,12 +50,13 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
         rpc,
       }),
 
-      [CONNECTOR_NAMES.GNOSIS]:
-        typeof window === 'undefined'
-          ? undefined
-          : new SafeAppConnector({
-              supportedChainIds,
-            }),
+      [CONNECTOR_NAMES.GNOSIS]: (() => {
+        try {
+          return new SafeAppConnector({ supportedChainIds });
+        } catch (error) {
+          return undefined;
+        }
+      })(),
 
       [CONNECTOR_NAMES.COINBASE]: new WalletLinkConnector({
         // only mainnet
