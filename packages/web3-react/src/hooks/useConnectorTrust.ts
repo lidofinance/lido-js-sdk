@@ -1,4 +1,5 @@
 import invariant from 'tiny-invariant';
+import warning from 'tiny-warning';
 import { openWindow } from '@lido-sdk/helpers';
 import { useCallback } from 'react';
 import { useConnectors } from './useConnectors';
@@ -17,10 +18,12 @@ export const useConnectorTrust = (): Connector => {
   const { activate } = useWeb3React();
 
   const openInWallet = useCallback(() => {
-    if (typeof window === 'undefined') return;
-
-    const pageUrl = encodeURIComponent(window.location.href);
-    openWindow(`${TRUST_URL}${pageUrl}`);
+    try {
+      const pageUrl = encodeURIComponent(window.location.href);
+      openWindow(`${TRUST_URL}${pageUrl}`);
+    } catch (error) {
+      warning(false, 'Failed to open the link');
+    }
   }, []);
 
   const connect = useCallback(() => {

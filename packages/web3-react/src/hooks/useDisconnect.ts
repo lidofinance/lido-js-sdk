@@ -5,7 +5,7 @@ import { useConnectorInfo } from './useConnectorInfo';
 import { useCallback } from 'react';
 
 export const useDisconnect = (): (() => void) | undefined => {
-  const { deactivate, connector } = useWeb3React();
+  const { deactivate, active, connector } = useWeb3React();
 
   const disconnect = useCallback(() => {
     deactivate();
@@ -16,7 +16,7 @@ export const useDisconnect = (): (() => void) | undefined => {
   }, [deactivate, connector]);
 
   const { isGnosis, isImToken, isTrust } = useConnectorInfo();
-  const canDisconnect = !isGnosis && !isImToken && !isTrust;
+  const canDisconnect = active && !isGnosis && !isImToken && !isTrust;
 
   return canDisconnect ? disconnect : undefined;
 };
