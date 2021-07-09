@@ -22,7 +22,7 @@ describe('useConnectorCoinbase', () => {
     const { result } = renderHook(() => useConnectorCoinbase());
     const { connect } = result.current;
 
-    act(() => connect());
+    await act(() => connect());
     expect(mockActivate).toHaveBeenCalledWith(coinbase);
     expect(mockActivate).toHaveBeenCalledTimes(1);
   });

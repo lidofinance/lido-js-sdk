@@ -61,7 +61,7 @@ describe('useConnectorImToken', () => {
     const { result } = renderHook(() => useConnectorImToken());
     const { connect } = result.current;
 
-    act(() => connect?.());
+    await act(async () => await connect?.());
     expect(mockActivate).toHaveBeenCalledWith(injected);
     expect(mockActivate).toHaveBeenCalledTimes(1);
   });
@@ -70,7 +70,7 @@ describe('useConnectorImToken', () => {
     const { result } = renderHook(() => useConnectorImToken());
     const { connect } = result.current;
 
-    act(() => connect?.());
+    await act(async () => await connect?.());
     expect(mockOpenWindow).toHaveBeenCalledTimes(1);
   });
 
@@ -81,7 +81,7 @@ describe('useConnectorImToken', () => {
     const { result } = renderHook(() => useConnectorImToken());
     const { connect } = result.current;
 
-    act(() => connect?.());
+    await act(async () => await connect?.());
     expect(mockWarning).toHaveBeenCalledTimes(1);
   });
 });

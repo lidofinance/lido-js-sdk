@@ -37,7 +37,7 @@ describe('useConnectorMetamask', () => {
     const { result } = renderHook(() => useConnectorMetamask());
     const { connect } = result.current;
 
-    act(() => connect());
+    await act(() => connect());
     expect(mockActivate).toHaveBeenCalledWith(injected);
     expect(mockActivate).toHaveBeenCalledTimes(1);
   });
@@ -46,7 +46,7 @@ describe('useConnectorMetamask', () => {
     const { result } = renderHook(() => useConnectorMetamask());
     const { connect } = result.current;
 
-    act(() => connect());
+    await act(() => connect());
     expect(mockOpenWindow).toHaveBeenCalledTimes(1);
   });
 
@@ -57,7 +57,7 @@ describe('useConnectorMetamask', () => {
     const { result } = renderHook(() => useConnectorMetamask());
     const { connect } = result.current;
 
-    act(() => connect());
+    await act(() => connect());
     expect(mockWarning).toHaveBeenCalledTimes(1);
   });
 });

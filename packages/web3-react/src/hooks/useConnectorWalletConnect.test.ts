@@ -22,7 +22,7 @@ describe('useConnectorWalletConnect', () => {
     const { result } = renderHook(() => useConnectorWalletConnect());
     const { connect } = result.current;
 
-    act(() => connect());
+    await act(() => connect());
     expect(mockActivate).toHaveBeenCalledWith(walletconnect);
     expect(mockActivate).toHaveBeenCalledTimes(1);
   });

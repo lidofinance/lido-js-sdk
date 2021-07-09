@@ -67,7 +67,7 @@ describe('useDisconnect', () => {
     const { result } = renderHook(() => useDisconnect());
     expect(result.current.disconnect).toBeInstanceOf(Function);
 
-    act(() => result.current.disconnect?.());
+    await act(() => result.current.disconnect?.());
 
     expect(mockDeactivate).toHaveBeenCalledTimes(1);
     expect(connector.deactivate).toHaveBeenCalledTimes(1);

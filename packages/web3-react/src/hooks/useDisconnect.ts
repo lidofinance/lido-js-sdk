@@ -7,19 +7,30 @@ type ExtendedConnector =
   | (AbstractConnector & { close?: () => Promise<void> })
   | undefined;
 
-type Disconnect = {
-  disconnect?: () => void;
-};
-
-export const useDisconnect = (): Disconnect => {
-  const { deactivate, active, connector } = useWeb3();
+export const useForceDisconnect = (): {
+  disconnect: () => void;
+} => {
+  const { deactivate, connector } = useWeb3();
   const extendedConnector = connector as ExtendedConnector;
 
-  const disconnect = useCallback(() => {
-    deactivate();
-    extendedConnector?.deactivate();
-    extendedConnector?.close?.();
+  const disconnect = useCallback(async () => {
+    try {
+      deactivate();
+      extendedConnector?.deactivate();
+      await extendedConnector?.close?.();
+    } catch (error) {
+      //
+    }
   }, [deactivate, extendedConnector]);
+
+  return { disconnect };
+};
+
+export const useDisconnect = (): {
+  disconnect?: () => void;
+} => {
+  const { active } = useWeb3();
+  const { disconnect } = useForceDisconnect();
 
   const { isGnosis, isDappBrowser } = useConnectorInfo();
   const available = active && !isGnosis && !isDappBrowser;

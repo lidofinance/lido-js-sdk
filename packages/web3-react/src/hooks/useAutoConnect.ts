@@ -48,7 +48,7 @@ export const useEagerConnector = (connectors: ConnectorsContextValue): void => {
       if (!connector) return;
 
       try {
-        activate(connector, undefined, true);
+        await activate(connector, undefined, true);
       } catch (error) {
         warning(false, 'Connector is not activated');
       }
