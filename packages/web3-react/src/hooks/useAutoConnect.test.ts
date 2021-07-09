@@ -1,5 +1,5 @@
-jest.mock('@web3-react/core');
 jest.mock('tiny-warning');
+jest.mock('./useWeb3');
 jest.mock('./useConnectorStorage');
 jest.mock('./useConnectorInfo');
 jest.mock('./useDisconnect');

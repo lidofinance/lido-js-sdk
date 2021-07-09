@@ -68,6 +68,60 @@ Hooks for manually connecting to the user's wallet:
 
 They return an object with a `connect` handler if connecting is possible. In Metamask, Trust and ImToken hooks the `connect` method contains the Deep Linking logic.
 
-## Disconnect
+```tsx
+import {
+  useConnectorMetamask,
+  useConnectorCoinbase,
+} from '@lido-sdk/web3-react';
 
-`useDisconnect` return an object with a `disconnect` handler if disconnection is possible.
+const Component = () => {
+  const metamask = useConnectorMetamask();
+  const coinbase = useConnectorCoinbase();
+
+  return (
+    <div>
+      <button onClick={metamask.connect}>Connect to Metamask</button>;
+      <button onClick={coinbase.connect}>Connect to Coinbase</button>;
+    </div>
+  );
+};
+```
+
+## useDisconnect
+
+Return an object with a `disconnect` handler if disconnection is possible.
+
+```tsx
+import { useDisconnect } from '@lido-sdk/web3-react';
+
+const Component = () => {
+  const { disconnect } = useDisconnect();
+
+  return (
+    <button onClick={disconnect} disabled={!disconnect}>
+      Disconnect
+    </button>
+  );
+};
+```
+
+## useSupportedChains
+
+```tsx
+import { useSupportedChains } from '@lido-sdk/web3-react';
+
+const Component = () => {
+  const { isUnsupported, supportedChains } = useSupportedChains();
+
+  if (isUnsupported) {
+    return (
+      <div>
+        Chain is not supported. Supported chains:{' '}
+        {supportedChains.map(({ name }) => name)}
+      </div>
+    );
+  }
+
+  // ...
+};
+```

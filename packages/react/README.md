@@ -209,7 +209,7 @@ const Component = () => {
   const spender = 'spender address';
   const { approve } = useApprove(amount, token, spender);
 
-  return <button onClick={approve}>Approve</div>;
+  return <button onClick={approve}>Approve</button>;
 };
 ```
 
@@ -338,7 +338,7 @@ const Component = () => {
   const token = 'token address';
   const { addToken } = useTokenToWallet(token);
 
-  return <button onClick={addToken}>Add token</div>;
+  return <button onClick={addToken}>Add token</button>;
 };
 ```
 
@@ -351,6 +351,6 @@ const Component = () => {
   const initialValue = null;
   const [value, setValue] = useLocalStorage('unique-key-in-LS', initialValue);
 
-  return <button onClick={setValue(2)}>{value}</div>;
+  return <button onClick={() => setValue(2)}>{value}</button>;
 };
 ```

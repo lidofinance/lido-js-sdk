@@ -1,4 +1,4 @@
-jest.mock('@web3-react/core');
+jest.mock('./useWeb3');
 
 import { renderHook } from '@testing-library/react-hooks';
 import { SafeAppConnector } from '@gnosis.pm/safe-apps-web3-react';

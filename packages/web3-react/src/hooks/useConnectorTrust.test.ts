@@ -1,6 +1,6 @@
-jest.mock('@web3-react/core');
 jest.mock('@lido-sdk/helpers');
 jest.mock('tiny-warning');
+jest.mock('./useWeb3');
 jest.mock('./useConnectors');
 
 const mockIsMobileOrTablet = jest.fn();

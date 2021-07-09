@@ -1,4 +1,4 @@
-jest.mock('@web3-react/core');
+jest.mock('./useWeb3');
 jest.mock('./useConnectors');
 
 import { renderHook, act } from '@testing-library/react-hooks';
