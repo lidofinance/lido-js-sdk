@@ -1,14 +1,13 @@
 import invariant from 'tiny-invariant';
 import warning from 'tiny-warning';
-import { openWindow } from '@lido-sdk/helpers';
 import { useCallback } from 'react';
+import { openWindow } from '@lido-sdk/helpers';
 import { useConnectors } from './useConnectors';
+import { useWeb3 } from './useWeb3';
 import { hasInjected } from '../helpers';
-import { useWeb3React } from '@web3-react/core';
 
 type Connector = {
   connect: () => void;
-  available: boolean;
 };
 
 /*
@@ -20,7 +19,7 @@ const METAMASK_URL = 'https://metamask.app.link/dapp/';
 
 export const useConnectorMetamask = (): Connector => {
   const { injected } = useConnectors();
-  const { activate } = useWeb3React();
+  const { activate } = useWeb3();
 
   const openInWallet = useCallback(() => {
     try {
@@ -44,5 +43,5 @@ export const useConnectorMetamask = (): Connector => {
     }
   }, [activate, openInWallet, injected]);
 
-  return { connect, available: true };
+  return { connect };
 };

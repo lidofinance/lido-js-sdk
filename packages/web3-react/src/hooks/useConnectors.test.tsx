@@ -2,17 +2,17 @@ jest.mock('@gnosis.pm/safe-apps-web3-react');
 jest.mock('@ethersproject/providers');
 jest.mock('./useAutoConnect');
 
+import { FC } from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { AbstractConnector } from '@web3-react/abstract-connector';
 import { Web3Provider } from '@ethersproject/providers';
 import { renderHook as renderHookOnServer } from '@testing-library/react-hooks/server';
 import { SafeAppConnector } from '@gnosis.pm/safe-apps-web3-react';
+import { CHAINS } from '@lido-sdk/constants';
 import { useAutoConnect } from './useAutoConnect';
 import { useConnectors } from './useConnectors';
+import { useWeb3 } from './useWeb3';
 import { ProviderWeb3 } from '../context';
-import { CHAINS } from '@lido-sdk/constants';
-import { FC } from 'react';
-import { useWeb3React } from '@web3-react/core';
 
 const mockSafeAppConnector = SafeAppConnector as jest.MockedClass<
   typeof SafeAppConnector
@@ -100,7 +100,7 @@ describe('gnosis SSR', () => {
 
 describe('getLibrary', () => {
   test('should wrap with web3', async () => {
-    const { result } = renderHook(() => useWeb3React(), { wrapper });
+    const { result } = renderHook(() => useWeb3(), { wrapper });
     const { activate } = result.current;
 
     class Connector extends AbstractConnector {

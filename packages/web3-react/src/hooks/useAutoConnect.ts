@@ -1,12 +1,12 @@
 import warning from 'tiny-warning';
 import { useCallback, useEffect, useRef } from 'react';
-import { useWeb3React } from '@web3-react/core';
-import { useConnectorStorage } from './useConnectorStorage';
-import { ConnectorsContextValue } from '../context';
 import { AbstractConnector } from '@web3-react/abstract-connector';
-import { isImTokenProvider, isTrustProvider } from '../helpers';
+import { useWeb3 } from './useWeb3';
+import { useConnectorStorage } from './useConnectorStorage';
 import { useConnectorInfo } from './useConnectorInfo';
 import { useDisconnect } from './useDisconnect';
+import { ConnectorsContextValue } from '../context';
+import { isDappBrowserProvider } from '../helpers';
 
 export const useAutoConnect = (connectors: ConnectorsContextValue): void => {
   useEagerConnector(connectors);
@@ -16,7 +16,7 @@ export const useAutoConnect = (connectors: ConnectorsContextValue): void => {
 };
 
 export const useEagerConnector = (connectors: ConnectorsContextValue): void => {
-  const { active, activate } = useWeb3React();
+  const { active, activate } = useWeb3();
   const [savedConnector] = useConnectorStorage();
   const tried = useRef(false);
 
@@ -25,8 +25,7 @@ export const useEagerConnector = (connectors: ConnectorsContextValue): void => {
       const { gnosis, injected } = connectors;
 
       // Dapp browsers
-      if (isTrustProvider()) return injected;
-      if (isImTokenProvider()) return injected;
+      if (isDappBrowserProvider()) return injected;
 
       // Gnosis iframe
       const isSaveApp = await gnosis?.isSafeApp();
@@ -59,10 +58,8 @@ export const useEagerConnector = (connectors: ConnectorsContextValue): void => {
 
 export const useSaveConnectorToLS = (): void => {
   const [, saveConnector] = useConnectorStorage();
-  const { isInjected, isImToken, isTrust, isWalletConnect, isCoinbase } =
+  const { isInjected, isDappBrowser, isWalletConnect, isCoinbase } =
     useConnectorInfo();
-
-  const isDappBrowser = isImToken || isTrust;
 
   useEffect(() => {
     if (isInjected && !isDappBrowser) return saveConnector('injected');
@@ -73,7 +70,7 @@ export const useSaveConnectorToLS = (): void => {
 
 export const useDeleteConnectorFromLS = (): void => {
   const [, saveConnector] = useConnectorStorage();
-  const { active } = useWeb3React();
+  const { active } = useWeb3();
 
   const lastState = useRef(active);
 
@@ -91,7 +88,7 @@ export const useDeleteConnectorFromLS = (): void => {
 
 export const useWatchConnectorInLS = (): void => {
   const [savedConnector] = useConnectorStorage();
-  const disconnect = useDisconnect();
+  const { disconnect } = useDisconnect();
   const lastConnector = useRef(savedConnector);
 
   useEffect(() => {

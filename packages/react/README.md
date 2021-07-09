@@ -24,6 +24,7 @@ Part of [Lido JS SDK](https://github.com/lidofinance/lido-js-sdk/#readme)
   - [useTxPrice](#usetxprice)
 - [Other hooks](#other-hooks)
   - [useTokenToWallet](#usetokentowallet)
+  - [useLocalStorage](#uselocalstorage)
 
 ## Install
 
@@ -338,5 +339,18 @@ const Component = () => {
   const { addToken } = useTokenToWallet(token);
 
   return <button onClick={addToken}>Add token</div>;
+};
+```
+
+### useLocalStorage
+
+```tsx
+import { useLocalStorage } from '@lido-sdk/react';
+
+const Component = () => {
+  const initialValue = null;
+  const [value, setValue] = useLocalStorage('unique-key-in-LS', initialValue);
+
+  return <button onClick={setValue(2)}>{value}</div>;
 };
 ```

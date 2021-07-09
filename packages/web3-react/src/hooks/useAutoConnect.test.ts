@@ -3,9 +3,11 @@ jest.mock('tiny-warning');
 jest.mock('./useConnectorStorage');
 jest.mock('./useConnectorInfo');
 jest.mock('./useDisconnect');
+jest.mock('../helpers/injected');
 
+import warning from 'tiny-warning';
 import { renderHook, act } from '@testing-library/react-hooks';
-import { useWeb3React } from '@web3-react/core';
+import { useWeb3 } from './useWeb3';
 import { useConnectorStorage } from './useConnectorStorage';
 import { useConnectorInfo } from './useConnectorInfo';
 import { useDisconnect } from './useDisconnect';
@@ -16,11 +18,9 @@ import {
   useDeleteConnectorFromLS,
   useWatchConnectorInLS,
 } from './useAutoConnect';
-import warning from 'tiny-warning';
+import { isDappBrowserProvider } from '../helpers/injected';
 
-const mockUseWeb3React = useWeb3React as jest.MockedFunction<
-  typeof useWeb3React
->;
+const mockUseWeb3 = useWeb3 as jest.MockedFunction<typeof useWeb3>;
 const mockUseConnectorStorage = useConnectorStorage as jest.MockedFunction<
   typeof useConnectorStorage
 >;
@@ -31,21 +31,27 @@ const mockUseDisconnect = useDisconnect as jest.MockedFunction<
   typeof useDisconnect
 >;
 const mockWarning = warning as jest.MockedFunction<typeof warning>;
+const mockIsDappBrowserProvider = isDappBrowserProvider as jest.MockedFunction<
+  typeof isDappBrowserProvider
+>;
 const mockActivate = jest.fn(async () => true);
 
 beforeEach(() => {
-  mockUseWeb3React.mockReturnValue({ activate: mockActivate } as any);
+  mockUseDisconnect.mockReturnValue({});
+  mockUseWeb3.mockReturnValue({ activate: mockActivate } as any);
   mockUseConnectorStorage.mockReturnValue([] as any);
   mockUseConnectorInfo.mockReturnValue({} as any);
+  mockIsDappBrowserProvider.mockReturnValue(false);
 });
 
 afterEach(() => {
   delete window.ethereum;
-  mockUseWeb3React.mockReset();
+  mockUseWeb3.mockReset();
   mockUseConnectorStorage.mockReset();
   mockWarning.mockReset();
   mockUseDisconnect.mockReset();
   mockUseConnectorInfo.mockReset();
+  mockIsDappBrowserProvider.mockReset();
   mockActivate.mockReset();
 });
 
@@ -77,21 +83,10 @@ describe('useEagerConnector', () => {
     expect(mockWarning).toHaveBeenCalledTimes(1);
   });
 
-  test('should activate imToken connector', async () => {
+  test('should activate injected connector if it’s dapp browser', async () => {
     const injected = {};
-    window.ethereum = { isImToken: true };
-
-    const { waitFor } = renderHook(() =>
-      useEagerConnector({ injected } as any),
-    );
-
-    await waitFor(() => expect(mockActivate).toHaveBeenCalledTimes(1));
-    expect(mockActivate).toHaveBeenCalledWith(injected, undefined, true);
-  });
-
-  test('should activate Trust connector', async () => {
-    const injected = {};
-    window.ethereum = { isTrust: true };
+    window.ethereum = {};
+    mockIsDappBrowserProvider.mockReturnValue(true);
 
     const { waitFor } = renderHook(() =>
       useEagerConnector({ injected } as any),
@@ -119,7 +114,8 @@ describe('useEagerConnector', () => {
 
   test('should not activate after rerender', async () => {
     const injected = {};
-    window.ethereum = { isTrust: true };
+    window.ethereum = {};
+    mockIsDappBrowserProvider.mockReturnValue(true);
 
     const { waitFor, rerender } = renderHook(() =>
       useEagerConnector({ injected } as any),
@@ -190,11 +186,11 @@ describe('useSaveConnectorToLS', () => {
 describe('useDeleteConnectorFromLS', () => {
   test('should delete connector from LS if active is changed', async () => {
     const mockSaveConnector = jest.fn(() => void 0);
-    mockUseWeb3React.mockReturnValue({ active: true } as any);
+    mockUseWeb3.mockReturnValue({ active: true } as any);
     mockUseConnectorStorage.mockReturnValue(['injected', mockSaveConnector]);
 
     const { waitFor, rerender } = renderHook(() => useDeleteConnectorFromLS());
-    mockUseWeb3React.mockReturnValue({ active: false } as any);
+    mockUseWeb3.mockReturnValue({ active: false } as any);
 
     act(() => rerender());
 
@@ -206,7 +202,7 @@ describe('useDeleteConnectorFromLS', () => {
 describe('useWatchConnectorInLS', () => {
   test('should disconnect if connector in LS becomes null', async () => {
     const mockDisconnect = jest.fn(() => void 0);
-    mockUseDisconnect.mockReturnValue(mockDisconnect);
+    mockUseDisconnect.mockReturnValue({ disconnect: mockDisconnect });
     mockUseConnectorStorage.mockReturnValue(['injected'] as any);
 
     const { waitFor, rerender } = renderHook(() => useWatchConnectorInLS());

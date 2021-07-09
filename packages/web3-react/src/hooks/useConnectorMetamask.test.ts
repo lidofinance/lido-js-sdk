@@ -3,16 +3,14 @@ jest.mock('@lido-sdk/helpers');
 jest.mock('tiny-warning');
 jest.mock('./useConnectors');
 
-import { renderHook, act } from '@testing-library/react-hooks';
-import { useConnectorMetamask } from './useConnectorMetamask';
-import { useWeb3React } from '@web3-react/core';
-import { openWindow } from '@lido-sdk/helpers';
-import { useConnectors } from './useConnectors';
 import warning from 'tiny-warning';
+import { renderHook, act } from '@testing-library/react-hooks';
+import { openWindow } from '@lido-sdk/helpers';
+import { useConnectorMetamask } from './useConnectorMetamask';
+import { useWeb3 } from './useWeb3';
+import { useConnectors } from './useConnectors';
 
-const mockUseWeb3React = useWeb3React as jest.MockedFunction<
-  typeof useWeb3React
->;
+const mockUseWeb3 = useWeb3 as jest.MockedFunction<typeof useWeb3>;
 const mockUseConnectors = useConnectors as jest.MockedFunction<
   typeof useConnectors
 >;
@@ -21,7 +19,7 @@ const mockWarning = warning as jest.MockedFunction<typeof warning>;
 
 beforeEach(() => {
   delete window.ethereum;
-  mockUseWeb3React.mockReturnValue({} as any);
+  mockUseWeb3.mockReturnValue({} as any);
   mockUseConnectors.mockReturnValue({ injected: {} } as any);
   mockOpenWindow.mockReset();
   mockWarning.mockReset();
@@ -33,7 +31,7 @@ describe('useConnectorMetamask', () => {
     const injected = {};
 
     window.ethereum = {};
-    mockUseWeb3React.mockReturnValue({ activate: mockActivate } as any);
+    mockUseWeb3.mockReturnValue({ activate: mockActivate } as any);
     mockUseConnectors.mockReturnValue({ injected } as any);
 
     const { result } = renderHook(() => useConnectorMetamask());

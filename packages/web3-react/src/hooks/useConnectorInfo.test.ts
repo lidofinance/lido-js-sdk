@@ -1,26 +1,24 @@
 jest.mock('@web3-react/core');
 
 import { renderHook } from '@testing-library/react-hooks';
-import { useConnectorInfo } from './useConnectorInfo';
-import { useWeb3React } from '@web3-react/core';
 import { SafeAppConnector } from '@gnosis.pm/safe-apps-web3-react';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { InjectedConnector } from '@web3-react/injected-connector';
+import { useConnectorInfo } from './useConnectorInfo';
+import { useWeb3 } from './useWeb3';
 
-const mockUseWeb3React = useWeb3React as jest.MockedFunction<
-  typeof useWeb3React
->;
+const mockUseWeb3 = useWeb3 as jest.MockedFunction<typeof useWeb3>;
 
 const mockConnector = (Connector: any) => {
   class EmptyConnector {}
   const connector = new EmptyConnector();
   Object.setPrototypeOf(connector, Connector.prototype);
-  mockUseWeb3React.mockReturnValue({ active: true, connector } as any);
+  mockUseWeb3.mockReturnValue({ active: true, connector } as any);
 };
 
 beforeEach(() => {
-  mockUseWeb3React.mockReturnValue({} as any);
+  mockUseWeb3.mockReturnValue({} as any);
   delete window.ethereum;
 });
 
@@ -102,7 +100,7 @@ describe('useConnectorInfo', () => {
   });
 
   test('should not detect connector', async () => {
-    mockUseWeb3React.mockReturnValue({ active: false } as any);
+    mockUseWeb3.mockReturnValue({ active: false } as any);
 
     const { result } = renderHook(() => useConnectorInfo());
     const { connectorName, providerName, ...flags } = result.current;

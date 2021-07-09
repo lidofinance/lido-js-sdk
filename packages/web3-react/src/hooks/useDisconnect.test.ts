@@ -2,24 +2,22 @@ jest.mock('@web3-react/core');
 jest.mock('./useConnectorInfo');
 
 import { renderHook, act } from '@testing-library/react-hooks';
-import { useWeb3React } from '@web3-react/core';
+import { useWeb3 } from './useWeb3';
 import { useConnectorInfo } from './useConnectorInfo';
 import { useDisconnect } from './useDisconnect';
 
-const mockUseWeb3React = useWeb3React as jest.MockedFunction<
-  typeof useWeb3React
->;
+const mockUseWeb3 = useWeb3 as jest.MockedFunction<typeof useWeb3>;
 const mockUseConnectorInfo = useConnectorInfo as jest.MockedFunction<
   typeof useConnectorInfo
 >;
 
 beforeEach(() => {
-  mockUseWeb3React.mockReturnValue({} as any);
+  mockUseWeb3.mockReturnValue({} as any);
   mockUseConnectorInfo.mockReturnValue({} as any);
 });
 
 afterEach(() => {
-  mockUseWeb3React.mockReset();
+  mockUseWeb3.mockReset();
   mockUseConnectorInfo.mockReset();
 });
 
@@ -30,34 +28,26 @@ describe('useDisconnect', () => {
   });
 
   test('should return callback', async () => {
-    mockUseWeb3React.mockReturnValue({ active: true } as any);
+    mockUseWeb3.mockReturnValue({ active: true } as any);
 
     const { result } = renderHook(() => useDisconnect());
-    expect(result.current).toBeInstanceOf(Function);
+    expect(result.current.disconnect).toBeInstanceOf(Function);
   });
 
   test('should not return callback if it is gnosis', async () => {
     mockUseConnectorInfo.mockReturnValue({ isGnosis: true } as any);
-    mockUseWeb3React.mockReturnValue({ active: true } as any);
+    mockUseWeb3.mockReturnValue({ active: true } as any);
 
     const { result } = renderHook(() => useDisconnect());
-    expect(result.current).toBeUndefined();
+    expect(result.current.disconnect).toBeUndefined();
   });
 
-  test('should not return callback if it is imToken', async () => {
-    mockUseConnectorInfo.mockReturnValue({ isImToken: true } as any);
-    mockUseWeb3React.mockReturnValue({ active: true } as any);
+  test('should not return callback if it’s Dapp Browser', async () => {
+    mockUseConnectorInfo.mockReturnValue({ isDappBrowser: true } as any);
+    mockUseWeb3.mockReturnValue({ active: true } as any);
 
     const { result } = renderHook(() => useDisconnect());
-    expect(result.current).toBeUndefined();
-  });
-
-  test('should not return callback if it is Trust', async () => {
-    mockUseConnectorInfo.mockReturnValue({ isTrust: true } as any);
-    mockUseWeb3React.mockReturnValue({ active: true } as any);
-
-    const { result } = renderHook(() => useDisconnect());
-    expect(result.current).toBeUndefined();
+    expect(result.current.disconnect).toBeUndefined();
   });
 
   test('should disconnect', async () => {
@@ -68,17 +58,16 @@ describe('useDisconnect', () => {
       close: jest.fn(async () => void 0),
     };
 
-    mockUseWeb3React.mockReturnValue({
+    mockUseWeb3.mockReturnValue({
       deactivate: mockDeactivate,
       connector,
       active: true,
     } as any);
 
     const { result } = renderHook(() => useDisconnect());
-    expect(result.current).toBeInstanceOf(Function);
+    expect(result.current.disconnect).toBeInstanceOf(Function);
 
-    const disconnect = result.current as () => void;
-    act(() => disconnect());
+    act(() => result.current.disconnect?.());
 
     expect(mockDeactivate).toHaveBeenCalledTimes(1);
     expect(connector.deactivate).toHaveBeenCalledTimes(1);

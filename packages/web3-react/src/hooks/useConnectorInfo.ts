@@ -1,17 +1,19 @@
 import { SafeAppConnector } from '@gnosis.pm/safe-apps-web3-react';
-import { useWeb3React } from '@web3-react/core';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
+import { useWeb3 } from './useWeb3';
 import { CONNECTOR_NAMES, PROVIDER_NAMES } from '../constants';
 import { Connector } from '../context';
 import {
+  isDappBrowserProvider,
   isImTokenProvider,
   isMetamaskProvider,
   isTrustProvider,
 } from '../helpers';
 
 type ConnectorInfo = {
+  isDappBrowser: boolean;
   isInjected: boolean;
   isImToken: boolean;
   isTrust: boolean;
@@ -24,13 +26,14 @@ type ConnectorInfo = {
 };
 
 export const useConnectorInfo = (): ConnectorInfo => {
-  const { active, connector } = useWeb3React();
+  const { active, connector } = useWeb3();
 
   const isGnosis = active && connector instanceof SafeAppConnector;
   const isWalletConnect = active && connector instanceof WalletConnectConnector;
   const isCoinbase = active && connector instanceof WalletLinkConnector;
 
   const isInjected = active && connector instanceof InjectedConnector;
+  const isDappBrowser = isInjected && isDappBrowserProvider();
   const isMetamask = isInjected && isMetamaskProvider();
   const isImToken = isInjected && isImTokenProvider();
   const isTrust = isInjected && isTrustProvider();
@@ -61,6 +64,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
   return {
     providerName,
     connectorName,
+    isDappBrowser,
     isInjected,
     isImToken,
     isTrust,

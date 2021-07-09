@@ -1,5 +1,5 @@
-import { STORAGE_CONNECTOR_KEY } from '../constants';
 import { useLocalStorage } from '@lido-sdk/react';
+import { STORAGE_CONNECTOR_KEY } from '../constants';
 import { Connector } from '../context';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

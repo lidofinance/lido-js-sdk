@@ -1,14 +1,18 @@
-import { useWeb3React } from '@web3-react/core';
-import { useConnectorInfo } from './useConnectorInfo';
-import { useCallback } from 'react';
 import { AbstractConnector } from '@web3-react/abstract-connector';
+import { useCallback } from 'react';
+import { useWeb3 } from './useWeb3';
+import { useConnectorInfo } from './useConnectorInfo';
 
 type ExtendedConnector =
   | (AbstractConnector & { close?: () => Promise<void> })
   | undefined;
 
-export const useDisconnect = (): (() => void) | undefined => {
-  const { deactivate, active, connector } = useWeb3React();
+type Disconnect = {
+  disconnect?: () => void;
+};
+
+export const useDisconnect = (): Disconnect => {
+  const { deactivate, active, connector } = useWeb3();
   const extendedConnector = connector as ExtendedConnector;
 
   const disconnect = useCallback(() => {
@@ -17,8 +21,10 @@ export const useDisconnect = (): (() => void) | undefined => {
     extendedConnector?.close?.();
   }, [deactivate, extendedConnector]);
 
-  const { isGnosis, isImToken, isTrust } = useConnectorInfo();
-  const canDisconnect = active && !isGnosis && !isImToken && !isTrust;
+  const { isGnosis, isDappBrowser } = useConnectorInfo();
+  const available = active && !isGnosis && !isDappBrowser;
 
-  return canDisconnect ? disconnect : undefined;
+  return {
+    disconnect: available ? disconnect : undefined,
+  };
 };

@@ -1,3 +1,5 @@
+import { isMobileOrTablet } from './ua';
+
 declare global {
   interface Window {
     ethereum?: {
@@ -38,4 +40,8 @@ export const isTrustProvider = (): boolean => {
   } catch (error) {
     return false;
   }
+};
+
+export const isDappBrowserProvider = (): boolean => {
+  return isMobileOrTablet && hasInjected();
 };

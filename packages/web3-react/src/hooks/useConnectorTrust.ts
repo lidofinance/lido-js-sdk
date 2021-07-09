@@ -1,21 +1,20 @@
 import invariant from 'tiny-invariant';
 import warning from 'tiny-warning';
-import { openWindow } from '@lido-sdk/helpers';
 import { useCallback } from 'react';
+import { openWindow } from '@lido-sdk/helpers';
 import { useConnectors } from './useConnectors';
-import { hasInjected } from '../helpers';
-import { useWeb3React } from '@web3-react/core';
+import { useWeb3 } from './useWeb3';
+import { hasInjected, isIOS, isMobileOrTablet } from '../helpers';
 
 type Connector = {
-  connect: () => void;
-  available: boolean;
+  connect?: () => void;
 };
 
 const TRUST_URL = 'https://link.trustwallet.com/open_url?url=';
 
 export const useConnectorTrust = (): Connector => {
   const { injected } = useConnectors();
-  const { activate } = useWeb3React();
+  const { activate } = useWeb3();
 
   const openInWallet = useCallback(() => {
     try {
@@ -36,5 +35,9 @@ export const useConnectorTrust = (): Connector => {
     }
   }, [activate, openInWallet, injected]);
 
-  return { connect, available: true };
+  const available = isMobileOrTablet && !isIOS;
+
+  return {
+    connect: available ? connect : undefined,
+  };
 };

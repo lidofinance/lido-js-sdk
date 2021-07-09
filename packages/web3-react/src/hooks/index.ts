@@ -8,3 +8,4 @@ export * from './useConnectorStorage';
 export * from './useConnectorTrust';
 export * from './useConnectorWalletConnect';
 export * from './useDisconnect';
+export * from './useWeb3';

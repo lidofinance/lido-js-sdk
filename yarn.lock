@@ -2392,12 +2392,14 @@ __metadata:
     "@gnosis.pm/safe-apps-web3-react": ^0.3.0
     "@lido-sdk/providers": "workspace:*"
     "@lido-sdk/react": "workspace:*"
+    "@types/ua-parser-js": ^0.7.36
     "@web3-react/abstract-connector": ^6.0.7
     "@web3-react/core": ^6.1.9
     "@web3-react/injected-connector": ^6.0.7
     "@web3-react/walletconnect-connector": ^6.2.0
     "@web3-react/walletlink-connector": ^6.2.0
     tiny-invariant: 1
+    ua-parser-js: 0
   peerDependencies:
     "@ethersproject/providers": 5
     react: 16 || 17 || 18
@@ -3329,6 +3331,13 @@ __metadata:
   version: 2.0.0
   resolution: "@types/stack-utils@npm:2.0.0"
   checksum: 662312302e07685c99a1c45c6753eb997b31d2af66e646c5937f62d593a63a111289503d0b06a8d1e6f3922b67fc2ed94889d84653a08861a7fee67b81ce5b92
+  languageName: node
+  linkType: hard
+
+"@types/ua-parser-js@npm:^0.7.36":
+  version: 0.7.36
+  resolution: "@types/ua-parser-js@npm:0.7.36"
+  checksum: 0a0aa0172cccb77128b8daf49731ef88e6fb66afe9fdb4e1fac289d5f9b6dcc37133d61053504a0f0edba1925459174d665fed23f1a637e135e17bdc9bcecd8c
   languageName: node
   linkType: hard
 
@@ -13248,6 +13257,13 @@ typescript@^4.3.5:
   version: 2.6.1
   resolution: "typical@npm:2.6.1"
   checksum: 7b2b6744de07613960463af7367f31ff78d27247cb976c7e0a807ac47a153e6432fc5b2c59966ddc177b0560b0016ce002a6509e65014224edad133bc1bc658a
+  languageName: node
+  linkType: hard
+
+"ua-parser-js@npm:0":
+  version: 0.7.28
+  resolution: "ua-parser-js@npm:0.7.28"
+  checksum: bf65a24eb48d8ec31f6396494bff16b92228e88d7ea15d0bdaa71505313979d2fd176d832418d849a8fa6e119e8dea482f52a2acffe51a3f1810087d295a9adf
   languageName: node
   linkType: hard
 

@@ -2,13 +2,11 @@ jest.mock('@web3-react/core');
 jest.mock('./useConnectors');
 
 import { renderHook, act } from '@testing-library/react-hooks';
+import { useWeb3 } from './useWeb3';
 import { useConnectorWalletConnect } from './useConnectorWalletConnect';
-import { useWeb3React } from '@web3-react/core';
 import { useConnectors } from './useConnectors';
 
-const mockUseWeb3React = useWeb3React as jest.MockedFunction<
-  typeof useWeb3React
->;
+const mockUseWeb3 = useWeb3 as jest.MockedFunction<typeof useWeb3>;
 const mockUseConnectors = useConnectors as jest.MockedFunction<
   typeof useConnectors
 >;
@@ -18,7 +16,7 @@ describe('useConnectorWalletConnect', () => {
     const mockActivate = jest.fn(async () => true);
     const walletconnect = {};
 
-    mockUseWeb3React.mockReturnValue({ activate: mockActivate } as any);
+    mockUseWeb3.mockReturnValue({ activate: mockActivate } as any);
     mockUseConnectors.mockReturnValue({ walletconnect } as any);
 
     const { result } = renderHook(() => useConnectorWalletConnect());

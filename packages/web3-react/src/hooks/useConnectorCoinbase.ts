@@ -1,19 +1,18 @@
 import { useCallback } from 'react';
 import { useConnectors } from './useConnectors';
-import { useWeb3React } from '@web3-react/core';
+import { useWeb3 } from './useWeb3';
 
 type Connector = {
   connect: () => void;
-  available: boolean;
 };
 
 export const useConnectorCoinbase = (): Connector => {
   const { coinbase } = useConnectors();
-  const { activate } = useWeb3React();
+  const { activate } = useWeb3();
 
   const connect = useCallback(() => {
     activate(coinbase);
   }, [activate, coinbase]);
 
-  return { connect, available: true };
+  return { connect };
 };

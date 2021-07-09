@@ -3,12 +3,21 @@ import {
   isMetamaskProvider,
   isImTokenProvider,
   isTrustProvider,
+  isDappBrowserProvider,
 } from './injected';
 
 const windowSpy = jest.spyOn(global, 'window', 'get');
+const mockIsMobileOrTablet = jest.fn();
+
+jest.mock('./ua', () => ({
+  get isMobileOrTablet() {
+    return mockIsMobileOrTablet();
+  },
+}));
 
 beforeEach(() => {
   windowSpy.mockReturnValue(undefined as any);
+  mockIsMobileOrTablet.mockReturnValue(false);
 });
 
 describe('hasInjected', () => {
@@ -29,7 +38,7 @@ describe('isMetamaskProvider', () => {
     expect(isMetamaskProvider()).toBe(true);
   });
 
-  test('should not metamask', async () => {
+  test('should not detect metamask', async () => {
     expect(() => isMetamaskProvider()).not.toThrowError();
     expect(isMetamaskProvider()).toBe(false);
   });
@@ -41,7 +50,7 @@ describe('isImTokenProvider', () => {
     expect(isImTokenProvider()).toBe(true);
   });
 
-  test('should not imToken', async () => {
+  test('should not detect imToken', async () => {
     expect(() => isImTokenProvider()).not.toThrowError();
     expect(isImTokenProvider()).toBe(false);
   });
@@ -53,8 +62,20 @@ describe('isTrustProvider', () => {
     expect(isTrustProvider()).toBe(true);
   });
 
-  test('should not trust wallet', async () => {
+  test('should not detect trust wallet', async () => {
     expect(() => isTrustProvider()).not.toThrowError();
     expect(isTrustProvider()).toBe(false);
+  });
+});
+
+describe('isDappBrowserProvider', () => {
+  test('should detect dapp browser', async () => {
+    mockIsMobileOrTablet.mockReturnValue(true);
+    windowSpy.mockReturnValue({ ethereum: {} } as any);
+    expect(isDappBrowserProvider()).toBe(true);
+  });
+
+  test('should not detect dapp browser', async () => {
+    expect(isDappBrowserProvider()).toBe(false);
   });
 });
