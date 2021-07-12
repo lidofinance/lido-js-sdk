@@ -10,6 +10,7 @@ JS SDK for Lido Finance projects.
 - [@lido-sdk/helpers](/packages/helpers/README.md)
 - [@lido-sdk/providers](/packages/providers/README.md). RPC provider getters with cache
 - [@lido-sdk/react](/packages/react/README.md). React hooks and providers. SSR ready
+- [@lido-sdk/web3-react](/packages/web3-react/README.md). Wrapped [web3-react](https://github.com/NoahZinsmeister/web3-react) provider
 
 ## Install
 
