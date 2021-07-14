@@ -6,6 +6,7 @@ export enum PROVIDER_NAMES {
   WALLET_CONNECT = 'WalletConnect',
   COINBASE = 'Coinbase',
   INJECTED = 'Injected',
+  LEDGER_HQ_LIVE = 'Ledger Live',
 }
 
 export enum CONNECTOR_NAMES {
@@ -13,4 +14,5 @@ export enum CONNECTOR_NAMES {
   WALLET_CONNECT = 'walletconnect',
   COINBASE = 'coinbase',
   INJECTED = 'injected',
+  LEDGER_HQ_LIVE = 'ledgerlive',
 }

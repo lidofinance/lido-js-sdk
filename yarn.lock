@@ -1978,36 +1978,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gnosis.pm/safe-apps-provider@npm:0.3.0":
-  version: 0.3.0
-  resolution: "@gnosis.pm/safe-apps-provider@npm:0.3.0"
+"@gnosis.pm/safe-apps-provider@npm:0.6.0":
+  version: 0.6.0
+  resolution: "@gnosis.pm/safe-apps-provider@npm:0.6.0"
   dependencies:
-    "@gnosis.pm/safe-apps-sdk": 2.3.0
+    "@gnosis.pm/safe-apps-sdk": 4.0.0
     events: ^3.3.0
-  checksum: 14e1b86f03617fe52fc7344cf44941c6a5184a832a307e1c05b6ff3f7b977eae1d095b9408320ef6ff69812119c493f6ce458cfa2a04dab7f8db208cfcd048af
+  checksum: ee04e10bfad0f4507d0371edc491e32176a8c1e7c6219bf01f17f76b396bec04b8aa3571afa82f2e3dc7dfc2c6b0f1d037cfc176a2be4aee7dbecee3137f44d9
   languageName: node
   linkType: hard
 
-"@gnosis.pm/safe-apps-sdk@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@gnosis.pm/safe-apps-sdk@npm:2.3.0"
-  dependencies:
-    semver: ^7.3.2
-  checksum: 441ac1b9e472d1b0cfc7363a8584565bdece9680da0049c13c04bab96a8e29db3a860f5d3ec52bebcf7b0d09aa8543a2cb33c348dfef83cc3325b1374798dcd2
+"@gnosis.pm/safe-apps-sdk@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@gnosis.pm/safe-apps-sdk@npm:4.0.0"
+  checksum: 161153468c08f0ddfab08fddd65be0f1149f6ad31fa587926be6a5ebd4c5b96fc121e725faf0f92d1cab9bdf9c45a8ea0420963394fa62fe20f3ad4b77818ea4
   languageName: node
   linkType: hard
 
-"@gnosis.pm/safe-apps-web3-react@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "@gnosis.pm/safe-apps-web3-react@npm:0.3.0"
+"@gnosis.pm/safe-apps-web3-react@npm:0":
+  version: 0.6.0
+  resolution: "@gnosis.pm/safe-apps-web3-react@npm:0.6.0"
   dependencies:
-    "@gnosis.pm/safe-apps-provider": 0.3.0
-    "@gnosis.pm/safe-apps-sdk": 2.3.0
+    "@gnosis.pm/safe-apps-provider": 0.6.0
+    "@gnosis.pm/safe-apps-sdk": 4.0.0
     "@web3-react/abstract-connector": 6.0.7
   peerDependencies:
     "@web3-react/core": 6.x.x
     react: 16.x.x || 17.x.x
-  checksum: 1242caa414fc991fc7302cfb8721905776c5691e105bf73b41de943096bd136eb8c98ea9d4212c2f653a60bcb6baac41c3c1158515b703c4c63ef82c7ade8f68
+  checksum: 399c9b3eac91322b36cef95b9bcb68e180d580d919b895c44106b68c46fbf15f563425f95ee0d36b504f86608d5ca704cb7fe3fa5465ae5e5a5f06c610e9fa63
   languageName: node
   linkType: hard
 
@@ -2281,6 +2279,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ledgerhq/iframe-provider@npm:0":
+  version: 0.4.2
+  resolution: "@ledgerhq/iframe-provider@npm:0.4.2"
+  dependencies:
+    eventemitter3: ^4.0.0
+  checksum: 5318b4e09904256c6a2d65fbd66269384635c8075232d43b16fc265e5380bafca1d292e633e3daebf6f68cce8bc413cb0030a86f5b2e8eea5993756fceaca7a3
+  languageName: node
+  linkType: hard
+
 "@lido-sdk/constants@workspace:*, @lido-sdk/constants@workspace:packages/constants":
   version: 0.0.0-use.local
   resolution: "@lido-sdk/constants@workspace:packages/constants"
@@ -2389,15 +2396,16 @@ __metadata:
   resolution: "@lido-sdk/web3-react@workspace:packages/web3-react"
   dependencies:
     "@ethersproject/providers": ^5.4.1
-    "@gnosis.pm/safe-apps-web3-react": ^0.3.0
+    "@gnosis.pm/safe-apps-web3-react": 0
+    "@ledgerhq/iframe-provider": 0
     "@lido-sdk/providers": "workspace:*"
     "@lido-sdk/react": "workspace:*"
     "@types/ua-parser-js": ^0.7.36
-    "@web3-react/abstract-connector": ^6.0.7
-    "@web3-react/core": ^6.1.9
-    "@web3-react/injected-connector": ^6.0.7
-    "@web3-react/walletconnect-connector": ^6.2.0
-    "@web3-react/walletlink-connector": ^6.2.0
+    "@web3-react/abstract-connector": 6
+    "@web3-react/core": 6
+    "@web3-react/injected-connector": 6
+    "@web3-react/walletconnect-connector": 6
+    "@web3-react/walletlink-connector": 6
     tiny-invariant: 1
     ua-parser-js: 0
   peerDependencies:
@@ -3591,7 +3599,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/abstract-connector@npm:6.0.7, @web3-react/abstract-connector@npm:^6.0.7":
+"@web3-react/abstract-connector@npm:6, @web3-react/abstract-connector@npm:6.0.7, @web3-react/abstract-connector@npm:^6.0.7":
   version: 6.0.7
   resolution: "@web3-react/abstract-connector@npm:6.0.7"
   dependencies:
@@ -3600,7 +3608,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/core@npm:^6.1.9":
+"@web3-react/core@npm:6":
   version: 6.1.9
   resolution: "@web3-react/core@npm:6.1.9"
   dependencies:
@@ -3615,7 +3623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/injected-connector@npm:^6.0.7":
+"@web3-react/injected-connector@npm:6":
   version: 6.0.7
   resolution: "@web3-react/injected-connector@npm:6.0.7"
   dependencies:
@@ -3633,7 +3641,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/walletconnect-connector@npm:^6.2.0":
+"@web3-react/walletconnect-connector@npm:6":
   version: 6.2.0
   resolution: "@web3-react/walletconnect-connector@npm:6.2.0"
   dependencies:
@@ -3645,7 +3653,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/walletlink-connector@npm:^6.2.0":
+"@web3-react/walletlink-connector@npm:6":
   version: 6.2.3
   resolution: "@web3-react/walletlink-connector@npm:6.2.3"
   dependencies:
@@ -6507,7 +6515,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eventemitter3@npm:4.0.7":
+"eventemitter3@npm:4.0.7, eventemitter3@npm:^4.0.0":
   version: 4.0.7
   resolution: "eventemitter3@npm:4.0.7"
   checksum: 1fc12c7bc3b4194c50975827e72d56ff57c32b75a4c7dbf4d5eebf3c8371f6f1aad6799150b609de1b867c0d8a9885c08b6ca5e7e0dc437d6152f3063b2607dd

@@ -5,6 +5,7 @@ import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { SafeAppConnector } from '@gnosis.pm/safe-apps-web3-react';
 import { CHAINS } from '@lido-sdk/constants';
 import { useSDK } from '@lido-sdk/react';
+import { LedgerHQFrameConnector } from '../connectors';
 import { useAutoConnect } from '../hooks/useAutoConnect';
 import { CONNECTOR_NAMES } from '../constants';
 
@@ -18,6 +19,7 @@ export type ConnectorsContextValue = {
   injected: InjectedConnector;
   walletconnect: WalletConnectConnector;
   coinbase: WalletLinkConnector;
+  ledgerlive: LedgerHQFrameConnector;
   gnosis?: SafeAppConnector;
 };
 
@@ -46,6 +48,7 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
       }),
 
       [CONNECTOR_NAMES.WALLET_CONNECT]: new WalletConnectConnector({
+        // bridge: 'https://walletconnect-relay.lido.fi',
         supportedChainIds,
         rpc,
       }),
@@ -57,6 +60,8 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
           return undefined;
         }
       })(),
+
+      [CONNECTOR_NAMES.LEDGER_HQ_LIVE]: new LedgerHQFrameConnector(),
 
       [CONNECTOR_NAMES.COINBASE]: new WalletLinkConnector({
         // only mainnet

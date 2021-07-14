@@ -83,6 +83,16 @@ describe('useEagerConnector', () => {
     expect(mockWarning).toHaveBeenCalledTimes(1);
   });
 
+  test('should activate ledger live connector', async () => {
+    const ledgerlive = { isLedgerApp: () => true };
+    const { waitFor } = renderHook(() =>
+      useEagerConnector({ ledgerlive } as any),
+    );
+
+    await waitFor(() => expect(mockActivate).toHaveBeenCalledTimes(1));
+    expect(mockActivate).toHaveBeenCalledWith(ledgerlive, undefined, true);
+  });
+
   test('should activate injected connector if it’s dapp browser', async () => {
     const injected = {};
     window.ethereum = {};

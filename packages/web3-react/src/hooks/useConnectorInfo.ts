@@ -11,6 +11,7 @@ import {
   isMetamaskProvider,
   isTrustProvider,
 } from '../helpers';
+import { LedgerHQFrameConnector } from '../connectors';
 
 type ConnectorInfo = {
   isDappBrowser: boolean;
@@ -19,6 +20,7 @@ type ConnectorInfo = {
   isTrust: boolean;
   isMetamask: boolean;
   isGnosis: boolean;
+  isLedgerLive: boolean;
   isWalletConnect: boolean;
   isCoinbase: boolean;
   providerName?: string;
@@ -31,6 +33,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
   const isGnosis = active && connector instanceof SafeAppConnector;
   const isWalletConnect = active && connector instanceof WalletConnectConnector;
   const isCoinbase = active && connector instanceof WalletLinkConnector;
+  const isLedgerLive = active && connector instanceof LedgerHQFrameConnector;
 
   const isInjected = active && connector instanceof InjectedConnector;
   const isDappBrowser = isInjected && isDappBrowserProvider();
@@ -39,12 +42,13 @@ export const useConnectorInfo = (): ConnectorInfo => {
   const isTrust = isInjected && isTrustProvider();
 
   const providerName = (() => {
-    if (isGnosis) return PROVIDER_NAMES.GNOSIS;
-    if (isWalletConnect) return PROVIDER_NAMES.WALLET_CONNECT;
     if (isCoinbase) return PROVIDER_NAMES.COINBASE;
+    if (isGnosis) return PROVIDER_NAMES.GNOSIS;
+    if (isLedgerLive) return PROVIDER_NAMES.LEDGER_HQ_LIVE;
+    if (isWalletConnect) return PROVIDER_NAMES.WALLET_CONNECT;
 
-    if (isMetamask) return PROVIDER_NAMES.METAMASK;
     if (isImToken) return PROVIDER_NAMES.IM_TOKEN;
+    if (isMetamask) return PROVIDER_NAMES.METAMASK;
     if (isTrust) return PROVIDER_NAMES.TRUST;
 
     if (isInjected) return PROVIDER_NAMES.INJECTED;
@@ -53,24 +57,30 @@ export const useConnectorInfo = (): ConnectorInfo => {
   })();
 
   const connectorName: Connector | undefined = (() => {
-    if (isInjected) return CONNECTOR_NAMES.INJECTED;
-    if (isWalletConnect) return CONNECTOR_NAMES.WALLET_CONNECT;
     if (isCoinbase) return CONNECTOR_NAMES.COINBASE;
     if (isGnosis) return CONNECTOR_NAMES.GNOSIS;
+    if (isLedgerLive) return CONNECTOR_NAMES.LEDGER_HQ_LIVE;
+    if (isWalletConnect) return CONNECTOR_NAMES.WALLET_CONNECT;
+
+    if (isInjected) return CONNECTOR_NAMES.INJECTED;
 
     return undefined;
   })();
 
   return {
-    providerName,
     connectorName,
+    providerName,
+
+    isCoinbase,
+    isGnosis,
+    isLedgerLive,
+    isWalletConnect,
+
+    isImToken,
+    isMetamask,
+    isTrust,
+
     isDappBrowser,
     isInjected,
-    isImToken,
-    isTrust,
-    isMetamask,
-    isGnosis,
-    isWalletConnect,
-    isCoinbase,
   };
 };

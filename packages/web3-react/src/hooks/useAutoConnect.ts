@@ -22,14 +22,17 @@ export const useEagerConnector = (connectors: ConnectorsContextValue): void => {
 
   const getEagerConnector =
     useCallback(async (): Promise<AbstractConnector | null> => {
-      const { gnosis, injected } = connectors;
+      const { gnosis, ledgerlive, injected } = connectors;
 
-      // Dapp browsers
-      if (isDappBrowserProvider()) return injected;
+      // Ledger Live iframe
+      if (ledgerlive?.isLedgerApp()) return ledgerlive;
 
       // Gnosis iframe
       const isSaveApp = await gnosis?.isSafeApp();
       if (isSaveApp && gnosis) return gnosis;
+
+      // Dapp browsers
+      if (isDappBrowserProvider()) return injected;
 
       // Saved in LS
       const saved = savedConnector && connectors[savedConnector];

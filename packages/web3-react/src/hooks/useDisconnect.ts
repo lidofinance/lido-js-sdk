@@ -32,8 +32,8 @@ export const useDisconnect = (): {
   const { active } = useWeb3();
   const { disconnect } = useForceDisconnect();
 
-  const { isGnosis, isDappBrowser } = useConnectorInfo();
-  const available = active && !isGnosis && !isDappBrowser;
+  const { isGnosis, isLedgerLive, isDappBrowser } = useConnectorInfo();
+  const available = active && !isGnosis && !isDappBrowser && !isLedgerLive;
 
   return {
     disconnect: available ? disconnect : undefined,
