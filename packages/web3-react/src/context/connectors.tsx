@@ -5,11 +5,13 @@ import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { SafeAppConnector } from '@gnosis.pm/safe-apps-web3-react';
 import { CHAINS } from '@lido-sdk/constants';
 import { useSDK } from '@lido-sdk/react';
-import { LedgerHQFrameConnector } from '../connectors';
+import { LedgerHQFrameConnector } from 'web3-ledgerhq-frame-connector';
+import { LedgerHQConnector } from 'web3-ledgerhq-connector';
 import { useAutoConnect } from '../hooks/useAutoConnect';
 import { CONNECTOR_NAMES } from '../constants';
 
 export interface ConnectorsContextProps {
+  defaultChainId: CHAINS;
   rpc: Record<number, string>;
   appName?: string;
   appLogoUrl?: string;
@@ -20,6 +22,7 @@ export type ConnectorsContextValue = {
   walletconnect: WalletConnectConnector;
   coinbase: WalletLinkConnector;
   ledgerlive: LedgerHQFrameConnector;
+  ledger: LedgerHQConnector;
   gnosis?: SafeAppConnector;
 };
 
@@ -35,6 +38,7 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
   const {
     rpc,
     children,
+    defaultChainId,
     appName = DEFAULT_NAME,
     appLogoUrl = DEFAULT_LOGO,
   } = props;
@@ -63,6 +67,11 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
 
       [CONNECTOR_NAMES.LEDGER_HQ_LIVE]: new LedgerHQFrameConnector(),
 
+      [CONNECTOR_NAMES.LEDGER]: new LedgerHQConnector({
+        chainId: defaultChainId,
+        url: rpc[defaultChainId],
+      }),
+
       [CONNECTOR_NAMES.COINBASE]: new WalletLinkConnector({
         // only mainnet
         url: rpc[CHAINS.Mainnet],
@@ -71,7 +80,7 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
         appLogoUrl,
       }),
     }),
-    [appLogoUrl, appName, rpc, supportedChainIds],
+    [appLogoUrl, appName, rpc, defaultChainId, supportedChainIds],
   );
 
   useAutoConnect(connectors);

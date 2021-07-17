@@ -1602,7 +1602,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/abstract-signer@npm:5.4.0, @ethersproject/abstract-signer@npm:^5.4.0":
+"@ethersproject/abstract-signer@npm:5, @ethersproject/abstract-signer@npm:5.4.0, @ethersproject/abstract-signer@npm:^5.4.0":
   version: 5.4.0
   resolution: "@ethersproject/abstract-signer@npm:5.4.0"
   dependencies:
@@ -1647,7 +1647,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/bignumber@npm:5.4.0, @ethersproject/bignumber@npm:^5.4.0":
+"@ethersproject/bignumber@npm:5, @ethersproject/bignumber@npm:5.4.0, @ethersproject/bignumber@npm:^5.4.0":
   version: 5.4.0
   resolution: "@ethersproject/bignumber@npm:5.4.0"
   dependencies:
@@ -1658,7 +1658,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/bytes@npm:5.4.0, @ethersproject/bytes@npm:^5.4.0":
+"@ethersproject/bytes@npm:5, @ethersproject/bytes@npm:5.4.0, @ethersproject/bytes@npm:^5.4.0":
   version: 5.4.0
   resolution: "@ethersproject/bytes@npm:5.4.0"
   dependencies:
@@ -1796,7 +1796,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/properties@npm:5.4.0, @ethersproject/properties@npm:^5.4.0":
+"@ethersproject/properties@npm:5, @ethersproject/properties@npm:5.4.0, @ethersproject/properties@npm:^5.4.0":
   version: 5.4.0
   resolution: "@ethersproject/properties@npm:5.4.0"
   dependencies:
@@ -1805,7 +1805,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/providers@npm:5.4.1, @ethersproject/providers@npm:^5.4.1":
+"@ethersproject/providers@npm:5, @ethersproject/providers@npm:5.4.1, @ethersproject/providers@npm:^5.4.1":
   version: 5.4.1
   resolution: "@ethersproject/providers@npm:5.4.1"
   dependencies:
@@ -1890,7 +1890,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/strings@npm:5.4.0, @ethersproject/strings@npm:^5.4.0":
+"@ethersproject/strings@npm:5, @ethersproject/strings@npm:5.4.0, @ethersproject/strings@npm:^5.4.0":
   version: 5.4.0
   resolution: "@ethersproject/strings@npm:5.4.0"
   dependencies:
@@ -1901,7 +1901,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/transactions@npm:5.4.0, @ethersproject/transactions@npm:^5.4.0":
+"@ethersproject/transactions@npm:5, @ethersproject/transactions@npm:5.4.0, @ethersproject/transactions@npm:^5.4.0":
   version: 5.4.0
   resolution: "@ethersproject/transactions@npm:5.4.0"
   dependencies:
@@ -2279,12 +2279,84 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ledgerhq/cryptoassets@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "@ledgerhq/cryptoassets@npm:6.1.0"
+  dependencies:
+    invariant: 2
+  checksum: f996243b10d1f8fbbc9191a01baa047c29d1b3a4b521aa1ed66c7c420944e53b3863f4f6722872337f7b05308bd6b9b28124bc4a2dbe2960a68213eaed20bfd6
+  languageName: node
+  linkType: hard
+
+"@ledgerhq/devices@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "@ledgerhq/devices@npm:6.1.0"
+  dependencies:
+    "@ledgerhq/errors": ^6.0.2
+    "@ledgerhq/logs": ^6.0.2
+    rxjs: 6
+    semver: ^7.3.5
+  checksum: 76cff457cc9650e340c90cecad07beffbd8e54f8684da1418f8f26e2c9cb24400084c21665769880f5c0ef0aa095a2638d569e40514f06eac4d11d7b15479324
+  languageName: node
+  linkType: hard
+
+"@ledgerhq/errors@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "@ledgerhq/errors@npm:6.0.2"
+  checksum: 2771b9e48e7e63074fc4a222e05ab7e627ea72169dbebdc65ab1c975ca5851e074731f178de0238474d7c89512eb0d363214c65124df5bac32fa2febb39b2133
+  languageName: node
+  linkType: hard
+
+"@ledgerhq/hw-app-eth@npm:6":
+  version: 6.1.0
+  resolution: "@ledgerhq/hw-app-eth@npm:6.1.0"
+  dependencies:
+    "@ledgerhq/cryptoassets": ^6.1.0
+    "@ledgerhq/errors": ^6.0.2
+    "@ledgerhq/hw-transport": ^6.1.0
+    "@ledgerhq/logs": ^6.0.2
+    bignumber.js: ^9.0.1
+    ethers: ^5.4.1
+  checksum: 0e4c2f9cee76eaf42d67c39d3edf4f244f17e95bfe8dfe39949beabe2d2abca06df48204bbdf7f60e8e19af595a0049711bad2a902733e3beb42d77a835ca338
+  languageName: node
+  linkType: hard
+
+"@ledgerhq/hw-transport-webhid@npm:6":
+  version: 6.1.0
+  resolution: "@ledgerhq/hw-transport-webhid@npm:6.1.0"
+  dependencies:
+    "@ledgerhq/devices": ^6.1.0
+    "@ledgerhq/errors": ^6.0.2
+    "@ledgerhq/hw-transport": ^6.1.0
+    "@ledgerhq/logs": ^6.0.2
+  checksum: 6b158ffb75e8c7b3dbdd9e0f23e7a5bd5948ebb5a2a5a3505a322205daf28f491148c1bdb1e5b1ac6fc8158a1c784438f4a4b59a5ddf9ba48f592a16ea6138e3
+  languageName: node
+  linkType: hard
+
+"@ledgerhq/hw-transport@npm:6, @ledgerhq/hw-transport@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "@ledgerhq/hw-transport@npm:6.1.0"
+  dependencies:
+    "@ledgerhq/devices": ^6.1.0
+    "@ledgerhq/errors": ^6.0.2
+    events: ^3.3.0
+  checksum: 3e92ed048f409a5a3935155f18a7b407aea7de4638335d9eac14f3d65bd9623a3054238cf861fa0eaf5d437b43684141a4892b9b6cb7392ca47f5aa8f98415cc
+  languageName: node
+  linkType: hard
+
 "@ledgerhq/iframe-provider@npm:0":
   version: 0.4.2
   resolution: "@ledgerhq/iframe-provider@npm:0.4.2"
   dependencies:
     eventemitter3: ^4.0.0
   checksum: 5318b4e09904256c6a2d65fbd66269384635c8075232d43b16fc265e5380bafca1d292e633e3daebf6f68cce8bc413cb0030a86f5b2e8eea5993756fceaca7a3
+  languageName: node
+  linkType: hard
+
+"@ledgerhq/logs@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "@ledgerhq/logs@npm:6.0.2"
+  checksum: 03f1a5e62197cab30e53d1136725ea2f1d3e161b4cf62dcc3c3dd5d36ac50d6fa9cc647fa112d1a3d1a800f3ed74f5564f6050ebe2ae74441fae40aaf9c9f311
   languageName: node
   linkType: hard
 
@@ -2398,6 +2470,8 @@ __metadata:
     "@ethersproject/providers": ^5.4.1
     "@gnosis.pm/safe-apps-web3-react": 0
     "@ledgerhq/iframe-provider": 0
+    "@lido-sdk/constants": "workspace:*"
+    "@lido-sdk/helpers": "workspace:*"
     "@lido-sdk/providers": "workspace:*"
     "@lido-sdk/react": "workspace:*"
     "@types/ua-parser-js": ^0.7.36
@@ -2407,7 +2481,10 @@ __metadata:
     "@web3-react/walletconnect-connector": 6
     "@web3-react/walletlink-connector": 6
     tiny-invariant: 1
+    tiny-warning: 1
     ua-parser-js: 0
+    web3-ledgerhq-connector: 1
+    web3-ledgerhq-frame-connector: 1
   peerDependencies:
     "@ethersproject/providers": 5
     react: 16 || 17 || 18
@@ -3634,7 +3711,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/types@npm:^6.0.7":
+"@web3-react/types@npm:6, @web3-react/types@npm:^6.0.7":
   version: 6.0.7
   resolution: "@web3-react/types@npm:6.0.7"
   checksum: d40824d9125b685d9ce4786ed04f1166105009057e55e12cfb508c0bf27fdaeffdc7bf96f3e512c3cd8ac115623300f669996ff01da85e7a79e62e331eb226c2
@@ -4398,6 +4475,13 @@ __metadata:
   version: 2.2.2
   resolution: "before-after-hook@npm:2.2.2"
   checksum: 06dd8fc2a1c5c4a16f21d725a7b7d05814d94c4a0a003abe923bb509b3863638efc8ab89515192046dc8d29bbc5dbd3f75fe47a2d3bffbffae427fc976c142bb
+  languageName: node
+  linkType: hard
+
+"bignumber.js@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "bignumber.js@npm:9.0.1"
+  checksum: 605e9639c413f344c37b23e919254f60a5017cc5ccd925e2f8fb79b36aa3d54f356df9c726f38465263236455f685d60dcf38dbe32cb0b7e4d2a32c94b035476
   languageName: node
   linkType: hard
 
@@ -7727,6 +7811,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"invariant@npm:2":
+  version: 2.2.4
+  resolution: "invariant@npm:2.2.4"
+  dependencies:
+    loose-envify: ^1.0.0
+  checksum: 96d8a2a4f0ad21020c5847546fc36bec5c0870d99f071aaa93df00c1036439d48211a1823ab6128f78a15ccc4c4f62baf6a65f6c0ed489270dd44d0a04f443a1
+  languageName: node
+  linkType: hard
+
 "ip-regex@npm:^4.1.0":
   version: 4.3.0
   resolution: "ip-regex@npm:4.3.0"
@@ -9586,7 +9679,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.0.0, loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -11926,7 +12019,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^6.6.3, rxjs@npm:^6.6.7":
+"rxjs@npm:6, rxjs@npm:^6.6.3, rxjs@npm:^6.6.7":
   version: 6.6.7
   resolution: "rxjs@npm:6.6.7"
   dependencies:
@@ -13549,6 +13642,39 @@ typescript@^4.3.5:
   dependencies:
     defaults: ^1.0.3
   checksum: abf8ba432dd19a95af63895de6af932900a9451e175745551aeca0fd2d46604bc72ff80aa83adc3f67fb8389191329340e2864aefcf20655ffe91f0dbee5d953
+  languageName: node
+  linkType: hard
+
+"web3-ledgerhq-connector@npm:1":
+  version: 1.0.0
+  resolution: "web3-ledgerhq-connector@npm:1.0.0"
+  dependencies:
+    "@ethersproject/abstract-signer": 5
+    "@ethersproject/bignumber": 5
+    "@ethersproject/bytes": 5
+    "@ethersproject/properties": 5
+    "@ethersproject/providers": 5
+    "@ethersproject/strings": 5
+    "@ethersproject/transactions": 5
+    "@ledgerhq/hw-app-eth": 6
+    "@ledgerhq/hw-transport": 6
+    "@ledgerhq/hw-transport-webhid": 6
+    "@web3-react/abstract-connector": 6
+    "@web3-react/types": 6
+    tiny-invariant: 1
+  checksum: 92b465acba99b4dec7ab5c781c27f3763ad95dedf55042ef3a6eedeb6bceaf7f0f665138359d2c6377c024d1926be9ac7374cb0d5e0bc048107609652ba68a23
+  languageName: node
+  linkType: hard
+
+"web3-ledgerhq-frame-connector@npm:1":
+  version: 1.0.0
+  resolution: "web3-ledgerhq-frame-connector@npm:1.0.0"
+  dependencies:
+    "@ledgerhq/iframe-provider": 0
+    "@web3-react/abstract-connector": 6
+    "@web3-react/types": 6
+    tiny-invariant: 1
+  checksum: 70769a0c4c5cd04c8f69fdb1349c8772135f54ecb0fe0bda341dab658f429b0c0aad7b7327d9ff812209d9265c027b25c63e518582a71a12eaaacc30893afcc4
   languageName: node
   linkType: hard
 

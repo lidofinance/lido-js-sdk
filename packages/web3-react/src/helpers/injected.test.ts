@@ -4,8 +4,6 @@ import {
   isMetamaskProvider,
   isTrustProvider,
   isDappBrowserProvider,
-  isIframe,
-  isLedgerDappBrowserProvider,
 } from './injected';
 
 const windowSpy = jest.spyOn(global, 'window', 'get');
@@ -79,41 +77,5 @@ describe('isDappBrowserProvider', () => {
 
   test('should not detect dapp browser', async () => {
     expect(isDappBrowserProvider()).toBe(false);
-  });
-});
-
-describe('isIframe', () => {
-  test('should detect iframe', async () => {
-    windowSpy.mockReturnValue({ self: {}, top: {} } as any);
-    expect(isIframe()).toBe(true);
-  });
-
-  test('should not detect iframe', async () => {
-    expect(isIframe()).toBe(false);
-  });
-});
-
-describe('isLedgerDappBrowserProvider', () => {
-  test('should detect ledger dapp browser', async () => {
-    const self = { location: { search: '?embed=true' } };
-    windowSpy.mockReturnValue({ self, top: {} } as any);
-    expect(isLedgerDappBrowserProvider()).toBe(true);
-  });
-
-  test('should not detect ledger dapp browser if it’s not iframe', async () => {
-    const same = { location: { search: '?embed=true' } };
-    windowSpy.mockReturnValue({ self: same, top: same } as any);
-    expect(isLedgerDappBrowserProvider()).toBe(false);
-  });
-
-  test('should not detect ledger dapp browser if urls doesn’t contain embed', async () => {
-    const self = { location: { search: '' } };
-    windowSpy.mockReturnValue({ self: self, top: {} } as any);
-    expect(isLedgerDappBrowserProvider()).toBe(false);
-  });
-
-  test('should catch an error', async () => {
-    windowSpy.mockReturnValue({ self: {}, top: {} } as any);
-    expect(isLedgerDappBrowserProvider()).toBe(false);
   });
 });
