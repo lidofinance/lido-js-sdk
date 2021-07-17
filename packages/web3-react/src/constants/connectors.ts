@@ -7,6 +7,7 @@ export enum PROVIDER_NAMES {
   COINBASE = 'Coinbase',
   INJECTED = 'Injected',
   LEDGER_HQ_LIVE = 'Ledger Live',
+  LEDGER = 'Ledger',
 }
 
 export enum CONNECTOR_NAMES {
@@ -15,4 +16,5 @@ export enum CONNECTOR_NAMES {
   COINBASE = 'coinbase',
   INJECTED = 'injected',
   LEDGER_HQ_LIVE = 'ledgerlive',
+  LEDGER = 'ledger',
 }

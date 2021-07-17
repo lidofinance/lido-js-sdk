@@ -7,7 +7,8 @@ import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { useConnectorInfo } from './useConnectorInfo';
 import { useWeb3 } from './useWeb3';
-import { LedgerHQFrameConnector } from '../connectors';
+import { LedgerHQFrameConnector } from 'web3-ledgerhq-frame-connector';
+import { LedgerHQConnector } from 'web3-ledgerhq-connector';
 
 const mockUseWeb3 = useWeb3 as jest.MockedFunction<typeof useWeb3>;
 
@@ -30,6 +31,15 @@ describe('useConnectorInfo', () => {
     const { connectorName, providerName, isGnosis, ...rest } = result.current;
 
     expect(isGnosis).toBe(true);
+    expect(Object.values(rest).includes(true)).toBeFalsy();
+  });
+
+  test('should detect ledger live', async () => {
+    mockConnector(LedgerHQConnector);
+    const { result } = renderHook(() => useConnectorInfo());
+    const { connectorName, providerName, isLedger, ...rest } = result.current;
+
+    expect(isLedger).toBe(true);
     expect(Object.values(rest).includes(true)).toBeFalsy();
   });
 

@@ -32,6 +32,8 @@
   "dependencies": {
     "@gnosis.pm/safe-apps-web3-react": "0",
     "@ledgerhq/iframe-provider": "0",
+    "@lido-sdk/constants": "workspace:*",
+    "@lido-sdk/helpers": "workspace:*",
     "@lido-sdk/providers": "workspace:*",
     "@lido-sdk/react": "workspace:*",
     "@web3-react/abstract-connector": "6",
@@ -40,7 +42,10 @@
     "@web3-react/walletconnect-connector": "6",
     "@web3-react/walletlink-connector": "6",
     "tiny-invariant": "1",
-    "ua-parser-js": "0"
+    "tiny-warning": "1",
+    "ua-parser-js": "0",
+    "web3-ledgerhq-connector": "1",
+    "web3-ledgerhq-frame-connector": "1"
   },
   "peerDependencies": {
     "@ethersproject/providers": "5",
