@@ -30,26 +30,26 @@
     "@types/ua-parser-js": "^0.7.36"
   },
   "dependencies": {
-    "@gnosis.pm/safe-apps-web3-react": "0",
-    "@ledgerhq/iframe-provider": "0",
+    "@gnosis.pm/safe-apps-web3-react": "0.6.0",
+    "@ledgerhq/iframe-provider": "0.4.2",
     "@lido-sdk/constants": "workspace:*",
     "@lido-sdk/helpers": "workspace:*",
     "@lido-sdk/providers": "workspace:*",
     "@lido-sdk/react": "workspace:*",
-    "@web3-react/abstract-connector": "6",
-    "@web3-react/core": "6",
-    "@web3-react/injected-connector": "6",
-    "@web3-react/walletconnect-connector": "6",
-    "@web3-react/walletlink-connector": "6",
-    "tiny-invariant": "1",
-    "tiny-warning": "1",
-    "ua-parser-js": "0",
-    "web3-ledgerhq-connector": "1",
-    "web3-ledgerhq-frame-connector": "1"
+    "@web3-react/abstract-connector": ">=6",
+    "@web3-react/core": ">=6",
+    "@web3-react/injected-connector": ">=6",
+    "@web3-react/walletconnect-connector": ">=6",
+    "@web3-react/walletlink-connector": ">=6",
+    "tiny-invariant": ">=1.1.0",
+    "tiny-warning": ">=1.0.3",
+    "ua-parser-js": ">=0.7.28",
+    "web3-ledgerhq-connector": ">=1.0.0",
+    "web3-ledgerhq-frame-connector": ">=1.0.1"
   },
   "peerDependencies": {
-    "@ethersproject/providers": "5",
-    "react": "16 || 17 || 18",
-    "react-dom": "16 || 17 || 18"
+    "@ethersproject/providers": ">=5",
+    "react": ">=16",
+    "react-dom": ">=16"
   }
 }

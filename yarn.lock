@@ -2147,7 +2147,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gnosis.pm/safe-apps-web3-react@npm:0":
+"@gnosis.pm/safe-apps-web3-react@npm:0.6.0":
   version: 0.6.0
   resolution: "@gnosis.pm/safe-apps-web3-react@npm:0.6.0"
   dependencies:
@@ -2478,7 +2478,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ledgerhq/iframe-provider@npm:0":
+"@ledgerhq/iframe-provider@npm:0, @ledgerhq/iframe-provider@npm:0.4.2":
   version: 0.4.2
   resolution: "@ledgerhq/iframe-provider@npm:0.4.2"
   dependencies:
@@ -2499,7 +2499,7 @@ __metadata:
   resolution: "@lido-sdk/constants@workspace:packages/constants"
   dependencies:
     "@types/jest": ^26.0.24
-    tiny-invariant: 1
+    tiny-invariant: ">=1.1.0"
   languageName: unknown
   linkType: soft
 
@@ -2518,7 +2518,7 @@ __metadata:
     "@typechain/ethers-v5": ^7.0.1
     "@types/jest": ^26.0.24
     ethers: ^5.4.2
-    tiny-invariant: 1
+    tiny-invariant: ">=1.1.0"
     typechain: ^5.1.2
     typescript: ^4.3.5
   peerDependencies:
@@ -2536,8 +2536,8 @@ __metadata:
     "@lido-sdk/constants": "workspace:*"
     "@types/jest": ^26.0.24
     "@types/node-fetch": ^2.5.12
-    node-fetch: 2
-    tiny-invariant: 1
+    node-fetch: ">=2.6.1"
+    tiny-invariant: ">=1.1.0"
   languageName: unknown
   linkType: soft
 
@@ -2548,9 +2548,9 @@ __metadata:
     "@ethersproject/bignumber": ^5.4.1
     "@lido-sdk/constants": "workspace:*"
     "@types/jest": ^26.0.24
-    tiny-invariant: 1
+    tiny-invariant: ">=1.1.0"
   peerDependencies:
-    "@ethersproject/bignumber": 5
+    "@ethersproject/bignumber": ">=5"
   languageName: unknown
   linkType: soft
 
@@ -2584,16 +2584,16 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     swr: ^0.5.6
-    tiny-invariant: 1
-    tiny-warning: 1
+    tiny-invariant: ">=1.1.0"
+    tiny-warning: ">=1.0.3"
   peerDependencies:
-    "@ethersproject/bignumber": 5
-    "@ethersproject/constants": 5
-    "@ethersproject/contracts": 5
-    "@ethersproject/providers": 5
-    react: 16 || 17 || 18
-    react-dom: 16 || 17 || 18
-    swr: 0
+    "@ethersproject/bignumber": ">=5"
+    "@ethersproject/constants": ">=5"
+    "@ethersproject/contracts": ">=5"
+    "@ethersproject/providers": ">=5"
+    react: ">=16"
+    react-dom: ">=16"
+    swr: ">=0"
   languageName: unknown
   linkType: soft
 
@@ -2602,27 +2602,27 @@ __metadata:
   resolution: "@lido-sdk/web3-react@workspace:packages/web3-react"
   dependencies:
     "@ethersproject/providers": ^5.4.2
-    "@gnosis.pm/safe-apps-web3-react": 0
-    "@ledgerhq/iframe-provider": 0
+    "@gnosis.pm/safe-apps-web3-react": 0.6.0
+    "@ledgerhq/iframe-provider": 0.4.2
     "@lido-sdk/constants": "workspace:*"
     "@lido-sdk/helpers": "workspace:*"
     "@lido-sdk/providers": "workspace:*"
     "@lido-sdk/react": "workspace:*"
     "@types/ua-parser-js": ^0.7.36
-    "@web3-react/abstract-connector": 6
-    "@web3-react/core": 6
-    "@web3-react/injected-connector": 6
-    "@web3-react/walletconnect-connector": 6
-    "@web3-react/walletlink-connector": 6
-    tiny-invariant: 1
-    tiny-warning: 1
-    ua-parser-js: 0
-    web3-ledgerhq-connector: 1
-    web3-ledgerhq-frame-connector: 1
+    "@web3-react/abstract-connector": ">=6"
+    "@web3-react/core": ">=6"
+    "@web3-react/injected-connector": ">=6"
+    "@web3-react/walletconnect-connector": ">=6"
+    "@web3-react/walletlink-connector": ">=6"
+    tiny-invariant: ">=1.1.0"
+    tiny-warning: ">=1.0.3"
+    ua-parser-js: ">=0.7.28"
+    web3-ledgerhq-connector: ">=1.0.0"
+    web3-ledgerhq-frame-connector: ">=1.0.1"
   peerDependencies:
-    "@ethersproject/providers": 5
-    react: 16 || 17 || 18
-    react-dom: 16 || 17 || 18
+    "@ethersproject/providers": ">=5"
+    react: ">=16"
+    react-dom: ">=16"
   languageName: unknown
   linkType: soft
 
@@ -3919,7 +3919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/abstract-connector@npm:6, @web3-react/abstract-connector@npm:6.0.7, @web3-react/abstract-connector@npm:^6.0.7":
+"@web3-react/abstract-connector@npm:6, @web3-react/abstract-connector@npm:6.0.7, @web3-react/abstract-connector@npm:>=6, @web3-react/abstract-connector@npm:^6.0.7":
   version: 6.0.7
   resolution: "@web3-react/abstract-connector@npm:6.0.7"
   dependencies:
@@ -3928,7 +3928,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/core@npm:6":
+"@web3-react/core@npm:>=6":
   version: 6.1.9
   resolution: "@web3-react/core@npm:6.1.9"
   dependencies:
@@ -3943,7 +3943,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/injected-connector@npm:6":
+"@web3-react/injected-connector@npm:>=6":
   version: 6.0.7
   resolution: "@web3-react/injected-connector@npm:6.0.7"
   dependencies:
@@ -3961,7 +3961,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/walletconnect-connector@npm:6":
+"@web3-react/walletconnect-connector@npm:>=6":
   version: 6.2.4
   resolution: "@web3-react/walletconnect-connector@npm:6.2.4"
   dependencies:
@@ -3973,7 +3973,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/walletlink-connector@npm:6":
+"@web3-react/walletlink-connector@npm:>=6":
   version: 6.2.3
   resolution: "@web3-react/walletlink-connector@npm:6.2.3"
   dependencies:
@@ -9711,7 +9711,7 @@ __metadata:
     prettier: ^2.3.2
     react: ^17.0.2
     react-dom: ^17.0.2
-    rollup: ^2.54.0
+    rollup: ^2.55.0
     rollup-plugin-copy: ^3.4.0
     rollup-plugin-delete: ^2.0.0
     rollup-plugin-typescript2: ^0.30.0
@@ -10511,17 +10511,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:2, node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1":
-  version: 2.6.1
-  resolution: "node-fetch@npm:2.6.1"
-  checksum: cbb171635e538162b977eac5dfe7a1e07a9a02e991924377a6435502291e2f823d306b95aabc455caebf4a118ccf836868462bc70ccc3095af02bb9da61fda37
-  languageName: node
-  linkType: hard
-
 "node-fetch@npm:2.1.2":
   version: 2.1.2
   resolution: "node-fetch@npm:2.1.2"
   checksum: 9f9fcdc37df8780e61ac8e5089d7c765c61dc8c8afa614f71fec74b3b95b47d0d6bf842b6d91cb0baf75566f9a60aa367acd0c394f22482fb301125168db29dd
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:>=2.6.1, node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1":
+  version: 2.6.1
+  resolution: "node-fetch@npm:2.6.1"
+  checksum: cbb171635e538162b977eac5dfe7a1e07a9a02e991924377a6435502291e2f823d306b95aabc455caebf4a118ccf836868462bc70ccc3095af02bb9da61fda37
   languageName: node
   linkType: hard
 
@@ -12255,9 +12255,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.54.0":
-  version: 2.54.0
-  resolution: "rollup@npm:2.54.0"
+"rollup@npm:^2.55.0":
+  version: 2.55.0
+  resolution: "rollup@npm:2.55.0"
   dependencies:
     fsevents: ~2.3.2
   dependenciesMeta:
@@ -12265,7 +12265,7 @@ resolve@^2.0.0-next.3:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: caf0de927d472ba085f2b313c70eb3412af4f0aba24e7abce5b4bc3f896cee0076a06c7172f1fcf0b58f1413c938f8f2987f17af746dcc144df97f7148ddeb2d
+  checksum: 9269671325aff6e887419838326a9d5e86f725ddc89d114c20fc4942d25eca8fcdd8869a566d8b6636fd62942d23873b9e0384d07db8ec829000581ea7986bdb
   languageName: node
   linkType: hard
 
@@ -13300,7 +13300,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tiny-invariant@npm:1, tiny-invariant@npm:^1.0.6":
+"tiny-invariant@npm:1, tiny-invariant@npm:>=1.1.0, tiny-invariant@npm:^1.0.6":
   version: 1.1.0
   resolution: "tiny-invariant@npm:1.1.0"
   checksum: 64318fbd77c451cfff23b57b9f3aef56594d9cea051a87dc538c9b371f97e8d474eaa2a7cbd60b8aa23f852393152495e8651b197607465fdf9c8ff134043b1b
@@ -13314,7 +13314,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tiny-warning@npm:1, tiny-warning@npm:^1.0.3":
+"tiny-warning@npm:>=1.0.3, tiny-warning@npm:^1.0.3":
   version: 1.0.3
   resolution: "tiny-warning@npm:1.0.3"
   checksum: 6cf9f66cb765b893976b8cd1c1310338861f30fb04d02ef2c8e0a748cbc2ed5acd8bb1954b78c15f640ad4116def67134d7d705f2a0c9bf27e6e2eb3e92bff29
@@ -13627,7 +13627,7 @@ typescript@^4.3.5:
   languageName: node
   linkType: hard
 
-"ua-parser-js@npm:0":
+"ua-parser-js@npm:>=0.7.28":
   version: 0.7.28
   resolution: "ua-parser-js@npm:0.7.28"
   checksum: bf65a24eb48d8ec31f6396494bff16b92228e88d7ea15d0bdaa71505313979d2fd176d832418d849a8fa6e119e8dea482f52a2acffe51a3f1810087d295a9adf
@@ -13911,7 +13911,7 @@ typescript@^4.3.5:
   languageName: node
   linkType: hard
 
-"web3-ledgerhq-connector@npm:1":
+"web3-ledgerhq-connector@npm:>=1.0.0":
   version: 1.0.0
   resolution: "web3-ledgerhq-connector@npm:1.0.0"
   dependencies:
@@ -13932,7 +13932,7 @@ typescript@^4.3.5:
   languageName: node
   linkType: hard
 
-"web3-ledgerhq-frame-connector@npm:1":
+"web3-ledgerhq-frame-connector@npm:>=1.0.1":
   version: 1.0.1
   resolution: "web3-ledgerhq-frame-connector@npm:1.0.1"
   dependencies:

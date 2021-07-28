@@ -42,16 +42,16 @@
     "@lido-sdk/constants": "workspace:*",
     "@lido-sdk/contracts": "workspace:*",
     "@lido-sdk/helpers": "workspace:*",
-    "tiny-invariant": "1",
-    "tiny-warning": "1"
+    "tiny-invariant": ">=1.1.0",
+    "tiny-warning": ">=1.0.3"
   },
   "peerDependencies": {
-    "@ethersproject/bignumber": "5",
-    "@ethersproject/constants": "5",
-    "@ethersproject/contracts": "5",
-    "@ethersproject/providers": "5",
-    "react": "16 || 17 || 18",
-    "react-dom": "16 || 17 || 18",
-    "swr": "0"
+    "@ethersproject/bignumber": ">=5",
+    "@ethersproject/constants": ">=5",
+    "@ethersproject/contracts": ">=5",
+    "@ethersproject/providers": ">=5",
+    "react": ">=16",
+    "react-dom": ">=16",
+    "swr": ">=0"
   }
 }
