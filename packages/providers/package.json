@@ -26,8 +26,8 @@
     "access": "public"
   },
   "devDependencies": {
-    "@ethersproject/providers": "^5.4.1",
-    "@types/jest": "^26.0.23"
+    "@ethersproject/providers": "^5.4.2",
+    "@types/jest": "^26.0.24"
   },
   "dependencies": {
     "@lido-sdk/constants": "workspace:*"

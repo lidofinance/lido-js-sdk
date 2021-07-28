@@ -33,13 +33,13 @@
     "@ethersproject/abstract-signer": "^5.4.0",
     "@ethersproject/bytes": "^5.4.0",
     "@ethersproject/contracts": "^5.4.0",
-    "@ethersproject/providers": "^5.4.1",
+    "@ethersproject/providers": "^5.4.2",
     "@lido-sdk/fetch": "workspace:*",
     "@lido-sdk/providers": "workspace:*",
     "@typechain/ethers-v5": "^7.0.1",
-    "@types/jest": "^26.0.23",
-    "ethers": "^5.4.1",
-    "typechain": "^5.1.1",
+    "@types/jest": "^26.0.24",
+    "ethers": "^5.4.2",
+    "typechain": "^5.1.2",
     "typescript": "^4.3.5"
   },
   "peerDependencies": {
