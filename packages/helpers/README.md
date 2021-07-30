@@ -11,6 +11,8 @@ yarn add @lido-sdk/helpers
 
 ## Etherscan
 
+A set of functions for generating links to [etherscan](https://etherscan.io/)
+
 ```ts
 import { getEtherscanTxLink } from '@lido-sdk/helpers';
 import { CHAINS } from '@lido-sdk/constants';
