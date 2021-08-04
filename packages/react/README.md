@@ -36,6 +36,8 @@ yarn add @lido-sdk/react
 
 ### Contracts factory
 
+[Source](src/factories/contracts.ts)
+
 `contractHooksFactory` creates set of hooks, which return RPC and Web3 contracts.
 
 ```ts
@@ -73,7 +75,9 @@ useLDOContractWeb3();
 
 ### ERC20 hooks factory
 
-`hooksFactory` creates the ERC20 set of hooks.
+[Source](src/factories/tokens.ts)
+
+`hooksFactory` binds a token address to the [ERC20 hooks](#erc20-hooks) and returns an object of them. The factory function takes a callback, that uses to get a token address by chain id.
 
 ```ts
 import { hooksFactory } from '@lido-sdk/react';
@@ -98,6 +102,7 @@ useWSTETHBalance()
 useWSTETHTotalSupply()
 useWSTETHDecimals()
 useWSTETHAllowance(spender: string)
+useWSTETHApprove(amount: BigNumber, spender: string, wrapper: UseApproveWrapper)
 ```
 
 ```ts
@@ -105,6 +110,7 @@ useSTETHBalance()
 useSTETHTotalSupply()
 useSTETHDecimals()
 useSTETHAllowance(spender: string)
+useSTETHApprove(amount: BigNumber, spender: string, wrapper: UseApproveWrapper)
 ```
 
 ```ts
@@ -112,6 +118,7 @@ useLDOBalance()
 useLDOTotalSupply()
 useLDODecimals()
 useLDOAllowance(spender: string)
+useLDOApprove(amount: BigNumber, spender: string, wrapper: UseApproveWrapper)
 ```
 
 ## ERC20 hooks

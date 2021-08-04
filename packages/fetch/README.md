@@ -3,6 +3,15 @@
 Fetchers for Lido Finance projects.
 Part of [Lido JS SDK](https://github.com/lidofinance/lido-js-sdk/#readme)
 
+- [Install](#install)
+- [Fetch](#fetch)
+- [Fetch With Fallbacks](#fetch-with-fallbacks)
+- [Fetch RPC](#fetch-rpc)
+  - [Options](#options)
+- [Helpers](#helpers)
+  - [getInfuraRPCUrl](#getinfurarpcurl)
+  - [getAlchemyRPCUrl](#getalchemyrpcurl)
+
 ## Install
 
 ```bash

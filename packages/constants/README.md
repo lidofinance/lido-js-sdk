@@ -3,6 +3,17 @@
 Constants for Lido Finance projects.
 Part of [Lido JS SDK](https://github.com/lidofinance/lido-js-sdk/#readme)
 
+- [Install](#install)
+- [Chains](#chains)
+  - [Chains enum](#chains-enum)
+  - [Array of chains ids](#array-of-chains-ids)
+  - [getChainColor](#getchaincolor)
+- [Tokens](#tokens)
+  - [Lido tokens enum](#lido-tokens-enum)
+  - [getTokenAddress](#gettokenaddress)
+- [Aggregator](#aggregator)
+  - [getAggregatorAddress](#getaggregatoraddress)
+
 ## Install
 
 ```bash
@@ -13,9 +24,7 @@ yarn add @lido-sdk/constants
 
 [Source](src/chains.ts)
 
-### CHAINS
-
-Chains ids enum
+### Chains enum
 
 ```ts
 import { CHAINS } from '@lido-sdk/constants';
@@ -23,9 +32,7 @@ import { CHAINS } from '@lido-sdk/constants';
 console.log(CHAINS.Mainnet, CHAINS.Goerli); // 1, 5
 ```
 
-### CHAINS_IDS
-
-Array of chains ids
+### Array of chains ids
 
 ```ts
 import { CHAINS_IDS } from '@lido-sdk/constants';
@@ -48,14 +55,14 @@ console.log(goerliChainColor); // #3099f2
 
 [Source](src/tokens.ts)
 
-### TOKENS
-
-Lido tokens enum
+### Lido tokens enum
 
 ```ts
 import { TOKENS } from '@lido-sdk/constants';
 
+console.log(TOKENS.WSTETH); // WSTETH
 console.log(TOKENS.STETH); // STETH
+console.log(TOKENS.LDO); // LDO
 ```
 
 ### getTokenAddress

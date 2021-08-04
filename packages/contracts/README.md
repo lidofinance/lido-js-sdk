@@ -7,6 +7,13 @@ A Contract is an abstraction of code that has been deployed to the blockchain. A
 
 It uses [TypeChain](https://github.com/ethereum-ts/TypeChain) under the hood to generate TypeScript typings for contacts.
 
+- [Install](#install)
+- [Getters](#getters)
+  - [getERC20Contract](#geterc20contract)
+  - [getWSTETHContract](#getwstethcontract)
+  - [getSTETHContract](#getstethcontract)
+  - [getLDOContract](#getldocontract)
+
 ## Install
 
 ```bash
