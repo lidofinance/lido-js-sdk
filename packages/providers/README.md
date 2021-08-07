@@ -9,6 +9,7 @@ A Provider is an abstraction of a connection to the Ethereum network, providing 
 - [RPC providers](#rpc-providers)
   - [getRpcProvider](#getrpcprovider)
   - [getRpcBatchProvider](#getrpcbatchprovider)
+- [Cache](#cache)
 
 ## Install
 
@@ -42,4 +43,39 @@ import { CHAINS } from '@lido-sdk/constants';
 import { getRpcBatchProvider } from '@lido-sdk/providers';
 
 const batchProvider = getRpcBatchProvider(CHAINS.Mainnet, '/rpc/url');
+```
+
+## Cache
+
+To get another provider instance, getters have a third optional parameter `cacheSeed`.
+
+Calls without `cacheSeed` or with the same `cacheSeed` return the same providers:
+
+```ts
+const providerFirst = getRpcBatchProvider(CHAINS.Mainnet, '/rpc/url', 1);
+const providerSecond = getRpcBatchProvider(CHAINS.Mainnet, '/rpc/url', 1);
+
+providerFirst === providerSecond; // true
+```
+
+Calls with different `cacheSeed` return different providers:
+
+```ts
+const providerFirst = getRpcBatchProvider(CHAINS.Mainnet, '/rpc/url', 1);
+const providerSecond = getRpcBatchProvider(CHAINS.Mainnet, '/rpc/url', 2);
+
+providerFirst !== providerSecond; // true
+```
+
+Of course, if the `cacheSeed` is the same, but `chainId` or `url` are different the result providers will also be different:
+
+```ts
+const providerFirst = getRpcBatchProvider(CHAINS.Mainnet, '/rpc/url', 1);
+const providerSecond = getRpcBatchProvider(
+  CHAINS.Mainnet,
+  '/another/rpc/url',
+  1,
+);
+
+providerFirst !== providerSecond; // true, because the urls are different
 ```

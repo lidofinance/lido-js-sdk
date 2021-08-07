@@ -32,6 +32,22 @@ describe('getRpcProvider', () => {
 
     expect(providerFirst).not.toBe(providerSecond);
   });
+
+  test('should use cache if seeds are the same', () => {
+    const url = '/api/rpc';
+    const providerFirst = getRpcProvider(CHAINS.Mainnet, url, 1);
+    const providerSecond = getRpcProvider(CHAINS.Mainnet, url, 1);
+
+    expect(providerFirst).toBe(providerSecond);
+  });
+
+  test('should be different if seeds are different', () => {
+    const url = '/api/rpc';
+    const providerFirst = getRpcProvider(CHAINS.Mainnet, url, 1);
+    const providerSecond = getRpcProvider(CHAINS.Mainnet, url, 2);
+
+    expect(providerFirst).not.toBe(providerSecond);
+  });
 });
 
 describe('getRpcBatchProvider', () => {

@@ -13,6 +13,7 @@ It uses [TypeChain](https://github.com/ethereum-ts/TypeChain) under the hood to 
   - [getWSTETHContract](#getwstethcontract)
   - [getSTETHContract](#getstethcontract)
   - [getLDOContract](#getldocontract)
+- [Cache](#cache)
 
 ## Install
 
