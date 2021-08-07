@@ -15,12 +15,17 @@ export interface Factory<C extends BaseContract> {
 
 export const createContractGetter = <C extends BaseContract>(
   factory: Factory<C>,
-): ((address: string, signerOrProvider: Signer | Provider) => C) => {
+): ((
+  address: string,
+  signerOrProvider: Signer | Provider,
+  cacheSeed?: number,
+) => C) => {
   const providerCache = new WeakMap<Signer | Provider, Record<string, C>>();
 
-  return (address, signerOrProvider) => {
+  return (address, signerOrProvider, cacheSeed = 0) => {
+    const cacheByAddressKey = `${address}-${cacheSeed}`;
     let cacheByAddress = providerCache.get(signerOrProvider);
-    let contract = cacheByAddress?.[address];
+    let contract = cacheByAddress?.[cacheByAddressKey];
 
     if (!cacheByAddress) {
       cacheByAddress = {};
@@ -29,7 +34,7 @@ export const createContractGetter = <C extends BaseContract>(
 
     if (!contract) {
       contract = factory.connect(address, signerOrProvider);
-      cacheByAddress[address] = contract;
+      cacheByAddress[cacheByAddressKey] = contract;
     }
 
     return contract;

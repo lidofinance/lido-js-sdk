@@ -57,3 +57,34 @@ Returns an instance of `Contract` based on stETH contract [ABI](https://docs.eth
 ### getLDOContract
 
 Returns an instance of `Contract` based on LDO token [ABI](https://docs.ethers.io/v5/api/utils/abi/). LDO Token docs can be found here: https://docs.lido.fi/lido-dao/#ldo-token
+
+## Cache
+
+To get another contract instance, getters have a third optional parameter `cacheSeed`.
+
+Calls without `cacheSeed` or with the same `cacheSeed` return the same contracts:
+
+```ts
+const contractFirst = getERC20Contract('0x0...', provider, 1);
+const contractSecond = getERC20Contract('0x0...', provider, 1);
+
+contractFirst === contractSecond; // true
+```
+
+Calls with different `cacheSeed` return different contracts:
+
+```ts
+const contractFirst = getERC20Contract('0x0...', provider, 1);
+const contractSecond = getERC20Contract('0x0...', provider, 2);
+
+contractFirst !== contractSecond; // true
+```
+
+Of course, if the `cacheSeed` is the same, but `address` or `provider` are different the result contracts will also be different:
+
+```ts
+const contractFirst = getERC20Contract('0x1...', provider, 1);
+const contractSecond = getERC20Contract('0x0...', provider, 1);
+
+contractFirst !== contractSecond; // true, because the addresses are different
+```

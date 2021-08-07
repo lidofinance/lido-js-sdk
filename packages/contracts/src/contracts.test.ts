@@ -85,4 +85,18 @@ describe('cache', () => {
     expect(providerFirst).not.toBe(providerSecond);
     expect(contractFirst).not.toBe(contractSecond);
   });
+
+  test('should use cache if seeds are equal', () => {
+    const contractFirst = getERC20Contract(addressFirst, providerFirst, 1);
+    const contractSecond = getERC20Contract(addressFirst, providerFirst, 1);
+
+    expect(contractFirst).toBe(contractSecond);
+  });
+
+  test('should be different if seeds are different', () => {
+    const contractFirst = getERC20Contract(addressFirst, providerFirst, 1);
+    const contractSecond = getERC20Contract(addressFirst, providerFirst, 2);
+
+    expect(contractFirst).not.toBe(contractSecond);
+  });
 });
