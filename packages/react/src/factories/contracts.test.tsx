@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react-hooks';
 import { ProviderWrapper } from '../hooks/testUtils';
 import { Web3Provider } from '@ethersproject/providers';
 import { Contract } from '@ethersproject/contracts';
@@ -25,6 +25,8 @@ const hooksWeb3 = {
 };
 
 describe('web3 contracts', () => {
+  const ProviderWeb3 = new Web3Provider(async () => void 0);
+
   Object.entries(hooksWeb3).map(([name, hook]) => {
     test(`${name} should be a function`, async () => {
       expect(hook).toBeInstanceOf(Function);
@@ -32,10 +34,7 @@ describe('web3 contracts', () => {
 
     test(`${name} should work`, async () => {
       const wrapper: FC = (props) => (
-        <ProviderWrapper
-          providerWeb3={new Web3Provider(async () => void 0)}
-          {...props}
-        />
+        <ProviderWrapper providerWeb3={ProviderWeb3} {...props} />
       );
 
       const { result } = renderHook(() => hook(), { wrapper });
@@ -47,6 +46,19 @@ describe('web3 contracts', () => {
 
       const { result } = renderHook(() => hook(), { wrapper });
       expect(result.current).toBeNull();
+    });
+
+    test(`${name} should return the same contract`, async () => {
+      const wrapper: FC = (props) => (
+        <ProviderWrapper providerWeb3={ProviderWeb3} {...props} />
+      );
+
+      const { result, rerender } = renderHook(() => hook(), { wrapper });
+      const firstResult = result.current;
+      act(() => rerender());
+      const secondResult = result.current;
+
+      expect(firstResult).toBe(secondResult);
     });
   });
 });
@@ -62,6 +74,17 @@ describe('RPC contracts', () => {
 
       const { result } = renderHook(() => hook(), { wrapper });
       expect(result.current).toBeInstanceOf(Contract);
+    });
+
+    test(`${name} should return the same contract`, async () => {
+      const wrapper = ProviderWrapper;
+
+      const { result, rerender } = renderHook(() => hook(), { wrapper });
+      const firstResult = result.current;
+      act(() => rerender());
+      const secondResult = result.current;
+
+      expect(firstResult).toBe(secondResult);
     });
   });
 });
