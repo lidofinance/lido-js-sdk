@@ -7,6 +7,7 @@ import {
   Factory,
   createContractGetter,
 } from '@lido-sdk/contracts';
+import { useMemo } from 'react';
 import { useSDK } from '../hooks';
 
 export const contractHooksFactory = <C extends BaseContract>(
@@ -29,8 +30,12 @@ export const contractHooksFactory = <C extends BaseContract>(
       const { chainId, providerWeb3 } = useSDK();
       const tokenAddress = getTokenAddress(chainId);
 
-      if (!providerWeb3) return null;
-      return getContract(tokenAddress, providerWeb3.getSigner());
+      const signer = useMemo(() => {
+        return providerWeb3?.getSigner();
+      }, [providerWeb3]);
+
+      if (!signer) return null;
+      return getContract(tokenAddress, signer);
     },
   };
 };
