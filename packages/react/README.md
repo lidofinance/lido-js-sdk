@@ -16,6 +16,7 @@ Part of [Lido JS SDK](https://github.com/lidofinance/lido-js-sdk/#readme)
   - [useDecimals](#usedecimals)
 - [SWR hooks](#swr-hooks)
   - [useLidoSWR](#uselidoswr)
+  - [useLidoSWRImmutable](#uselidoswrimmutable)
   - [useContractSWR](#usecontractswr)
   - [useEthereumSWR](#useethereumswr)
   - [useEthereumBalance](#useethereumbalance)
@@ -250,6 +251,21 @@ const Component = () => {
 
   return <div>{loading ? 'loading...' : data}</div>;
 };
+```
+
+### useLidoSWRImmutable
+
+Immutable version of `useLidoSWR`. It has the same API interface as the normal hook.
+
+```tsx
+useLidoSWRImmutable('/data', fetcher);
+
+// equal to
+useLidoSWR('/data', fetcher, {
+  dedupingInterval: 86_400_000,
+  revalidateOnFocus: false,
+  revalidateOnReconnect: false,
+});
 ```
 
 ### useContractSWR
