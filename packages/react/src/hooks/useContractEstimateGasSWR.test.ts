@@ -32,6 +32,15 @@ describe('useContractEstimateGasSWR', () => {
     expect(mockMethod).toHaveBeenCalledTimes(0);
   });
 
+  test('should not throw an error if contract is undefined', async () => {
+    const { result } = renderHook(() =>
+      useContractEstimateGasSWR({ method: 'test' }),
+    );
+
+    expect(result.current.data).toBeUndefined();
+    expect(result.error).toBeUndefined();
+  });
+
   test('should update if contract is changed', async () => {
     const contractFirst = { estimateGas: { test: async () => 1 } } as any;
     const contractSecond = { estimateGas: { test: async () => 2 } } as any;

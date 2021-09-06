@@ -10,21 +10,19 @@ export const useContractEstimateGasSWR = <
   M extends FilterAsyncMethods<C['estimateGas']>,
   F extends boolean,
 >(props: {
-  contract: C;
+  contract?: C;
   method: M;
   shouldFetch?: F;
   params?: F extends false ? unknown[] : Parameters<C['estimateGas'][M]>;
   config?: SWRConfiguration<BigNumber, Error>;
 }): SWRResponse<BigNumber, Error> => {
   const { shouldFetch = true, params = [], contract, method, config } = props;
-  const cacheKey = contract;
 
-  invariant(contract != null, 'Contract is required');
   invariant(method != null, 'Method is required');
 
   return useLidoSWR<BigNumber, Error>(
-    shouldFetch ? [cacheKey, method, ...params] : null,
-    (cacheKey: C, method: string, ...params: unknown[]) => {
+    shouldFetch && contract ? [contract, method, ...params] : null,
+    (contract: C, method: string, ...params: unknown[]) => {
       return contract.estimateGas[method](...params);
     },
     config,
