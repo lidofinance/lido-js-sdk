@@ -18,6 +18,7 @@ Part of [Lido JS SDK](https://github.com/lidofinance/lido-js-sdk/#readme)
   - [useLidoSWR](#uselidoswr)
   - [useLidoSWRImmutable](#uselidoswrimmutable)
   - [useContractSWR](#usecontractswr)
+  - [useContractEstimateGasSWR](#usecontractestimategasswr)
   - [useEthereumSWR](#useethereumswr)
   - [useEthereumBalance](#useethereumbalance)
 - [Price hooks](#price-hooks)
@@ -290,6 +291,27 @@ const Component = () => {
   const balance = data?.toString();
 
   return <div>{loading ? 'loading...' : balance}</div>;
+};
+```
+
+### useContractEstimateGasSWR
+
+`useLidoSWR` over `contract.estimateGas[method]`
+
+```tsx
+import { useContractEstimateGasSWR } from '@lido-sdk/react';
+import { CHAINS, TOKENS } from '@lido-sdk/constants';
+
+const Component = () => {
+  const { data, loading } = useContractEstimateGasSWR({
+    contract: myContractInstance,
+    method: 'myMethod',
+    params: ['argument'],
+  });
+
+  const gas = data?.toString();
+
+  return <div>{loading ? 'loading...' : gas}</div>;
 };
 ```
 
