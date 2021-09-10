@@ -5,7 +5,7 @@ import {
   JsonRpcFetchFunc,
 } from '@ethersproject/providers';
 import { CHAINS } from '@lido-sdk/constants';
-import { getRpcBatchProvider } from '@lido-sdk/providers';
+import { getStaticRpcBatchProvider } from '@lido-sdk/providers';
 import { ProviderSDK as ProviderSDKBase } from '@lido-sdk/react';
 import { Web3ReactProvider, useWeb3React } from '@web3-react/core';
 import { memo, FC } from 'react';
@@ -33,8 +33,8 @@ const ProviderSDK: FC<ProviderWeb3Props> = (props) => {
   invariant(rpc[chainId], `RPC url for chain ${chainId} is not provided`);
   invariant(rpc[CHAINS.Mainnet], 'RPC url for mainnet is not provided');
 
-  const providerRpc = getRpcBatchProvider(chainId, rpc[chainId]);
-  const providerMainnetRpc = getRpcBatchProvider(
+  const providerRpc = getStaticRpcBatchProvider(chainId, rpc[chainId]);
+  const providerMainnetRpc = getStaticRpcBatchProvider(
     CHAINS.Mainnet,
     rpc[CHAINS.Mainnet],
   );
