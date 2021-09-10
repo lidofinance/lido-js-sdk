@@ -26,6 +26,9 @@
     "access": "public"
   },
   "devDependencies": {
+    "@ethersproject/logger": "^5.4.0",
+    "@ethersproject/networks": "^5.4.0",
+    "@ethersproject/properties": "^5.4.0",
     "@ethersproject/providers": "^5.4.2",
     "@types/jest": "^26.0.24"
   },
@@ -33,6 +36,9 @@
     "@lido-sdk/constants": "workspace:*"
   },
   "peerDependencies": {
-    "@ethersproject/providers": "5"
+    "@ethersproject/logger": ">=5",
+    "@ethersproject/networks": ">=5",
+    "@ethersproject/properties": ">=5",
+    "@ethersproject/providers": ">=5"
   }
 }

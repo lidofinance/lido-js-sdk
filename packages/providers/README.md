@@ -9,6 +9,8 @@ A Provider is an abstraction of a connection to the Ethereum network, providing 
 - [RPC providers](#rpc-providers)
   - [getRpcProvider](#getrpcprovider)
   - [getRpcBatchProvider](#getrpcbatchprovider)
+  - [getStaticRpcProvider](#getstaticrpcprovider)
+  - [getStaticRpcBatchProvider](#getstaticrpcbatchprovider)
 - [Cache](#cache)
 
 ## Install
@@ -43,6 +45,28 @@ import { CHAINS } from '@lido-sdk/constants';
 import { getRpcBatchProvider } from '@lido-sdk/providers';
 
 const batchProvider = getRpcBatchProvider(CHAINS.Mainnet, '/rpc/url');
+```
+
+### getStaticRpcProvider
+
+Returns a [StaticJsonRpcProvider](https://docs.ethers.io/v5/api/providers/jsonrpc-provider/#StaticJsonRpcProvider) instance.
+
+```ts
+import { CHAINS } from '@lido-sdk/constants';
+import { getStaticRpcProvider } from '@lido-sdk/providers';
+
+const staticProvider = getStaticRpcProvider(CHAINS.Mainnet, '/rpc/url');
+```
+
+### getStaticRpcBatchProvider
+
+Returns an instance of batch version of [StaticJsonRpcProvider](https://docs.ethers.io/v5/api/providers/jsonrpc-provider/#StaticJsonRpcProvider).
+
+```ts
+import { CHAINS } from '@lido-sdk/constants';
+import { getStaticRpcBatchProvider } from '@lido-sdk/providers';
+
+const staticProvider = getStaticRpcBatchProvider(CHAINS.Mainnet, '/rpc/url');
 ```
 
 ## Cache

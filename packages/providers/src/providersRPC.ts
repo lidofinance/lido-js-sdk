@@ -2,7 +2,9 @@ import { CHAINS } from '@lido-sdk/constants';
 import {
   JsonRpcProvider,
   JsonRpcBatchProvider,
+  StaticJsonRpcProvider,
 } from '@ethersproject/providers';
+import { StaticJsonRpcBatchProvider } from './staticJsonRpcBatchProvider';
 
 const createProviderGetter = <P extends typeof JsonRpcProvider>(
   Provider: P,
@@ -24,3 +26,8 @@ const createProviderGetter = <P extends typeof JsonRpcProvider>(
 
 export const getRpcProvider = createProviderGetter(JsonRpcProvider);
 export const getRpcBatchProvider = createProviderGetter(JsonRpcBatchProvider);
+
+export const getStaticRpcProvider = createProviderGetter(StaticJsonRpcProvider);
+export const getStaticRpcBatchProvider = createProviderGetter(
+  StaticJsonRpcBatchProvider,
+);

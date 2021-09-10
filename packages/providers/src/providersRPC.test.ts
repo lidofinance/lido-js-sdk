@@ -1,8 +1,13 @@
 import { CHAINS } from '@lido-sdk/constants';
-import { getRpcProvider, getRpcBatchProvider } from './providersRPC';
+import {
+  getRpcProvider,
+  getRpcBatchProvider,
+  getStaticRpcProvider,
+  getStaticRpcBatchProvider,
+} from './providersRPC';
 
 describe('getRpcProvider', () => {
-  test('should create a contract', () => {
+  test('should return a provider instance', () => {
     const url = '/api/rpc';
     const provider = getRpcProvider(CHAINS.Mainnet, url);
 
@@ -51,9 +56,29 @@ describe('getRpcProvider', () => {
 });
 
 describe('getRpcBatchProvider', () => {
-  test('should create a contract', () => {
+  test('should return a provider instance', () => {
     const url = '/api/rpc';
     const provider = getRpcBatchProvider(CHAINS.Mainnet, url);
+
+    expect(provider).toBeInstanceOf(Object);
+    expect(provider.connection.url).toBe(url);
+  });
+});
+
+describe('getStaticRpcProvider', () => {
+  test('should return a provider instance', () => {
+    const url = '/api/rpc';
+    const provider = getStaticRpcProvider(CHAINS.Mainnet, url);
+
+    expect(provider).toBeInstanceOf(Object);
+    expect(provider.connection.url).toBe(url);
+  });
+});
+
+describe('getStaticRpcBatchProvider', () => {
+  test('should return a provider instance', () => {
+    const url = '/api/rpc';
+    const provider = getStaticRpcBatchProvider(CHAINS.Mainnet, url);
 
     expect(provider).toBeInstanceOf(Object);
     expect(provider.connection.url).toBe(url);
