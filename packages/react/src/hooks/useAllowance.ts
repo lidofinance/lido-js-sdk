@@ -6,6 +6,7 @@ import { getERC20Contract } from '@lido-sdk/contracts';
 import { useContractSWR } from './useContractSWR';
 import { SWRResponse } from './useLidoSWR';
 import { useSDK } from './useSDK';
+import { useDebounceCallback } from './useDebounceCallback';
 
 export const useAllowance = (
   token: string,
@@ -30,7 +31,7 @@ export const useAllowance = (
     params: [mergedOwner, spender],
   });
 
-  const updateAllowance = result.update;
+  const updateAllowance = useDebounceCallback(result.update);
 
   const subscribeToUpdates = useCallback(() => {
     if (!mergedOwner || !providerWeb3 || !contractWeb3) return;

@@ -2,6 +2,7 @@ export * from './useAllowance';
 export * from './useApprove';
 export * from './useContractEstimateGasSWR';
 export * from './useContractSWR';
+export * from './useDebounceCallback';
 export * from './useDecimals';
 export * from './useEthereumBalance';
 export * from './useEthereumSWR';

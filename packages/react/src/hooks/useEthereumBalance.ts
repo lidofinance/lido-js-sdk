@@ -4,6 +4,7 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { useSDK } from './useSDK';
 import { useEthereumSWR } from './useEthereumSWR';
 import { SWRResponse } from './useLidoSWR';
+import { useDebounceCallback } from './useDebounceCallback';
 
 export const useEthereumBalance = (
   account?: string,
@@ -17,7 +18,7 @@ export const useEthereumBalance = (
     params: [mergedAccount, 'latest'],
   });
 
-  const updateBalance = result.update;
+  const updateBalance = useDebounceCallback(result.update);
 
   const subscribeToUpdates = useCallback(() => {
     if (!mergedAccount || !providerWeb3) return;

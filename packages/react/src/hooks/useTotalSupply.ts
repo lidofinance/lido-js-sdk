@@ -6,6 +6,7 @@ import { getERC20Contract } from '@lido-sdk/contracts';
 import { useContractSWR } from './useContractSWR';
 import { SWRResponse } from './useLidoSWR';
 import { useSDK } from './useSDK';
+import { useDebounceCallback } from './useDebounceCallback';
 
 export const useTotalSupply = (token: string): SWRResponse<BigNumber> => {
   const { providerRpc, providerWeb3 } = useSDK();
@@ -22,7 +23,7 @@ export const useTotalSupply = (token: string): SWRResponse<BigNumber> => {
     method: 'totalSupply',
   });
 
-  const updateTotal = result.update;
+  const updateTotal = useDebounceCallback(result.update);
 
   const subscribeToUpdates = useCallback(() => {
     if (!providerWeb3 || !contractWeb3) return;
