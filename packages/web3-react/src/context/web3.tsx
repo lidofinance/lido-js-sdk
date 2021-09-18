@@ -17,7 +17,7 @@ export interface ProviderWeb3Props extends ConnectorsContextProps {
   defaultChainId: CHAINS;
   supportedChainIds: CHAINS[];
   swrConfig?: SWRConfiguration;
-  onError?: (error: Error) => void;
+  onError?: (error: unknown) => void;
 }
 
 function getLibrary(provider: ExternalProvider | JsonRpcFetchFunc) {

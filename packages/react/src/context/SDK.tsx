@@ -17,7 +17,7 @@ export interface SDKContextProps {
   providerWeb3?: Web3Provider;
   swrConfig?: SWRConfiguration;
   account?: string;
-  onError?: (error: Error) => void;
+  onError?: (error: unknown) => void;
 }
 
 export interface SDKContextValue {
@@ -28,7 +28,7 @@ export interface SDKContextValue {
   providerWeb3?: Web3Provider;
   swrConfig?: SWRConfiguration;
   account?: string;
-  onError: (error: Error) => void;
+  onError: (error: unknown) => void;
 }
 
 export const SDKContext = createContext({} as SDKContextValue);
