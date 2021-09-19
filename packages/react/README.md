@@ -21,12 +21,14 @@ Part of [Lido JS SDK](https://github.com/lidofinance/lido-js-sdk/#readme)
   - [useContractEstimateGasSWR](#usecontractestimategasswr)
   - [useEthereumSWR](#useethereumswr)
   - [useEthereumBalance](#useethereumbalance)
+  - [useFeeHistory](#usefeehistory)
 - [Price hooks](#price-hooks)
   - [useEthPrice](#useethprice)
   - [useTxPrice](#usetxprice)
 - [Other hooks](#other-hooks)
   - [useTokenToWallet](#usetokentowallet)
   - [useLocalStorage](#uselocalstorage)
+  - [useDebounceCallback](#usedebouncecallback)
 
 ## Install
 
@@ -343,6 +345,19 @@ const Component = () => {
 };
 ```
 
+### useFeeHistory
+
+```tsx
+import { useFeeHistory } from '@lido-sdk/react';
+
+const Component = () => {
+  const { data, loading } = useFeeHistory({ blocks: 1024 });
+  const { oldestBlock, baseFeePerGas, gasUsedRatio } = data;
+
+  return <div>{loading ? 'loading...' : oldestBlock}</div>;
+};
+```
+
 ## Price hooks
 
 ### useEthPrice
@@ -397,5 +412,15 @@ const Component = () => {
   const [value, setValue] = useLocalStorage('unique-key-in-LS', initialValue);
 
   return <button onClick={() => setValue(2)}>{value}</button>;
+};
+```
+
+### useDebounceCallback
+
+```tsx
+import { useDebounceCallback } from '@lido-sdk/react';
+
+const Component = () => {
+  const debounced = useDebounceCallback(callback);
 };
 ```
