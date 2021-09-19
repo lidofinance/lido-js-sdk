@@ -21,14 +21,12 @@ export const useEthereumSWR = <
   const providerRpcFromSdk = useSDK().providerRpc as P;
   const providerRpc = props.providerRpc ?? providerRpcFromSdk;
 
-  const cacheKey = providerRpc;
-
   invariant(providerRpc != null, 'RPC Provider is not provided');
   invariant(method != null, 'Method is required');
 
   return useLidoSWR<R, Error>(
-    shouldFetch ? [cacheKey, method, ...params] : null,
-    (cacheKey: P, method: M, ...params: Parameters<P[M]>) => {
+    shouldFetch ? [providerRpc, method, ...params] : null,
+    (providerRpc: P, method: M, ...params: Parameters<P[M]>) => {
       return providerRpc[method](...params);
     },
     config,

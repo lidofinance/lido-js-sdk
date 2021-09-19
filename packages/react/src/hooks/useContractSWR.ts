@@ -17,14 +17,13 @@ export const useContractSWR = <
   config?: SWRConfiguration<R, Error>;
 }): SWRResponse<R, Error> => {
   const { shouldFetch = true, params = [], contract, method, config } = props;
-  const cacheKey = contract;
 
   invariant(contract != null, 'Contract is required');
   invariant(method != null, 'Method is required');
 
   return useLidoSWR<R, Error>(
-    shouldFetch ? [cacheKey, method, ...params] : null,
-    (cacheKey: C, method: M, ...params: Parameters<C[M]>) => {
+    shouldFetch ? [contract, method, ...params] : null,
+    (contract: C, method: M, ...params: Parameters<C[M]>) => {
       return contract[method](...params);
     },
     config,

@@ -53,6 +53,14 @@ describe('getRpcProvider', () => {
 
     expect(providerFirst).not.toBe(providerSecond);
   });
+
+  test('should use pollingInterval', () => {
+    const url = '/api/rpc';
+    const pollingInterval = 1000;
+    const provider = getRpcProvider(CHAINS.Mainnet, url, 0, pollingInterval);
+
+    expect(provider.pollingInterval).toBe(pollingInterval);
+  });
 });
 
 describe('getRpcBatchProvider', () => {

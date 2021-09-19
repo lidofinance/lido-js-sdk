@@ -17,6 +17,7 @@ export interface ProviderWeb3Props extends ConnectorsContextProps {
   defaultChainId: CHAINS;
   supportedChainIds: CHAINS[];
   swrConfig?: SWRConfiguration;
+  pollingInterval?: number;
   onError?: (error: unknown) => void;
 }
 
@@ -27,16 +28,31 @@ function getLibrary(provider: ExternalProvider | JsonRpcFetchFunc) {
 }
 
 const ProviderSDK: FC<ProviderWeb3Props> = (props) => {
-  const { rpc, defaultChainId, supportedChainIds, children, ...rest } = props;
+  const {
+    rpc,
+    defaultChainId,
+    supportedChainIds,
+    children,
+    pollingInterval = POLLING_INTERVAL,
+    ...rest
+  } = props;
   const { chainId = defaultChainId, library, account } = useWeb3React();
 
   invariant(rpc[chainId], `RPC url for chain ${chainId} is not provided`);
   invariant(rpc[CHAINS.Mainnet], 'RPC url for mainnet is not provided');
 
-  const providerRpc = getStaticRpcBatchProvider(chainId, rpc[chainId]);
+  const providerRpc = getStaticRpcBatchProvider(
+    chainId,
+    rpc[chainId],
+    0,
+    pollingInterval,
+  );
+
   const providerMainnetRpc = getStaticRpcBatchProvider(
     CHAINS.Mainnet,
     rpc[CHAINS.Mainnet],
+    0,
+    pollingInterval,
   );
 
   return (

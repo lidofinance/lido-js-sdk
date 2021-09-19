@@ -11,16 +11,25 @@ const createProviderGetter = <P extends typeof JsonRpcProvider>(
 ) => {
   const cache = new Map<string, InstanceType<P>>();
 
-  return (chainId: CHAINS, url: string, cacheSeed = 0): InstanceType<P> => {
+  return (
+    chainId: CHAINS,
+    url: string,
+    cacheSeed = 0,
+    pollingInterval: number | null = null,
+  ): InstanceType<P> => {
     const cacheKey = `${chainId}-${cacheSeed}-${url}`;
-    let library = cache.get(cacheKey);
+    let provider = cache.get(cacheKey);
 
-    if (!library) {
-      library = new Provider(url, chainId) as InstanceType<P>;
-      cache.set(cacheKey, library);
+    if (!provider) {
+      provider = new Provider(url, chainId) as InstanceType<P>;
+      cache.set(cacheKey, provider);
     }
 
-    return library;
+    if (pollingInterval) {
+      provider.pollingInterval = pollingInterval;
+    }
+
+    return provider;
   };
 };
 
