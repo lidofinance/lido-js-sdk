@@ -22,6 +22,7 @@ Part of [Lido JS SDK](https://github.com/lidofinance/lido-js-sdk/#readme)
   - [useEthereumSWR](#useethereumswr)
   - [useEthereumBalance](#useethereumbalance)
   - [useFeeHistory](#usefeehistory)
+  - [useFeeAnalytics](#usefeeanalytics)
 - [Price hooks](#price-hooks)
   - [useEthPrice](#useethprice)
   - [useTxPrice](#usetxprice)
@@ -355,6 +356,18 @@ const Component = () => {
   const { oldestBlock, baseFeePerGas, gasUsedRatio } = data;
 
   return <div>{loading ? 'loading...' : oldestBlock}</div>;
+};
+```
+
+### useFeeAnalytics
+
+```tsx
+import { useFeeAnalytics } from '@lido-sdk/react';
+
+const Component = () => {
+  const { percentile, loading } = useFeeAnalytics({ blocks: 1024 });
+
+  return <div>{loading ? 'loading...' : percentile}</div>;
 };
 ```
 
