@@ -22,7 +22,7 @@ export const calculatePercentile = (
   return array.length ? lessThenTarget / array.length : 1;
 };
 
-export const useFeeAnalytics = (props: {
+export const useFeeAnalytics = (props?: {
   shouldFetch?: boolean;
   providerRpc?: JsonRpcProvider;
   providerWeb3?: Web3Provider;
