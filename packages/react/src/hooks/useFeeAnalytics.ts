@@ -1,5 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { Zero } from '@ethersproject/constants';
+import { JsonRpcProvider, Web3Provider } from '@ethersproject/providers';
+import { SWRConfiguration } from 'swr';
 import { FeeHistory, useFeeHistory } from './useFeeHistory';
 import { SWRResponse } from './useLidoSWR';
 
@@ -20,8 +22,14 @@ export const calculatePercentile = (
   return array.length ? lessThenTarget / array.length : 1;
 };
 
-export const useFeeAnalytics = (blocks?: number): FeeAnalytics => {
-  const history = useFeeHistory({ blocks });
+export const useFeeAnalytics = (props: {
+  shouldFetch?: boolean;
+  providerRpc?: JsonRpcProvider;
+  providerWeb3?: Web3Provider;
+  blocks?: number;
+  config?: SWRConfiguration<FeeHistory, Error>;
+}): FeeAnalytics => {
+  const history = useFeeHistory(props);
   const { mutate, update } = history;
 
   const feeHistory = history.data?.baseFeePerGas || [];
