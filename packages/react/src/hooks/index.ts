@@ -8,6 +8,7 @@ export * from './useEthereumBalance';
 export * from './useEthereumSWR';
 export * from './useEtherscanOpen';
 export * from './useEthPrice';
+export * from './useFeeAnalytics';
 export * from './useFeeHistory';
 export * from './useLidoSWR';
 export * from './useLidoSWRImmutable';
