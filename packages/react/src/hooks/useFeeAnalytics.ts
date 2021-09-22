@@ -5,7 +5,7 @@ import { SWRConfiguration } from 'swr';
 import { FeeHistory, useFeeHistory } from './useFeeHistory';
 import { SWRResponse } from './useLidoSWR';
 
-export type FeeAnalytics = Omit<SWRResponse<FeeHistory, Error>, 'data'> & {
+export type FeeAnalytics = SWRResponse<FeeHistory, Error> & {
   percentile: number;
   baseFee: BigNumber;
 };
@@ -30,14 +30,15 @@ export const useFeeAnalytics = (props?: {
   config?: SWRConfiguration<FeeHistory, Error>;
 }): FeeAnalytics => {
   const history = useFeeHistory(props);
-  const { mutate, update } = history;
+  const { data, mutate, update } = history;
 
-  const feeHistory = history.data?.baseFeePerGas || [];
+  const feeHistory = data?.baseFeePerGas || [];
   const baseFee = feeHistory[feeHistory.length - 1] ?? Zero;
 
   const percentile = calculatePercentile([...feeHistory], baseFee);
 
   return {
+    data,
     percentile,
     baseFee,
 
