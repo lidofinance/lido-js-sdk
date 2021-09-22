@@ -2449,7 +2449,7 @@ __metadata:
     tiny-invariant: ^1.1.0
     tiny-warning: ^1.0.3
     ua-parser-js: ^0.7.28
-    web3-ledgerhq-connector: ^1.0.0
+    web3-ledgerhq-connector: ^1.1.0
     web3-ledgerhq-frame-connector: ^1.0.1
   peerDependencies:
     "@ethersproject/providers": 5
@@ -13798,9 +13798,9 @@ typescript@^4.4.3:
   languageName: node
   linkType: hard
 
-"web3-ledgerhq-connector@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "web3-ledgerhq-connector@npm:1.0.0"
+"web3-ledgerhq-connector@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "web3-ledgerhq-connector@npm:1.1.0"
   dependencies:
     "@ethersproject/abstract-signer": 5
     "@ethersproject/bignumber": 5
@@ -13815,7 +13815,7 @@ typescript@^4.4.3:
     "@web3-react/abstract-connector": 6
     "@web3-react/types": 6
     tiny-invariant: 1
-  checksum: d3ebd584f9fc33d425e716d30241dfd64bb4e69766bac4c2b2ff29b054d809df85abfb3c5f44a0f76ec3ba96f5af0745924167362dc94e274f4b18435996be3c
+  checksum: 6dc9dfd5fb598f430403ada58ab0b452567004d8c83eba27a1c739886ffade52a59d56c30cc0a551ca4e4b41a28a9e99157d5f1a87b8a17fc7391239f95ce71f
   languageName: node
   linkType: hard
 
