@@ -26,12 +26,12 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.1",
+    "@types/jest": "^27.0.2",
     "@types/node-fetch": "^2.5.12"
   },
   "dependencies": {
     "@lido-sdk/constants": "workspace:*",
-    "node-fetch": "^2.6.2",
+    "node-fetch": "^2.6.4",
     "tiny-invariant": "^1.1.0"
   }
 }

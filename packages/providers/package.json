@@ -30,7 +30,7 @@
     "@ethersproject/networks": "^5.4.0",
     "@ethersproject/properties": "^5.4.0",
     "@ethersproject/providers": "^5.4.5",
-    "@types/jest": "^27.0.1"
+    "@types/jest": "^27.0.2"
   },
   "dependencies": {
     "@lido-sdk/constants": "workspace:*"

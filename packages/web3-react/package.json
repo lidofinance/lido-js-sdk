@@ -30,7 +30,7 @@
     "@types/ua-parser-js": "^0.7.36"
   },
   "dependencies": {
-    "@gnosis.pm/safe-apps-web3-react": "0.6.2",
+    "@gnosis.pm/safe-apps-web3-react": "0.6.3",
     "@ledgerhq/iframe-provider": "0.4.2",
     "@lido-sdk/constants": "workspace:*",
     "@lido-sdk/helpers": "workspace:*",

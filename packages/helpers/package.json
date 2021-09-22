@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@ethersproject/bignumber": "^5.4.2",
-    "@types/jest": "^27.0.1"
+    "@types/jest": "^27.0.2"
   },
   "dependencies": {
     "@lido-sdk/constants": "workspace:*",
