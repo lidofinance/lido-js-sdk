@@ -53,6 +53,7 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
 
       [CONNECTOR_NAMES.WALLET_CONNECT]: new WalletConnectConnector({
         // bridge: 'https://walletconnect-relay.lido.fi',
+        storageId: 'lido-walletconnect',
         supportedChainIds,
         rpc,
       }),
