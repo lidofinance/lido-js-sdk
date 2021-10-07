@@ -12,3 +12,5 @@ export const isAndroid = os.name === 'Android';
 export const isMobile = device.type === 'mobile';
 export const isTablet = device.type === 'tablet';
 export const isMobileOrTablet = isMobile || isTablet;
+
+export const isFirefox = browser.name === 'Firefox';
