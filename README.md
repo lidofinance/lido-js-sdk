@@ -14,9 +14,8 @@ JS SDK for Lido Finance projects.
 
 ## Install
 
-```
-yarn && yarn postinstall
-```
+1. `yarn && yarn postinstall`
+2. `yarn build`
 
 ## Usage
 
