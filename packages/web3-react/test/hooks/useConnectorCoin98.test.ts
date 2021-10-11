@@ -1,9 +1,7 @@
 jest.mock('@lido-sdk/helpers');
-jest.mock('tiny-warning');
 jest.mock('../../src/hooks/useWeb3');
 jest.mock('../../src/hooks/useConnectors');
 
-import warning from 'tiny-warning';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { openWindow } from '@lido-sdk/helpers';
 import { useConnectorCoin98 } from '../../src/hooks/useConnectorCoin98';
@@ -15,14 +13,12 @@ const mockUseConnectors = useConnectors as jest.MockedFunction<
   typeof useConnectors
 >;
 const mockOpenWindow = openWindow as jest.MockedFunction<typeof openWindow>;
-const mockWarning = warning as jest.MockedFunction<typeof warning>;
 
 beforeEach(() => {
   delete window.ethereum;
   mockUseWeb3.mockReturnValue({} as any);
   mockUseConnectors.mockReturnValue({ injected: {} } as any);
   mockOpenWindow.mockReset();
-  mockWarning.mockReset();
 });
 
 describe('useConnectorCoin98', () => {
