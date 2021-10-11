@@ -1,5 +1,4 @@
 import invariant from 'tiny-invariant';
-import warning from 'tiny-warning';
 import { useCallback } from 'react';
 import { openWindow } from '@lido-sdk/helpers';
 import { useConnectors } from './useConnectors';
@@ -17,20 +16,16 @@ export const useConnectorCoin98 = (): Connector => {
   const { disconnect } = useForceDisconnect();
 
   const openInWallet = useCallback(() => {
-    try {
-      if (isAndroid) {
-        openWindow('https://android.coin98.app');
-      } else if (isIOS) {
-        openWindow('https://ios.coin98.app');
-      } else if (isFirefox) {
-        openWindow(
-          'https://docs.coin98.com/products/coin98-wallet/extension/beginners-guide/install-extension-firefox',
-        );
-      } else {
-        openWindow('https://chrome.coin98.com');
-      }
-    } catch (error) {
-      warning(false, 'Failed to open the link');
+    if (isAndroid) {
+      openWindow('https://android.coin98.app');
+    } else if (isIOS) {
+      openWindow('https://ios.coin98.app');
+    } else if (isFirefox) {
+      openWindow(
+        'https://docs.coin98.com/products/coin98-wallet/extension/beginners-guide/install-extension-firefox',
+      );
+    } else {
+      openWindow('https://chrome.coin98.com');
     }
   }, []);
 
