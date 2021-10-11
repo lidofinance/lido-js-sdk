@@ -11,6 +11,7 @@ import {
   isDappBrowserProvider,
   isImTokenProvider,
   isMetamaskProvider,
+  isCoin98Provider,
   isTrustProvider,
 } from '../helpers';
 
@@ -20,6 +21,7 @@ type ConnectorInfo = {
   isImToken: boolean;
   isTrust: boolean;
   isMetamask: boolean;
+  isCoin98: boolean;
   isGnosis: boolean;
   isLedger: boolean;
   isLedgerLive: boolean;
@@ -41,6 +43,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
   const isInjected = active && connector instanceof InjectedConnector;
   const isDappBrowser = isInjected && isDappBrowserProvider();
   const isMetamask = isInjected && isMetamaskProvider();
+  const isCoin98 = isInjected && isCoin98Provider();
   const isImToken = isInjected && isImTokenProvider();
   const isTrust = isInjected && isTrustProvider();
 
@@ -53,6 +56,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
 
     if (isImToken) return PROVIDER_NAMES.IM_TOKEN;
     if (isMetamask) return PROVIDER_NAMES.METAMASK;
+    if (isCoin98) return PROVIDER_NAMES.COIN98;
     if (isTrust) return PROVIDER_NAMES.TRUST;
 
     if (isInjected) return PROVIDER_NAMES.INJECTED;
@@ -84,6 +88,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
 
     isImToken,
     isMetamask,
+    isCoin98,
     isTrust,
 
     isDappBrowser,
