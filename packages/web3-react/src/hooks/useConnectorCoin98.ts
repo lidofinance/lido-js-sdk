@@ -10,6 +10,12 @@ type Connector = {
   connect: () => Promise<void>;
 };
 
+const androidAppLink = 'https://android.coin98.app';
+const iosAppLink = 'https://ios.coin98.app';
+const chromeAppLink = 'https://chrome.coin98.com';
+const installExtensionFirefoxDocs =
+  'https://docs.coin98.com/products/coin98-wallet/extension/beginners-guide/install-extension-firefox';
+
 export const useConnectorCoin98 = (): Connector => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
@@ -17,15 +23,13 @@ export const useConnectorCoin98 = (): Connector => {
 
   const openInWallet = useCallback(() => {
     if (isAndroid) {
-      openWindow('https://android.coin98.app');
+      openWindow(androidAppLink);
     } else if (isIOS) {
-      openWindow('https://ios.coin98.app');
+      openWindow(iosAppLink);
     } else if (isFirefox) {
-      openWindow(
-        'https://docs.coin98.com/products/coin98-wallet/extension/beginners-guide/install-extension-firefox',
-      );
+      openWindow(installExtensionFirefoxDocs);
     } else {
-      openWindow('https://chrome.coin98.com');
+      openWindow(chromeAppLink);
     }
   }, []);
 
