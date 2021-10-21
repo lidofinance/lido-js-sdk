@@ -3,7 +3,13 @@ import { useCallback } from 'react';
 import { openWindow } from '@lido-sdk/helpers';
 import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
-import { hasInjected, isAndroid, isIOS, isFirefox } from '../helpers';
+import {
+  hasInjected,
+  isAndroid,
+  isIOS,
+  isFirefox,
+  isCoin98Provider,
+} from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 
 type Connector = {
@@ -36,7 +42,7 @@ export const useConnectorCoin98 = (): Connector => {
   const connect = useCallback(async () => {
     invariant(injected, 'Connector is required');
 
-    if (hasInjected()) {
+    if (hasInjected() && isCoin98Provider()) {
       await disconnect();
       activate(injected);
     } else {
