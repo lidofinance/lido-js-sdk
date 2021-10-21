@@ -22,11 +22,12 @@ beforeEach(() => {
 });
 
 describe('useConnectorCoin98', () => {
-  test('should connect if ethereum if presented', async () => {
+  test('should connect if ethereum and coin98 are presented', async () => {
     const mockActivate = jest.fn(async () => true);
     const injected = {};
 
     window.ethereum = {};
+    window.coin98 = true;
     mockUseWeb3.mockReturnValue({ activate: mockActivate } as any);
     mockUseConnectors.mockReturnValue({ injected } as any);
 
@@ -41,6 +42,20 @@ describe('useConnectorCoin98', () => {
   test('should open window if ethereum is not presented', async () => {
     const { result } = renderHook(() => useConnectorCoin98());
     const { connect } = result.current;
+
+    window.ethereum = undefined;
+    window.coin98 = true;
+
+    await act(() => connect());
+    expect(mockOpenWindow).toHaveBeenCalledTimes(1);
+  });
+
+  test('should open window if coin98 is not presented', async () => {
+    const { result } = renderHook(() => useConnectorCoin98());
+    const { connect } = result.current;
+
+    window.ethereum = {};
+    window.coin98 = undefined;
 
     await act(() => connect());
     expect(mockOpenWindow).toHaveBeenCalledTimes(1);
