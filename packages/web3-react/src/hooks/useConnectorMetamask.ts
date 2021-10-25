@@ -26,9 +26,7 @@ export const useConnectorMetamask = (): Connector => {
   const openInWallet = useCallback(() => {
     try {
       const { host, pathname, search } = window.location;
-      const pageUrlWithoutProtocol = encodeURIComponent(
-        host + pathname + search,
-      );
+      const pageUrlWithoutProtocol = encodeURI(host + pathname + search);
       openWindow(`${METAMASK_URL}${pageUrlWithoutProtocol}`);
     } catch (error) {
       warning(false, 'Failed to open the link');
