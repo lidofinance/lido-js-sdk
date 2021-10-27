@@ -13,6 +13,7 @@ import {
   isMetamaskProvider,
   isCoin98Provider,
   isTrustProvider,
+  isMathWalletProvider,
 } from '../helpers';
 
 type ConnectorInfo = {
@@ -44,6 +45,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
   const isDappBrowser = isInjected && isDappBrowserProvider();
   const isMetamask = isInjected && isMetamaskProvider();
   const isCoin98 = isInjected && isCoin98Provider();
+  const isMathWallet = isInjected && isMathWalletProvider();
   const isImToken = isInjected && isImTokenProvider();
   const isTrust = isInjected && isTrustProvider();
 
@@ -57,6 +59,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
     if (isImToken) return PROVIDER_NAMES.IM_TOKEN;
     if (isMetamask) return PROVIDER_NAMES.METAMASK;
     if (isCoin98) return PROVIDER_NAMES.COIN98;
+    if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isTrust) return PROVIDER_NAMES.TRUST;
 
     if (isInjected) return PROVIDER_NAMES.INJECTED;
