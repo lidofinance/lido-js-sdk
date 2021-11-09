@@ -20,7 +20,7 @@ const androidAppLink = 'https://android.coin98.app';
 const iosAppLink = 'https://ios.coin98.app';
 const chromeAppLink = 'https://chrome.coin98.com';
 const installExtensionFirefoxDocs =
-  'https://docs.coin98.com/products/coin98-wallet/extension/beginners-guide/install-extension-firefox';
+  'https://docs.coin98.com/products/coin98-wallet/extension/beginners-guide/install-extension#on-firefox';
 
 export const useConnectorCoin98 = (): Connector => {
   const { injected } = useConnectors();
