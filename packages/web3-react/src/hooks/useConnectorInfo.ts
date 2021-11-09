@@ -57,10 +57,10 @@ export const useConnectorInfo = (): ConnectorInfo => {
     if (isWalletConnect) return PROVIDER_NAMES.WALLET_CONNECT;
 
     if (isImToken) return PROVIDER_NAMES.IM_TOKEN;
-    if (isMetamask) return PROVIDER_NAMES.METAMASK;
     if (isCoin98) return PROVIDER_NAMES.COIN98;
     if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isTrust) return PROVIDER_NAMES.TRUST;
+    if (isMetamask) return PROVIDER_NAMES.METAMASK;
 
     if (isInjected) return PROVIDER_NAMES.INJECTED;
 
