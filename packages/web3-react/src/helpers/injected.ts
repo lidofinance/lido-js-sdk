@@ -8,6 +8,7 @@ declare global {
       isTrust?: boolean;
       isImToken?: boolean;
       isCoin98?: boolean;
+      isMathWallet?: boolean;
     };
   }
 }
@@ -31,6 +32,14 @@ export const isMetamaskProvider = (): boolean => {
 export const isCoin98Provider = (): boolean => {
   try {
     return !!window.coin98 || !!window.ethereum?.isCoin98;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const isMathWalletProvider = (): boolean => {
+  try {
+    return !!window.ethereum?.isMathWallet;
   } catch (error) {
     return false;
   }

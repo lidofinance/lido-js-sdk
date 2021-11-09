@@ -9,6 +9,7 @@ export enum PROVIDER_NAMES {
   LEDGER_HQ_LIVE = 'Ledger Live',
   LEDGER = 'Ledger',
   COIN98 = 'Coin98',
+  MATH_WALLET = 'MathWallet',
 }
 
 export enum CONNECTOR_NAMES {
@@ -18,5 +19,4 @@ export enum CONNECTOR_NAMES {
   INJECTED = 'injected',
   LEDGER_HQ_LIVE = 'ledgerlive',
   LEDGER = 'ledger',
-  COIN98 = 'coin98',
 }

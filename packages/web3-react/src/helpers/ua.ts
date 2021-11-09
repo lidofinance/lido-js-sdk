@@ -14,3 +14,4 @@ export const isTablet = device.type === 'tablet';
 export const isMobileOrTablet = isMobile || isTablet;
 
 export const isFirefox = browser.name === 'Firefox';
+export const isEdge = browser.name === 'Edge';
