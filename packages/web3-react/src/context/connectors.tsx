@@ -7,8 +7,9 @@ import { CHAINS } from '@lido-sdk/constants';
 import { useSDK } from '@lido-sdk/react';
 import { LedgerHQFrameConnector } from 'web3-ledgerhq-frame-connector';
 import { LedgerHQConnector } from 'web3-ledgerhq-connector';
-import { useAutoConnect } from '../hooks/useAutoConnect';
+import { useAutoConnect } from '../hooks';
 import { CONNECTOR_NAMES } from '../constants';
+import { isUrl } from '../helpers';
 
 export interface ConnectorsContextProps {
   defaultChainId: CHAINS;
@@ -44,6 +45,17 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
   } = props;
 
   const { supportedChainIds } = useSDK();
+  const walletConnectRPC = useMemo(
+    () =>
+      Object.entries(rpc).reduce(
+        (result, [key, value]) => ({
+          ...result,
+          [key]: isUrl(value) ? value : BASE_URL + value,
+        }),
+        {} as ConnectorsContextProps['rpc'],
+      ),
+    [rpc, BASE_URL],
+  );
 
   const connectors = useMemo(
     () => ({
@@ -55,7 +67,7 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
         // bridge: 'https://walletconnect-relay.lido.fi',
         storageId: 'lido-walletconnect',
         supportedChainIds,
-        rpc,
+        rpc: walletConnectRPC,
       }),
 
       [CONNECTOR_NAMES.GNOSIS]: (() => {
@@ -81,7 +93,14 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
         appLogoUrl,
       }),
     }),
-    [appLogoUrl, appName, rpc, defaultChainId, supportedChainIds],
+    [
+      appLogoUrl,
+      appName,
+      rpc,
+      defaultChainId,
+      supportedChainIds,
+      walletConnectRPC,
+    ],
   );
 
   useAutoConnect(connectors);
