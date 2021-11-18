@@ -38,8 +38,8 @@ export const useConnectorInfo = (): ConnectorInfo => {
   const isGnosis = active && connector instanceof SafeAppConnector;
   const isWalletConnect = active && connector instanceof WalletConnectConnector;
   const isCoinbase = active && connector instanceof WalletLinkConnector;
-  const isLedger = active && connector instanceof LedgerHQConnector;
   const isLedgerLive = active && connector instanceof LedgerHQFrameConnector;
+  const isLedger = connector instanceof LedgerHQConnector;
 
   const isInjected = active && connector instanceof InjectedConnector;
   const isDappBrowser = isInjected && isDappBrowserProvider();
