@@ -46,11 +46,11 @@ describe('fetchRPC', () => {
     expect(result).toBe(expected);
   });
 
-  test('should combine an url string correctly', async () => {
-    const url = (chainId: CHAINS) => `https://example.com?chainId=${chainId}`;
-    await fetchRPC(CHAINS.Mainnet, { urls: [url] });
-
-    expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(url(CHAINS.Mainnet), params);
-  });
+  // test('should combine an url string correctly', async () => {
+  //   const url = (chainId: CHAINS) => `https://example.com?chainId=${chainId}`;
+  //   await fetchRPC(CHAINS.Mainnet, { urls: [url] });
+  //
+  //   expect(fetch).toHaveBeenCalledTimes(1);
+  //   expect(fetch).toHaveBeenCalledWith(url(CHAINS.Mainnet), params);
+  // });
 });
