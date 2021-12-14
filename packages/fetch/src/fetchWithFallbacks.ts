@@ -22,7 +22,7 @@ export const fetchWithFallbacks: FetchWithFallbacks = async (
   try {
     const response = await fetch(input, init);
 
-    invariant(response?.ok, 'RPC something went wrong');
+    invariant(response?.ok, 'Request failed');
 
     return response;
   } catch (error) {
