@@ -20,7 +20,12 @@ export const fetchWithFallbacks: FetchWithFallbacks = async (
   const [input, ...restInputs] = inputs;
 
   try {
-    return await fetch(input, init);
+    const response = await fetch(input, init);
+
+    console.log('response ', response);
+    invariant(response?.ok, 'RPC something went wrong');
+
+    return response;
   } catch (error) {
     if (!restInputs.length) throw error;
     return await fetchWithFallbacks(restInputs, options);
