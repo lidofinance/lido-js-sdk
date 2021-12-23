@@ -18,9 +18,8 @@ type Connector = {
 };
 
 const androidAppLink =
-  'https://play.google.com/store/apps/details?id=com.medishares.android';
-const iosAppLink =
-  'https://apps.apple.com/ru/app/math-wallet-blockchain-wallet/id1383637331';
+  'https://play.google.com/store/apps/details?id=com.mathwallet.android';
+const iosAppLink = 'https://apps.apple.com/ru/app/mathwallet5/id1582612388';
 const chromeAppLink =
   'https://chrome.google.com/webstore/detail/math-wallet/afbcbjpbpfadlkmhmclhkeeodmamcflc';
 const edgeAppLink =
