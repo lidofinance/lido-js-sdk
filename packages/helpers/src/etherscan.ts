@@ -10,7 +10,7 @@ export enum ETHERSCAN_ENTITIES {
 export type EtherscanEntities = `${ETHERSCAN_ENTITIES}`;
 
 export const ETHERSCAN_PREFIX_BY_NETWORK: {
-  [key in CHAINS]: string;
+  [key in CHAINS]?: string;
 } = {
   [CHAINS.Mainnet]: '',
   [CHAINS.Ropsten]: 'ropsten.',

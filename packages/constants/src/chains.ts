@@ -6,6 +6,7 @@ export enum CHAINS {
   Rinkeby = 4,
   Goerli = 5,
   Kovan = 42,
+  Kintsugi = 1337702,
 }
 
 export const CHAINS_IDS = [
@@ -17,7 +18,7 @@ export const CHAINS_IDS = [
 ];
 
 export const CHAINS_COLORS: {
-  [key in CHAINS]: string;
+  [key in CHAINS]?: string;
 } = {
   [CHAINS.Mainnet]: '#29b6af',
   [CHAINS.Ropsten]: '#ff4a8d',

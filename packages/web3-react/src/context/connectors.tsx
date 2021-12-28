@@ -7,7 +7,7 @@ import { CHAINS } from '@lido-sdk/constants';
 import { useSDK } from '@lido-sdk/react';
 import { LedgerHQFrameConnector } from 'web3-ledgerhq-frame-connector';
 import { LedgerHQConnector } from 'web3-ledgerhq-connector';
-import { useAutoConnect } from '../hooks';
+import { useAutoConnect } from '../hooks/useAutoConnect';
 import { CONNECTOR_NAMES } from '../constants';
 import { isUrl } from '../helpers';
 

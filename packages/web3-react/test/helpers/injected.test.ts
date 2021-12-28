@@ -2,6 +2,8 @@ import {
   hasInjected,
   isImTokenProvider,
   isMetamaskProvider,
+  isCoin98Provider,
+  isMathWalletProvider,
   isTrustProvider,
   isDappBrowserProvider,
 } from '../../src/helpers/injected';
@@ -41,6 +43,30 @@ describe('isMetamaskProvider', () => {
   test('should not detect metamask', async () => {
     expect(() => isMetamaskProvider()).not.toThrowError();
     expect(isMetamaskProvider()).toBe(false);
+  });
+});
+
+describe('isCoin98Provider', () => {
+  test('should detect coin98', async () => {
+    windowSpy.mockReturnValue({ ethereum: { isCoin98: true } } as any);
+    expect(isCoin98Provider()).toBe(true);
+  });
+
+  test('should not detect coin98', async () => {
+    expect(() => isCoin98Provider()).not.toThrowError();
+    expect(isCoin98Provider()).toBe(false);
+  });
+});
+
+describe('isMathWalletProvider', () => {
+  test('should detect MathWallet', async () => {
+    windowSpy.mockReturnValue({ ethereum: { isMathWallet: true } } as any);
+    expect(isMathWalletProvider()).toBe(true);
+  });
+
+  test('should not detect MathWallet', async () => {
+    expect(() => isMathWalletProvider()).not.toThrowError();
+    expect(isMathWalletProvider()).toBe(false);
   });
 });
 
