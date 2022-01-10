@@ -1,3 +1,5 @@
 tsconfig.json
 *.test.js
+*.test.ts
+test
 src

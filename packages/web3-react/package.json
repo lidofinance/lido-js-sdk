@@ -44,7 +44,7 @@
     "tiny-invariant": "^1.1.0",
     "tiny-warning": "^1.0.3",
     "ua-parser-js": "^0.7.28",
-    "web3-ledgerhq-connector": "^1.1.0",
+    "web3-ledgerhq-connector": "^1.2.0",
     "web3-ledgerhq-frame-connector": "^1.0.1"
   },
   "peerDependencies": {
