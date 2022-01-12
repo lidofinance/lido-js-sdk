@@ -55,13 +55,16 @@ export const useConnectorInfo = (): ConnectorInfo => {
     if (isLedger) return PROVIDER_NAMES.LEDGER;
     if (isLedgerLive) return PROVIDER_NAMES.LEDGER_HQ_LIVE;
     if (isWalletConnect) return PROVIDER_NAMES.WALLET_CONNECT;
-
     if (isImToken) return PROVIDER_NAMES.IM_TOKEN;
-    if (isCoin98) return PROVIDER_NAMES.COIN98;
-    if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isTrust) return PROVIDER_NAMES.TRUST;
-    if (isMetamask) return PROVIDER_NAMES.METAMASK;
 
+    // Wallets which use "Injected" aka EIP-1193 API.
+    // The order of wallets here must correspond to the order of disabling
+    // the wallet connection buttons. Most "aggressive" wallet,
+    // which disables other wallets, goes first here.
+    if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
+    if (isCoin98) return PROVIDER_NAMES.COIN98;
+    if (isMetamask) return PROVIDER_NAMES.METAMASK;
     if (isInjected) return PROVIDER_NAMES.INJECTED;
 
     return undefined;
