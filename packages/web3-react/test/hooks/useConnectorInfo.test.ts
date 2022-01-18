@@ -65,6 +65,8 @@ describe('useConnectorInfo', () => {
 
   test('should detect coinbase', async () => {
     mockConnector(WalletLinkConnector);
+    window.ethereum = { isCoinbaseWallet: true };
+
     const { result } = renderHook(() => useConnectorInfo());
     const { connectorName, providerName, isCoinbase, ...rest } = result.current;
 

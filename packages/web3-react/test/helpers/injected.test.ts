@@ -6,7 +6,7 @@ import {
   isMathWalletProvider,
   isTrustProvider,
   isDappBrowserProvider,
-} from '../../src/helpers/injected';
+} from '../../src/helpers/providerDetectors';
 
 const windowSpy = jest.spyOn(global, 'window', 'get');
 const mockIsMobileOrTablet = jest.fn();
