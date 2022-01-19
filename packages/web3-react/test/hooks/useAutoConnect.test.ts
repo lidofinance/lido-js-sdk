@@ -3,7 +3,7 @@ jest.mock('../../src/hooks/useWeb3');
 jest.mock('../../src/hooks/useConnectorStorage');
 jest.mock('../../src/hooks/useConnectorInfo');
 jest.mock('../../src/hooks/useDisconnect');
-jest.mock('../../src/helpers/injected');
+jest.mock('../../src/helpers/providerDetectors');
 
 import warning from 'tiny-warning';
 import { renderHook, act } from '@testing-library/react-hooks';
@@ -18,7 +18,7 @@ import {
   useDeleteConnectorFromLS,
   useWatchConnectorInLS,
 } from '../../src/hooks/useAutoConnect';
-import { isDappBrowserProvider } from '../../src/helpers/injected';
+import { isDappBrowserProvider } from '../../src/helpers/providerDetectors';
 
 const mockUseWeb3 = useWeb3 as jest.MockedFunction<typeof useWeb3>;
 const mockUseConnectorStorage = useConnectorStorage as jest.MockedFunction<

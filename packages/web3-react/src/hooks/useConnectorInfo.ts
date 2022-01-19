@@ -1,7 +1,6 @@
 import { SafeAppConnector } from '@gnosis.pm/safe-apps-web3-react';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
-import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { LedgerHQFrameConnector } from 'web3-ledgerhq-frame-connector';
 import { LedgerHQConnector } from 'web3-ledgerhq-connector';
 import { useWeb3 } from './useWeb3';
@@ -14,6 +13,7 @@ import {
   isCoin98Provider,
   isTrustProvider,
   isMathWalletProvider,
+  isCoinbaseProvider,
 } from '../helpers';
 
 type ConnectorInfo = {
@@ -37,7 +37,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
 
   const isGnosis = active && connector instanceof SafeAppConnector;
   const isWalletConnect = active && connector instanceof WalletConnectConnector;
-  const isCoinbase = active && connector instanceof WalletLinkConnector;
+  const isCoinbase = active && isCoinbaseProvider();
   const isLedgerLive = active && connector instanceof LedgerHQFrameConnector;
   const isLedger = connector instanceof LedgerHQConnector;
 
@@ -50,7 +50,6 @@ export const useConnectorInfo = (): ConnectorInfo => {
   const isTrust = isInjected && isTrustProvider();
 
   const providerName = (() => {
-    if (isCoinbase) return PROVIDER_NAMES.COINBASE;
     if (isGnosis) return PROVIDER_NAMES.GNOSIS;
     if (isLedger) return PROVIDER_NAMES.LEDGER;
     if (isLedgerLive) return PROVIDER_NAMES.LEDGER_HQ_LIVE;
@@ -58,10 +57,11 @@ export const useConnectorInfo = (): ConnectorInfo => {
     if (isImToken) return PROVIDER_NAMES.IM_TOKEN;
     if (isTrust) return PROVIDER_NAMES.TRUST;
 
-    // Wallets which use "Injected" aka EIP-1193 API.
+    // Wallets which has conflicts with each other.
     // The order of wallets here must correspond to the order of disabling
     // the wallet connection buttons. Most "aggressive" wallet,
     // which disables other wallets, goes first here.
+    if (isCoinbase) return PROVIDER_NAMES.COINBASE;
     if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isCoin98) return PROVIDER_NAMES.COIN98;
     if (isMetamask) return PROVIDER_NAMES.METAMASK;

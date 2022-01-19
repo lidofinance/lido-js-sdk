@@ -9,6 +9,7 @@ declare global {
       isImToken?: boolean;
       isCoin98?: boolean;
       isMathWallet?: boolean;
+      isCoinbaseWallet?: boolean;
     };
   }
 }
@@ -63,4 +64,12 @@ export const isTrustProvider = (): boolean => {
 
 export const isDappBrowserProvider = (): boolean => {
   return isMobileOrTablet && hasInjected();
+};
+
+export const isCoinbaseProvider = (): boolean => {
+  try {
+    return !!window.ethereum?.isCoinbaseWallet;
+  } catch (error) {
+    return false;
+  }
 };
