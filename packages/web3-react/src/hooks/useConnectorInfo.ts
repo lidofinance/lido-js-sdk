@@ -1,6 +1,7 @@
 import { SafeAppConnector } from '@gnosis.pm/safe-apps-web3-react';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
+import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { LedgerHQFrameConnector } from 'web3-ledgerhq-frame-connector';
 import { LedgerHQConnector } from 'web3-ledgerhq-connector';
 import { useWeb3 } from './useWeb3';
@@ -37,9 +38,14 @@ export const useConnectorInfo = (): ConnectorInfo => {
 
   const isGnosis = active && connector instanceof SafeAppConnector;
   const isWalletConnect = active && connector instanceof WalletConnectConnector;
-  const isCoinbase = active && isCoinbaseProvider();
   const isLedgerLive = active && connector instanceof LedgerHQFrameConnector;
   const isLedger = connector instanceof LedgerHQConnector;
+
+  // WalletLink is used by Coinbase, but it can be used by other wallets too.
+  const isWalletLink = active && connector instanceof WalletLinkConnector;
+
+  // This detection doesn't work for the connection via QR code scanning.
+  const isCoinbase = active && isCoinbaseProvider();
 
   const isInjected = active && connector instanceof InjectedConnector;
   const isDappBrowser = isInjected && isDappBrowserProvider();
@@ -65,6 +71,10 @@ export const useConnectorInfo = (): ConnectorInfo => {
     if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isCoin98) return PROVIDER_NAMES.COIN98;
     if (isMetamask) return PROVIDER_NAMES.METAMASK;
+
+    // General providers which doesn't specify what exact wallet is being used.
+    // Works as a fallback.
+    if (isWalletLink) return PROVIDER_NAMES.WALLET_LINK;
     if (isInjected) return PROVIDER_NAMES.INJECTED;
 
     return undefined;
@@ -77,6 +87,9 @@ export const useConnectorInfo = (): ConnectorInfo => {
     if (isLedgerLive) return CONNECTOR_NAMES.LEDGER_HQ_LIVE;
     if (isWalletConnect) return CONNECTOR_NAMES.WALLET_CONNECT;
 
+    // General providers which doesn't specify what exact wallet is being used.
+    // Works as a fallback.
+    if (isWalletLink) return CONNECTOR_NAMES.WALLET_LINK;
     if (isInjected) return CONNECTOR_NAMES.INJECTED;
 
     return undefined;
