@@ -21,6 +21,7 @@ export interface ConnectorsContextProps {
 export type ConnectorsContextValue = {
   injected: InjectedConnector;
   walletconnect: WalletConnectConnector;
+  walletlink: WalletLinkConnector;
   coinbase: WalletLinkConnector;
   ledgerlive: LedgerHQFrameConnector;
   ledger: LedgerHQConnector;
@@ -86,6 +87,14 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
       }),
 
       [CONNECTOR_NAMES.COINBASE]: new WalletLinkConnector({
+        // only mainnet
+        url: rpc[CHAINS.Mainnet],
+        supportedChainIds,
+        appName,
+        appLogoUrl,
+      }),
+
+      [CONNECTOR_NAMES.WALLET_LINK]: new WalletLinkConnector({
         // only mainnet
         url: rpc[CHAINS.Mainnet],
         supportedChainIds,
