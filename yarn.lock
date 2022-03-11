@@ -2662,11 +2662,11 @@ __metadata:
     "@lido-sdk/providers": "workspace:*"
     "@lido-sdk/react": "workspace:*"
     "@types/ua-parser-js": ^0.7.36
-    "@web3-react/abstract-connector": ^6.0.7
-    "@web3-react/core": ^6.1.9
-    "@web3-react/injected-connector": ^6.0.7
-    "@web3-react/walletconnect-connector": ^6.2.4
-    "@web3-react/walletlink-connector": ^6.2.5
+    "@web3-react/abstract-connector": 6.0.7
+    "@web3-react/core": 6.1.9
+    "@web3-react/injected-connector": 6.0.7
+    "@web3-react/walletconnect-connector": 6.2.4
+    "@web3-react/walletlink-connector": 6.2.5
     tiny-invariant: ^1.1.0
     tiny-warning: ^1.0.3
     ua-parser-js: ^0.7.28
@@ -3985,7 +3985,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/core@npm:^6.1.9":
+"@web3-react/core@npm:6.1.9":
   version: 6.1.9
   resolution: "@web3-react/core@npm:6.1.9"
   dependencies:
@@ -4000,7 +4000,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/injected-connector@npm:^6.0.7":
+"@web3-react/injected-connector@npm:6.0.7":
   version: 6.0.7
   resolution: "@web3-react/injected-connector@npm:6.0.7"
   dependencies:
@@ -4018,7 +4018,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/walletconnect-connector@npm:^6.2.4":
+"@web3-react/walletconnect-connector@npm:6.2.4":
   version: 6.2.4
   resolution: "@web3-react/walletconnect-connector@npm:6.2.4"
   dependencies:
@@ -4030,7 +4030,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3-react/walletlink-connector@npm:^6.2.5":
+"@web3-react/walletlink-connector@npm:6.2.5":
   version: 6.2.5
   resolution: "@web3-react/walletlink-connector@npm:6.2.5"
   dependencies:
