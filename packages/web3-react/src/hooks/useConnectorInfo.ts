@@ -15,6 +15,7 @@ import {
   isTrustProvider,
   isMathWalletProvider,
   isCoinbaseProvider,
+  isTallyProvider,
 } from '../helpers';
 
 type ConnectorInfo = {
@@ -54,6 +55,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
   const isMathWallet = isInjected && isMathWalletProvider();
   const isImToken = isInjected && isImTokenProvider();
   const isTrust = isInjected && isTrustProvider();
+  const isTally = isInjected && isTallyProvider();
 
   const providerName = (() => {
     if (isGnosis) return PROVIDER_NAMES.GNOSIS;
@@ -67,6 +69,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
     // The order of wallets here must correspond to the order of disabling
     // the wallet connection buttons. Most "aggressive" wallet,
     // which disables other wallets, goes first here.
+    if (isTally) return PROVIDER_NAMES.TALLY;
     if (isCoinbase) return PROVIDER_NAMES.COINBASE;
     if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isCoin98) return PROVIDER_NAMES.COIN98;

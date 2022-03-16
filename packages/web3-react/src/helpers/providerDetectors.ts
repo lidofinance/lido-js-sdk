@@ -10,6 +10,7 @@ declare global {
       isCoin98?: boolean;
       isMathWallet?: boolean;
       isCoinbaseWallet?: boolean;
+      isTally?: boolean;
     };
   }
 }
@@ -69,6 +70,14 @@ export const isDappBrowserProvider = (): boolean => {
 export const isCoinbaseProvider = (): boolean => {
   try {
     return !!window.ethereum?.isCoinbaseWallet;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const isTallyProvider = (): boolean => {
+  try {
+    return !!window.ethereum?.isTally;
   } catch (error) {
     return false;
   }

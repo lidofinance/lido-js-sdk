@@ -3,37 +3,25 @@ import { useCallback } from 'react';
 import { openWindow } from '@lido-sdk/helpers';
 import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
-import {
-  hasInjected,
-  isAndroid,
-  isIOS,
-  isFirefox,
-  isCoin98Provider,
-} from '../helpers';
+import { hasInjected, isFirefox, isTallyProvider } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 
 type Connector = {
   connect: () => Promise<void>;
 };
 
-const androidAppLink = 'https://android.coin98.app';
-const iosAppLink = 'https://ios.coin98.app';
-const chromeAppLink = 'https://chrome.coin98.com';
-const installExtensionFirefoxDocs =
-  'https://docs.coin98.com/products/coin98-wallet/extension/beginners-guide/install-extension#on-firefox';
+const chromeAppLink =
+  'https://chrome.google.com/webstore/detail/tally-ho/eajafomhmkipbjmfmhebemolkcicgfmd';
+const firefoxAppLink = 'https://addons.mozilla.org/en-US/firefox/addon/tally/';
 
-export const useConnectorCoin98 = (): Connector => {
+export const useConnectorTally = (): Connector => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
 
   const suggestApp = useCallback(() => {
-    if (isAndroid) {
-      openWindow(androidAppLink);
-    } else if (isIOS) {
-      openWindow(iosAppLink);
-    } else if (isFirefox) {
-      openWindow(installExtensionFirefoxDocs);
+    if (isFirefox) {
+      openWindow(firefoxAppLink);
     } else {
       openWindow(chromeAppLink);
     }
@@ -42,7 +30,7 @@ export const useConnectorCoin98 = (): Connector => {
   const connect = useCallback(async () => {
     invariant(injected, 'Connector is required');
 
-    if (hasInjected() && isCoin98Provider()) {
+    if (hasInjected() && isTallyProvider()) {
       await disconnect();
       activate(injected);
     } else {
