@@ -31,7 +31,7 @@ export const useConnectorMathWallet = (): Connector => {
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
 
-  const openInWallet = useCallback(() => {
+  const suggestApp = useCallback(() => {
     if (isAndroid) {
       openWindow(androidAppLink);
     } else if (isIOS) {
@@ -52,9 +52,9 @@ export const useConnectorMathWallet = (): Connector => {
       await disconnect();
       activate(injected);
     } else {
-      openInWallet();
+      suggestApp();
     }
-  }, [activate, disconnect, openInWallet, injected]);
+  }, [activate, disconnect, suggestApp, injected]);
 
   return { connect };
 };
