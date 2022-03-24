@@ -3,11 +3,16 @@ import { useCallback } from 'react';
 import { openWindow } from '@lido-sdk/helpers';
 import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
-import { hasInjected, isFirefox, isTallyProvider } from '../helpers';
+import {
+  hasInjected,
+  isFirefox,
+  isMobileOrTablet,
+  isTallyProvider,
+} from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 
 type Connector = {
-  connect: () => Promise<void>;
+  connect?: () => Promise<void>;
 };
 
 const chromeAppLink =
@@ -38,5 +43,9 @@ export const useConnectorTally = (): Connector => {
     }
   }, [activate, disconnect, suggestApp, injected]);
 
-  return { connect };
+  const available = !isMobileOrTablet;
+
+  return {
+    connect: available ? connect : undefined,
+  };
 };
