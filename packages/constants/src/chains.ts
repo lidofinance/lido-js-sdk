@@ -7,6 +7,8 @@ export enum CHAINS {
   Goerli = 5,
   Kovan = 42,
   Kintsugi = 1337702,
+  Moonriver = 1285,
+  Moonbase = 1287,
 }
 
 export const CHAINS_IDS = [
