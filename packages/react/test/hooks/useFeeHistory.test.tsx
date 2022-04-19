@@ -46,14 +46,14 @@ describe('getChunksArguments', () => {
     const chunksArgs = getChunksArguments(0, 3, chunkSize);
 
     expect(chunksArgs).toEqual([
-      [chunkSize, '0x01', []],
-      [chunkSize, '0x03', []],
+      [hex(chunkSize), '0x01', []],
+      [hex(chunkSize), '0x03', []],
     ]);
   });
 
   test('should work if from == to', () => {
     const chunksArgs = getChunksArguments(0, 0, 1000);
-    expect(chunksArgs).toEqual([[1, '0x00', []]]);
+    expect(chunksArgs).toEqual([[hex(1), '0x00', []]]);
   });
 
   test('should work if the first chunk is smaller than the others', () => {
@@ -61,9 +61,9 @@ describe('getChunksArguments', () => {
     const chunksArgs = getChunksArguments(0, 7, chunkSize);
 
     expect(chunksArgs).toEqual([
-      [2, '0x01', []],
-      [3, '0x04', []],
-      [3, '0x07', []],
+      [hex(2), '0x01', []],
+      [hex(3), '0x04', []],
+      [hex(3), '0x07', []],
     ]);
   });
 
@@ -308,7 +308,11 @@ describe('useFeeHistory', () => {
     });
     expect(mockSend).toBeCalledTimes(1);
     expect(mockSendSecond).toBeCalledTimes(1);
-    expect(mockSendSecond).toBeCalledWith('eth_feeHistory', [1, '0x03', []]);
+    expect(mockSendSecond).toBeCalledWith('eth_feeHistory', [
+      hex(1),
+      '0x03',
+      [],
+    ]);
   });
 
   test('should use providerRpc from SDK', async () => {
