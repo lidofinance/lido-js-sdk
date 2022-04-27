@@ -2669,7 +2669,7 @@ __metadata:
     "@web3-react/walletlink-connector": 6.2.5
     tiny-invariant: ^1.1.0
     tiny-warning: ^1.0.3
-    ua-parser-js: ^0.7.28
+    ua-parser-js: 1.0.2
     web3-ledgerhq-connector: ^1.2.2
     web3-ledgerhq-frame-connector: ^1.0.1
   peerDependencies:
@@ -14206,10 +14206,10 @@ typescript@^4.4.3:
   languageName: node
   linkType: hard
 
-"ua-parser-js@npm:^0.7.28":
-  version: 0.7.28
-  resolution: "ua-parser-js@npm:0.7.28"
-  checksum: a7da4ad54527211e878ee016c2ef64efad5c2f5a31277d36c9da93b4c89ecaa64f391ad4cf158ada76a9ad8e53004a950705ff1c2f27a52ca8bfb3f1381c39ff
+"ua-parser-js@npm:1.0.2":
+  version: 1.0.2
+  resolution: "ua-parser-js@npm:1.0.2"
+  checksum: ff7f6d79a9c1a38aa85a0e751040fc7e17a0b621bda876838d14ebe55aca4e50e68da0350f181e58801c2d8a35e7db4e12473776e558910c4b7cabcec96aa3bf
   languageName: node
   linkType: hard
 
