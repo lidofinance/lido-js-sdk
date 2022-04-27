@@ -26,17 +26,4 @@ describe('useConnectorLedger', () => {
     expect(mockActivate).toHaveBeenCalledWith(ledger);
     expect(mockActivate).toHaveBeenCalledTimes(1);
   });
-
-  test('should not return connect if HID is not supported', async () => {
-    const mockActivate = jest.fn(async () => true);
-    const ledger = { isSupported: () => false };
-
-    mockUseWeb3.mockReturnValue({ activate: mockActivate } as any);
-    mockUseConnectors.mockReturnValue({ ledger } as any);
-
-    const { result } = renderHook(() => useConnectorLedger());
-    const { connect } = result.current;
-
-    expect(connect).toBeUndefined();
-  });
 });

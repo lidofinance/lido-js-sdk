@@ -4,11 +4,13 @@ import { useCallback } from 'react';
 import { openWindow } from '@lido-sdk/helpers';
 import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
-import { hasInjected, isMobileOrTablet } from '../helpers';
+import { hasInjected } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
+import { InjectedConnector } from '@web3-react/injected-connector';
 
 type Connector = {
-  connect?: () => Promise<void>;
+  connect: () => Promise<void>;
+  connector: InjectedConnector;
 };
 
 const IM_TOKEN_URL = 'imtokenv2://navigate?screen=DappView&url=';
@@ -38,9 +40,8 @@ export const useConnectorImToken = (): Connector => {
     }
   }, [activate, disconnect, openInWallet, injected]);
 
-  const available = isMobileOrTablet;
-
   return {
-    connect: available ? connect : undefined,
+    connect,
+    connector: injected,
   };
 };

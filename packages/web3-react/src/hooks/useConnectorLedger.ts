@@ -1,10 +1,12 @@
 import { useCallback } from 'react';
+import { LedgerHQConnector } from 'web3-ledgerhq-connector';
 import { useConnectors } from './useConnectors';
 import { useForceDisconnect } from './useDisconnect';
 import { useWeb3 } from './useWeb3';
 
 type Connector = {
-  connect?: () => Promise<void>;
+  connect: () => Promise<void>;
+  connector: LedgerHQConnector;
 };
 
 export const useConnectorLedger = (): Connector => {
@@ -17,9 +19,8 @@ export const useConnectorLedger = (): Connector => {
     activate(ledger);
   }, [activate, disconnect, ledger]);
 
-  const available = ledger.isSupported();
-
   return {
-    connect: available ? connect : undefined,
+    connect,
+    connector: ledger,
   };
 };

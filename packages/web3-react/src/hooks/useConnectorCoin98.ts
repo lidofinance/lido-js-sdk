@@ -11,9 +11,11 @@ import {
   isCoin98Provider,
 } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
+import { InjectedConnector } from '@web3-react/injected-connector';
 
 type Connector = {
   connect: () => Promise<void>;
+  connector: InjectedConnector;
 };
 
 const androidAppLink = 'https://android.coin98.app';
@@ -50,5 +52,5 @@ export const useConnectorCoin98 = (): Connector => {
     }
   }, [activate, disconnect, suggestApp, injected]);
 
-  return { connect };
+  return { connect, connector: injected };
 };
