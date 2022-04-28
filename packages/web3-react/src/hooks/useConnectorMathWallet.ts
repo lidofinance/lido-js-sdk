@@ -12,9 +12,11 @@ import {
   isMathWalletProvider,
 } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
+import { InjectedConnector } from '@web3-react/injected-connector';
 
 type Connector = {
   connect: () => Promise<void>;
+  connector: InjectedConnector;
 };
 
 const androidAppLink =
@@ -56,5 +58,5 @@ export const useConnectorMathWallet = (): Connector => {
     }
   }, [activate, disconnect, suggestApp, injected]);
 
-  return { connect };
+  return { connect, connector: injected };
 };

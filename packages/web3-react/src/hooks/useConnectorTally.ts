@@ -1,18 +1,15 @@
 import invariant from 'tiny-invariant';
 import { useCallback } from 'react';
+import { InjectedConnector } from '@web3-react/injected-connector';
 import { openWindow } from '@lido-sdk/helpers';
 import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
-import {
-  hasInjected,
-  isFirefox,
-  isMobileOrTablet,
-  isTallyProvider,
-} from '../helpers';
+import { hasInjected, isFirefox, isTallyProvider } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 
 type Connector = {
-  connect?: () => Promise<void>;
+  connect: () => Promise<void>;
+  connector: InjectedConnector;
 };
 
 const chromeAppLink =
@@ -43,9 +40,8 @@ export const useConnectorTally = (): Connector => {
     }
   }, [activate, disconnect, suggestApp, injected]);
 
-  const available = !isMobileOrTablet;
-
   return {
-    connect: available ? connect : undefined,
+    connect,
+    connector: injected,
   };
 };

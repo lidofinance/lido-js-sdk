@@ -2,9 +2,11 @@ import { useCallback } from 'react';
 import { useConnectors } from './useConnectors';
 import { useForceDisconnect } from './useDisconnect';
 import { useWeb3 } from './useWeb3';
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 
 type Connector = {
   connect: () => Promise<void>;
+  connector: WalletConnectConnector;
 };
 
 export const useConnectorWalletConnect = (): Connector => {
@@ -17,5 +19,5 @@ export const useConnectorWalletConnect = (): Connector => {
     activate(walletconnect);
   }, [activate, disconnect, walletconnect]);
 
-  return { connect };
+  return { connect, connector: walletconnect };
 };

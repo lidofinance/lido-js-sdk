@@ -42,14 +42,6 @@ describe('useConnectorTrust', () => {
     expect(connect).toBeDefined;
   });
 
-  test('should not return connect if it’s not mobile', async () => {
-    mockIsMobileOrTablet.mockReturnValue(false);
-    const { result } = renderHook(() => useConnectorTrust());
-    const { connect } = result.current;
-
-    expect(connect).toBeUndefined();
-  });
-
   test('should connect if ethereum if presented', async () => {
     const mockActivate = jest.fn(async () => true);
     const injected = {};

@@ -6,15 +6,12 @@ import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
 import { hasInjected } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
+import { InjectedConnector } from '@web3-react/injected-connector';
 
 type Connector = {
   connect: () => Promise<void>;
+  connector: InjectedConnector;
 };
-
-/*
- * TODO: add onboarding
- * https://docs.metamask.io/guide/onboarding-library.html
- */
 
 const METAMASK_URL = 'https://metamask.app.link/dapp/';
 
@@ -44,5 +41,5 @@ export const useConnectorMetamask = (): Connector => {
     }
   }, [activate, disconnect, openInWallet, injected]);
 
-  return { connect };
+  return { connect, connector: injected };
 };
