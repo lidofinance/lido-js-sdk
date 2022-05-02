@@ -8,6 +8,7 @@ export enum CHAINS {
   Kovan = 42,
   Kintsugi = 1337702,
   Kiln = 1337802,
+  Moonbeam = 1284,
   Moonriver = 1285,
   Moonbase = 1287,
 }
