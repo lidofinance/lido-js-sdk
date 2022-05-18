@@ -69,6 +69,10 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
         storageId: 'lido-walletconnect',
         supportedChainIds,
         rpc: walletConnectRPC,
+        qrcodeModalOptions: {
+          mobileLinks: [],
+          desktopLinks: [],
+        },
       }),
 
       [CONNECTOR_NAMES.GNOSIS]: (() => {
