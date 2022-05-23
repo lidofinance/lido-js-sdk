@@ -69,6 +69,22 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
         storageId: 'lido-walletconnect',
         supportedChainIds,
         rpc: walletConnectRPC,
+        qrcodeModalOptions: {
+          mobileLinks: [
+            'metamask',
+            'trust',
+            'gnosis safe multisig',
+            'imtoken',
+            'mathwallet',
+            'coin98',
+            'bitpay',
+            'ledger',
+            '1inch',
+            'huobi',
+            'unstoppable',
+          ],
+          desktopLinks: [],
+        },
       }),
 
       [CONNECTOR_NAMES.GNOSIS]: (() => {
