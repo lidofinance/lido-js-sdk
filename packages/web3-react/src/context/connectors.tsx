@@ -1,4 +1,4 @@
-import { createContext, memo, FC, useMemo } from 'react';
+import { createContext, FC, memo, useMemo } from 'react';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
@@ -21,6 +21,7 @@ export interface ConnectorsContextProps {
 export type ConnectorsContextValue = {
   injected: InjectedConnector;
   walletconnect: WalletConnectConnector;
+  WalletConnectUri: WalletConnectConnector;
   walletlink: WalletLinkConnector;
   coinbase: WalletLinkConnector;
   ledgerlive: LedgerHQFrameConnector;
@@ -85,6 +86,13 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
           ],
           desktopLinks: [],
         },
+      }),
+
+      [CONNECTOR_NAMES.WALLET_CONNECT_URI]: new WalletConnectConnector({
+        storageId: 'lido-walletconnect',
+        supportedChainIds,
+        rpc: walletConnectRPC,
+        qrcode: false,
       }),
 
       [CONNECTOR_NAMES.GNOSIS]: (() => {

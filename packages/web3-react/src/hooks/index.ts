@@ -10,6 +10,7 @@ export * from './useConnectors';
 export * from './useConnectorStorage';
 export * from './useConnectorTrust';
 export * from './useConnectorWalletConnect';
+export * from './useConnectorWalletConnectUri';
 export * from './useConnectorTally';
 export * from './useDisconnect';
 export * from './useSupportedChains';
