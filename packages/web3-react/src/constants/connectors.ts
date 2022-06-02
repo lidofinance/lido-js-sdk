@@ -17,6 +17,7 @@ export enum PROVIDER_NAMES {
 export enum CONNECTOR_NAMES {
   GNOSIS = 'gnosis',
   WALLET_CONNECT = 'walletconnect',
+  WALLET_CONNECT_URI = 'WalletConnectUri',
   WALLET_LINK = 'walletlink',
   COINBASE = 'coinbase',
   INJECTED = 'injected',
