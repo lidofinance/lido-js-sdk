@@ -14,7 +14,7 @@ type Connector = {
 
 const chromeAppLink =
   'https://chrome.google.com/webstore/detail/tally-ho/eajafomhmkipbjmfmhebemolkcicgfmd';
-const firefoxAppLink = 'https://addons.mozilla.org/en-US/firefox/addon/tally/';
+const firefoxAppLink = 'https://tally.cash/community-edition/';
 
 export const useConnectorTally = (): Connector => {
   const { injected } = useConnectors();

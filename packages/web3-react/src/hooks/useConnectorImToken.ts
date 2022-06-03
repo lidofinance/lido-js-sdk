@@ -13,7 +13,7 @@ type Connector = {
   connector: InjectedConnector;
 };
 
-const IM_TOKEN_URL = 'imtokenv2://navigate?screen=DappView&url=';
+const IM_TOKEN_URL = 'imtokenv2://navigate/DappView?url=';
 
 export const useConnectorImToken = (): Connector => {
   const { injected } = useConnectors();
