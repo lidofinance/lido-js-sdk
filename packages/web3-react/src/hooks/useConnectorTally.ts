@@ -1,22 +1,17 @@
 import invariant from 'tiny-invariant';
 import { useCallback } from 'react';
-import { InjectedConnector } from '@web3-react/injected-connector';
 import { openWindow } from '@lido-sdk/helpers';
 import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
 import { hasInjected, isFirefox, isTallyProvider } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
-
-type Connector = {
-  connect: () => Promise<void>;
-  connector: InjectedConnector;
-};
+import { InjectedHookResult } from './types';
 
 const chromeAppLink =
   'https://chrome.google.com/webstore/detail/tally-ho/eajafomhmkipbjmfmhebemolkcicgfmd';
 const firefoxAppLink = 'https://tally.cash/community-edition/';
 
-export const useConnectorTally = (): Connector => {
+export const useConnectorTally = (): InjectedHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();

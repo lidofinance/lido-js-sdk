@@ -11,12 +11,7 @@ import {
   isCoin98Provider,
 } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
-import { InjectedConnector } from '@web3-react/injected-connector';
-
-type Connector = {
-  connect: () => Promise<void>;
-  connector: InjectedConnector;
-};
+import { InjectedHookResult } from './types';
 
 const androidAppLink = 'https://android.coin98.app';
 const iosAppLink = 'https://ios.coin98.app';
@@ -24,7 +19,7 @@ const chromeAppLink = 'https://chrome.coin98.com';
 const installExtensionFirefoxDocs =
   'https://docs.coin98.com/products/coin98-wallet/extension/beginners-guide/install-extension#on-firefox';
 
-export const useConnectorCoin98 = (): Connector => {
+export const useConnectorCoin98 = (): InjectedHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();

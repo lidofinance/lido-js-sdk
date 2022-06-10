@@ -2,14 +2,9 @@ import { useCallback } from 'react';
 import { useConnectors } from './useConnectors';
 import { useForceDisconnect } from './useDisconnect';
 import { useWeb3 } from './useWeb3';
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
+import { WalletConnectHookResult } from './types';
 
-type Connector = {
-  connect: () => Promise<void>;
-  connector: WalletConnectConnector;
-};
-
-export const useConnectorWalletConnectUri = (): Connector => {
+export const useConnectorWalletConnectUri = (): WalletConnectHookResult => {
   const { WalletConnectUri: connector } = useConnectors();
 
   const { activate } = useWeb3();

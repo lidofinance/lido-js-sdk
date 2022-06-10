@@ -12,12 +12,7 @@ import {
   isMathWalletProvider,
 } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
-import { InjectedConnector } from '@web3-react/injected-connector';
-
-type Connector = {
-  connect: () => Promise<void>;
-  connector: InjectedConnector;
-};
+import { InjectedHookResult } from './types';
 
 const androidAppLink =
   'https://play.google.com/store/apps/details?id=com.mathwallet.android';
@@ -28,7 +23,7 @@ const edgeAppLink =
   'https://microsoftedge.microsoft.com/addons/detail/math-wallet/dfeccadlilpndjjohbjdblepmjeahlmm';
 const firefoxAppLink = 'https://mathwallet.org/en-us/#extension';
 
-export const useConnectorMathWallet = (): Connector => {
+export const useConnectorMathWallet = (): InjectedHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();

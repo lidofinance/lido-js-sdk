@@ -6,16 +6,11 @@ import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
 import { hasInjected } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
-import { InjectedConnector } from '@web3-react/injected-connector';
-
-type Connector = {
-  connect: () => Promise<void>;
-  connector: InjectedConnector;
-};
+import { InjectedHookResult } from './types';
 
 const IM_TOKEN_URL = 'imtokenv2://navigate/DappView?url=';
 
-export const useConnectorImToken = (): Connector => {
+export const useConnectorImToken = (): InjectedHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();

@@ -6,16 +6,11 @@ import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
 import { hasInjected } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
-import { InjectedConnector } from '@web3-react/injected-connector';
-
-type Connector = {
-  connect: () => Promise<void>;
-  connector: InjectedConnector;
-};
+import { InjectedHookResult } from './types';
 
 const METAMASK_URL = 'https://metamask.app.link/dapp/';
 
-export const useConnectorMetamask = (): Connector => {
+export const useConnectorMetamask = (): InjectedHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
