@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@lido-sdk/constants": "workspace:*",
-    "node-fetch": "^2.6.4",
+    "node-fetch": "^2.6.7",
     "tiny-invariant": "^1.1.0"
   }
 }
