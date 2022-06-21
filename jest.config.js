@@ -1,4 +1,5 @@
 module.exports = {
+  setupFiles: ['<rootDir>/jest-shim.js'],
   cacheDirectory: '.jest/cache',
   coverageDirectory: '.jest/coverage',
   coverageThreshold: {
