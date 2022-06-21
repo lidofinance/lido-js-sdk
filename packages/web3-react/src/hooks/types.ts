@@ -2,6 +2,7 @@ import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { LedgerHQConnector } from 'web3-ledgerhq-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
+import { UAuthConnector } from '@uauth/web3-react';
 
 export type InjectedHookResult = {
   connect: () => Promise<void>;
@@ -21,4 +22,9 @@ export type LedgerHookResult = {
 export type WalletConnectHookResult = {
   connect: () => Promise<void>;
   connector: WalletConnectConnector;
+};
+
+export type UAuthHookResult = {
+  connect: () => Promise<void>;
+  connector: UAuthConnector;
 };

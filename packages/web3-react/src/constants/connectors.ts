@@ -23,4 +23,5 @@ export enum CONNECTOR_NAMES {
   INJECTED = 'injected',
   LEDGER_HQ_LIVE = 'ledgerlive',
   LEDGER = 'ledger',
+  UAUTH = 'uauth',
 }

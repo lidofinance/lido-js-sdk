@@ -2,6 +2,8 @@ import { createContext, FC, memo, useMemo } from 'react';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
+import { UAuthConnector } from '@uauth/web3-react';
+import UAuth from '@uauth/js';
 import { SafeAppConnector } from '@gnosis.pm/safe-apps-web3-react';
 import { CHAINS } from '@lido-sdk/constants';
 import { useSDK } from '@lido-sdk/react';
@@ -26,6 +28,7 @@ export type ConnectorsContextValue = {
   coinbase: WalletLinkConnector;
   ledgerlive: LedgerHQFrameConnector;
   ledger: LedgerHQConnector;
+  uauth?: UAuthConnector;
   gnosis?: SafeAppConnector;
 };
 
@@ -59,7 +62,7 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
     [rpc, BASE_URL],
   );
 
-  const connectors = useMemo(
+  let connectors = useMemo(
     () => ({
       [CONNECTOR_NAMES.INJECTED]: new InjectedConnector({
         supportedChainIds,
@@ -134,6 +137,26 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
       supportedChainIds,
       walletConnectRPC,
     ],
+  );
+
+  // Reassigning connectors because UAuthConnector constructor requires
+  // linking to connectors, which must be defined already.
+  connectors = useMemo(
+    () => ({
+      ...connectors,
+      [CONNECTOR_NAMES.UAUTH]: new UAuthConnector({
+        uauth: new UAuth({
+          clientID: '6dea829b-3307-4892-b5cf-4a4699fbd88a',
+          redirectUri: 'http://localhost',
+          scope: 'openid wallet email:optional humanity_check:optional',
+        }),
+        connectors: {
+          injected: connectors[CONNECTOR_NAMES.INJECTED],
+          walletconnect: connectors[CONNECTOR_NAMES.WALLET_CONNECT],
+        },
+      }),
+    }),
+    [connectors],
   );
 
   useAutoConnect(connectors);

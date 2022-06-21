@@ -12,6 +12,7 @@ export * from './useConnectorTrust';
 export * from './useConnectorWalletConnect';
 export * from './useConnectorWalletConnectUri';
 export * from './useConnectorTally';
+export * from './useConnectorUnstoppableDomains';
 export * from './useDisconnect';
 export * from './useSupportedChains';
 export * from './useWeb3';
