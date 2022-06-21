@@ -4,12 +4,13 @@ import tslib from 'tslib';
 import ts from 'typescript';
 import { topologicallySort, listWorkspaces } from 'yarn-workspaces-list';
 import typescript from 'rollup-plugin-typescript2';
+import commonjs from '@rollup/plugin-commonjs';
 import del from 'rollup-plugin-delete';
 import copy from 'rollup-plugin-copy';
 import resolve from '@rollup/plugin-node-resolve';
+import json from '@rollup/plugin-json';
 
 const excludedWorkspaces = ['.'];
-const extensions = ['.ts', '.tsx', '.d.ts'];
 const commonExternal = ['react/jsx-runtime'];
 
 export default async () => {
@@ -65,7 +66,9 @@ export default async () => {
           ],
           copyOnce: true,
         }),
-        resolve({ extensions }),
+        commonjs(),
+        json(),
+        resolve({ extensions: ['.ts', '.tsx'] }),
         typescript({
           tslib,
           typescript: ts,
