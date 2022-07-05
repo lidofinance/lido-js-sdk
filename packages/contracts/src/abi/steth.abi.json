@@ -943,12 +943,6 @@
   },
   {
     "anonymous": false,
-    "inputs": [{ "indexed": false, "name": "amount", "type": "uint256" }],
-    "name": "Unbuffered",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
     "inputs": [
       { "indexed": true, "name": "sender", "type": "address" },
       { "indexed": false, "name": "tokenAmount", "type": "uint256" },
@@ -957,6 +951,12 @@
       { "indexed": false, "name": "etherAmount", "type": "uint256" }
     ],
     "name": "Withdrawal",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{ "indexed": false, "name": "amount", "type": "uint256" }],
+    "name": "Unbuffered",
     "type": "event"
   }
 ]
