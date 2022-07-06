@@ -68,7 +68,7 @@ Hooks for manually connecting to the user's wallet:
 - useConnectorTrust
 - useConnectorWalletConnect
 
-They return an object with a `connect` handler if connecting is possible. In Metamask, Trust and ImToken hooks the `connect` method contains the Deep Linking logic.
+They return an object with a `connect` handler if connecting is possible. In MetaMask, Trust and ImToken hooks the `connect` method contains the Deep Linking logic.
 
 ```tsx
 import {
