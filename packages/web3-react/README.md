@@ -18,11 +18,11 @@ import { CHAINS } from '@lido-sdk/constants';
 import { ProviderWeb3 } from '@lido-sdk/web3-react';
 
 const rpc = {
-  [CHAINS.Mainnet]: '/rpc/mainnet'
-  [CHAINS.Rinkeby]: '/rpc/rinkeby'
+  [CHAINS.Mainnet]: '/rpc/mainnet',
+  [CHAINS.Rinkeby]: '/rpc/rinkeby',
 };
 
-const supportedChainIds = [CHAINS.Mainnet, CHAINS.Rinkeby]
+const supportedChainIds = [CHAINS.Mainnet, CHAINS.Rinkeby];
 
 const Provider = () => {
   return (
@@ -47,7 +47,7 @@ Used connectors:
 - [WalletConnectConnector](https://www.npmjs.com/package/@web3-react/walletconnect-connector)
 - [WalletLinkConnector](https://www.npmjs.com/package/@web3-react/walletlink-connector)
 - [SafeAppConnector](https://www.npmjs.com/package/@gnosis.pm/safe-apps-web3-react)
-- [LedgerHQConnector](src/connectors/ledgerHQFrame.ts)
+- [LedgerHQConnector](https://www.npmjs.com/package/web3-ledgerhq-connector)
 
 ## Auto connect
 
@@ -68,7 +68,7 @@ Hooks for manually connecting to the user's wallet:
 - useConnectorTrust
 - useConnectorWalletConnect
 
-They return an object with a `connect` handler if connecting is possible. In Metamask, Trust and ImToken hooks the `connect` method contains the Deep Linking logic.
+They return an object with a `connect` handler if connecting is possible. In MetaMask, Trust and ImToken hooks the `connect` method contains the Deep Linking logic.
 
 ```tsx
 import {

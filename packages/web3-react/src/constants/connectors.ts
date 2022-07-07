@@ -1,6 +1,6 @@
 export enum PROVIDER_NAMES {
   GNOSIS = 'Gnosis',
-  METAMASK = 'Metamask',
+  METAMASK = 'MetaMask',
   IM_TOKEN = 'imToken',
   TRUST = 'Trust',
   WALLET_CONNECT = 'WalletConnect',
