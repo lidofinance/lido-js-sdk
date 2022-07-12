@@ -12,6 +12,7 @@ export enum PROVIDER_NAMES {
   COIN98 = 'Coin98',
   MATH_WALLET = 'MathWallet',
   TALLY = 'Tally',
+  BRAVE = 'Brave Wallet',
 }
 
 export enum CONNECTOR_NAMES {
