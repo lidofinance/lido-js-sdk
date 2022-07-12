@@ -16,6 +16,7 @@ import {
   isMathWalletProvider,
   isCoinbaseProvider,
   isTallyProvider,
+  isBraveWalletProvider,
 } from '../helpers';
 
 type ConnectorInfo = {
@@ -56,6 +57,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
   const isImToken = isInjected && isImTokenProvider();
   const isTrust = isInjected && isTrustProvider();
   const isTally = isInjected && isTallyProvider();
+  const isBraveWallet = isInjected && isBraveWalletProvider();
 
   const providerName = (() => {
     if (isGnosis) return PROVIDER_NAMES.GNOSIS;
@@ -74,6 +76,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
     if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isCoin98) return PROVIDER_NAMES.COIN98;
     if (isMetamask) return PROVIDER_NAMES.METAMASK;
+    if (isBraveWallet) return PROVIDER_NAMES.BRAVE;
 
     // General providers which doesn't specify what exact wallet is being used.
     // Works as a fallback.
