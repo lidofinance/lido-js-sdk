@@ -75,8 +75,10 @@ export const useConnectorInfo = (): ConnectorInfo => {
     if (isCoinbase) return PROVIDER_NAMES.COINBASE;
     if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isCoin98) return PROVIDER_NAMES.COIN98;
-    if (isMetamask) return PROVIDER_NAMES.METAMASK;
     if (isBraveWallet) return PROVIDER_NAMES.BRAVE;
+    // Metamask should be last in this list because almost all EIP-1193 wallets
+    // are trying to mimic Metamask by setting isMetamask = true
+    if (isMetamask) return PROVIDER_NAMES.METAMASK;
 
     // General providers which doesn't specify what exact wallet is being used.
     // Works as a fallback.
