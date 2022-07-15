@@ -1,15 +1,17 @@
+# JS/TS
 node_modules
-.DS_Store
-
-dist
-**/src/generated
-
 /.yarn/*
 !/.yarn/releases
 !/.yarn/plugins
 !/.yarn/sdks
 /.pnp.*
-
 /.jest
+dist
+**/src/generated
 
+# Editors
 .idea
+.vscode
+
+# Other
+.DS_Store
