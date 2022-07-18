@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { openWindow } from '@lido-sdk/helpers';
 import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
-import { hasInjected } from '../helpers';
+import { hasInjected, isImTokenProvider } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 import { InjectedConnector } from '@web3-react/injected-connector';
 
@@ -32,7 +32,7 @@ export const useConnectorImToken = (): Connector => {
   const connect = useCallback(async () => {
     invariant(injected, 'Connector is required');
 
-    if (hasInjected()) {
+    if (hasInjected() && isImTokenProvider()) {
       await disconnect();
       activate(injected);
     } else {

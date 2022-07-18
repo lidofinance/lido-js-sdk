@@ -42,11 +42,12 @@ describe('useConnectorTrust', () => {
     expect(connect).toBeDefined;
   });
 
-  test('should connect if ethereum if presented', async () => {
+  test('should connect if ethereum and Trust are presented', async () => {
     const mockActivate = jest.fn(async () => true);
     const injected = {};
 
     window.ethereum = {};
+    window.ethereum.isTrust = true;
     mockUseWeb3.mockReturnValue({ activate: mockActivate } as any);
     mockUseConnectors.mockReturnValue({ injected } as any);
 
