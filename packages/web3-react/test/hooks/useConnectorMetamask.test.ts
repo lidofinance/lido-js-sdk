@@ -26,11 +26,12 @@ beforeEach(() => {
 });
 
 describe('useConnectorMetamask', () => {
-  test('should connect if ethereum if presented', async () => {
+  test('should connect if ethereum and MetaMask are presented', async () => {
     const mockActivate = jest.fn(async () => true);
     const injected = {};
 
     window.ethereum = {};
+    window.ethereum.isMetaMask = true;
     mockUseWeb3.mockReturnValue({ activate: mockActivate } as any);
     mockUseConnectors.mockReturnValue({ injected } as any);
 
