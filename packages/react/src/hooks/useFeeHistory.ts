@@ -1,6 +1,6 @@
 import warning from 'tiny-warning';
 import invariant from 'tiny-invariant';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { SWRConfiguration } from 'swr';
 import { CHAINS } from '@lido-sdk/constants';
 import {
@@ -42,7 +42,7 @@ export const getBlockNumber = async (
   return cachedNumber === -1 ? await provider.getBlockNumber() : cachedNumber;
 };
 
-export const getChunksArguments = <T extends [number, string, number[]]>(
+export const getChunksArguments = <T extends [string, string, number[]]>(
   fromBlock: number,
   toBlock: number,
   chunkSize = MAX_BLOCKS_PER_REQUEST,
@@ -60,7 +60,11 @@ export const getChunksArguments = <T extends [number, string, number[]]>(
     const newestBlock = toBlock - chunkSize * index;
     const blocks = Math.min(1 + newestBlock - fromBlock, chunkSize);
 
-    return [blocks, BigNumber.from(newestBlock).toHexString(), []];
+    return [
+      BigNumber.from(blocks).toHexString(),
+      BigNumber.from(newestBlock).toHexString(),
+      [],
+    ];
   }).reverse() as T[];
 };
 
@@ -148,17 +152,17 @@ export const useFeeHistory = <
   config?: SWRConfiguration<FeeHistory, Error>;
 }): SWRResponse<FeeHistory, Error> => {
   const {
+    providerRpc: providerRpcFromSdk,
+    providerWeb3: providerWeb3FromSdk,
+    chainId,
+  } = useSDK();
+  const {
     shouldFetch = true,
     blocks = DEFAULT_HISTORY_BLOCKS,
     config,
+    providerRpc = providerRpcFromSdk,
+    providerWeb3 = providerWeb3FromSdk,
   } = props || {};
-  const providerRpcFromSdk = useSDK().providerRpc as P;
-  const providerRpc = props?.providerRpc ?? providerRpcFromSdk;
-
-  const providerWeb3FromSdk = useSDK().providerWeb3 as W;
-  const providerWeb3 = props?.providerWeb3 ?? providerWeb3FromSdk;
-
-  const { chainId } = useSDK();
 
   invariant(providerRpc != null, 'RPC Provider is not provided');
   invariant(blocks > 0, 'blocks number should be greater than 0');
@@ -207,7 +211,7 @@ export const useFeeHistory = <
 
   const updateHistory = useDebounceCallback(result.update);
 
-  const subscribeToUpdates = useCallback(() => {
+  useEffect(() => {
     const provider = providerWeb3 || providerRpc;
 
     try {
@@ -220,8 +224,6 @@ export const useFeeHistory = <
       return warning(false, 'Cannot subscribe to Block event');
     }
   }, [providerRpc, providerWeb3, updateHistory]);
-
-  useEffect(subscribeToUpdates, [subscribeToUpdates]);
 
   return result;
 };
