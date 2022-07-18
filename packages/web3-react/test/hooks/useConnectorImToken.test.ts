@@ -42,11 +42,12 @@ describe('useConnectorImToken', () => {
     expect(connect).toBeDefined;
   });
 
-  test('should connect if ethereum if presented', async () => {
+  test('should connect if ethereum and imToken are presented', async () => {
     const mockActivate = jest.fn(async () => true);
     const injected = {};
 
     window.ethereum = {};
+    window.ethereum.isImToken = true;
     mockUseWeb3.mockReturnValue({ activate: mockActivate } as any);
     mockUseConnectors.mockReturnValue({ injected } as any);
 

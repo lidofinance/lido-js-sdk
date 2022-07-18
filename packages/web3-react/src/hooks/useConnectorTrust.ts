@@ -5,7 +5,7 @@ import { openWindow } from '@lido-sdk/helpers';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
-import { hasInjected } from '../helpers';
+import { hasInjected, isTrustProvider } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 
 type Connector = {
@@ -32,7 +32,7 @@ export const useConnectorTrust = (): Connector => {
   const connect = useCallback(async () => {
     invariant(injected, 'Connector is required');
 
-    if (hasInjected()) {
+    if (hasInjected() && isTrustProvider()) {
       await disconnect();
       activate(injected);
     } else {
