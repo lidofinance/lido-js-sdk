@@ -9,8 +9,8 @@ type Connector = {
   connector: WalletConnectConnector;
 };
 
-export const useConnectorWalletConnectUri = (): Connector => {
-  const { WalletConnectUri: connector } = useConnectors();
+export const useConnectorWalletConnectNoLinks = (): Connector => {
+  const { WalletConnectNoLinks: connector } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
 

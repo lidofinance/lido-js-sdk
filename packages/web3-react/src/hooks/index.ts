@@ -11,6 +11,7 @@ export * from './useConnectorStorage';
 export * from './useConnectorTrust';
 export * from './useConnectorWalletConnect';
 export * from './useConnectorWalletConnectUri';
+export * from './useConnectorWalletConnectNoLinks';
 export * from './useConnectorTally';
 export * from './useConnectorBraveWallet';
 export * from './useDisconnect';
