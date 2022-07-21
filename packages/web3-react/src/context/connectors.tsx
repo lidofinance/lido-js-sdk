@@ -22,6 +22,7 @@ export type ConnectorsContextValue = {
   injected: InjectedConnector;
   walletconnect: WalletConnectConnector;
   WalletConnectUri: WalletConnectConnector;
+  WalletConnectNoLinks: WalletConnectConnector;
   walletlink: WalletLinkConnector;
   coinbase: WalletLinkConnector;
   ledgerlive: LedgerHQFrameConnector;
@@ -88,8 +89,18 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
         },
       }),
 
+      [CONNECTOR_NAMES.WALLET_CONNECT_NOLINKS]: new WalletConnectConnector({
+        storageId: 'lido-walletconnect-nolinks',
+        supportedChainIds,
+        rpc: walletConnectRPC,
+        qrcodeModalOptions: {
+          mobileLinks: [],
+          desktopLinks: [],
+        },
+      }),
+
       [CONNECTOR_NAMES.WALLET_CONNECT_URI]: new WalletConnectConnector({
-        storageId: 'lido-walletconnect',
+        storageId: 'lido-walletconnect-uri',
         supportedChainIds,
         rpc: walletConnectRPC,
         qrcode: false,
