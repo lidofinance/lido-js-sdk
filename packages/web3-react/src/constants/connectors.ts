@@ -13,6 +13,7 @@ export enum PROVIDER_NAMES {
   MATH_WALLET = 'MathWallet',
   TALLY = 'Tally',
   BRAVE = 'Brave Wallet',
+  EXODUS = 'Exodus',
 }
 
 export enum CONNECTOR_NAMES {
@@ -25,4 +26,5 @@ export enum CONNECTOR_NAMES {
   INJECTED = 'injected',
   LEDGER_HQ_LIVE = 'ledgerlive',
   LEDGER = 'ledger',
+  EXODUS = 'exodus',
 }
