@@ -17,6 +17,7 @@ import {
   isCoinbaseProvider,
   isTallyProvider,
   isBraveWalletProvider,
+  isExodusProvider,
 } from '../helpers';
 
 type ConnectorInfo = {
@@ -58,6 +59,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
   const isTrust = isInjected && isTrustProvider();
   const isTally = isInjected && isTallyProvider();
   const isBraveWallet = isInjected && isBraveWalletProvider();
+  const isExodus = isInjected && isExodusProvider();
 
   const providerName = (() => {
     if (isGnosis) return PROVIDER_NAMES.GNOSIS;
@@ -72,9 +74,10 @@ export const useConnectorInfo = (): ConnectorInfo => {
     // the wallet connection buttons. Most "aggressive" wallet,
     // which disables other wallets, goes first here.
     if (isTally) return PROVIDER_NAMES.TALLY;
-    if (isCoinbase) return PROVIDER_NAMES.COINBASE;
+    if (isExodus) return PROVIDER_NAMES.EXODUS;
     if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isCoin98) return PROVIDER_NAMES.COIN98;
+    if (isCoinbase) return PROVIDER_NAMES.COINBASE;
     if (isBraveWallet) return PROVIDER_NAMES.BRAVE;
     // Metamask should be last in this list because almost all EIP-1193 wallets
     // are trying to mimic Metamask by setting isMetamask = true
