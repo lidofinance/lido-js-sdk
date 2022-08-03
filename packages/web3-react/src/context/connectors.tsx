@@ -90,7 +90,7 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
       }),
 
       [CONNECTOR_NAMES.WALLET_CONNECT_NOLINKS]: new WalletConnectConnector({
-        storageId: 'lido-walletconnect-nolinks',
+        storageId: 'lido-walletconnect',
         supportedChainIds,
         rpc: walletConnectRPC,
         qrcodeModalOptions: {
@@ -100,7 +100,7 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
       }),
 
       [CONNECTOR_NAMES.WALLET_CONNECT_URI]: new WalletConnectConnector({
-        storageId: 'lido-walletconnect-uri',
+        storageId: 'lido-walletconnect',
         supportedChainIds,
         rpc: walletConnectRPC,
         qrcode: false,
