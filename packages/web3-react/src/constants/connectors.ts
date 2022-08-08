@@ -14,6 +14,7 @@ export enum PROVIDER_NAMES {
   TALLY = 'Tally',
   BRAVE = 'Brave Wallet',
   EXODUS = 'Exodus',
+  OPERA = 'Opera Crypto Wallet',
 }
 
 export enum CONNECTOR_NAMES {
@@ -26,5 +27,4 @@ export enum CONNECTOR_NAMES {
   INJECTED = 'injected',
   LEDGER_HQ_LIVE = 'ledgerlive',
   LEDGER = 'ledger',
-  EXODUS = 'exodus',
 }

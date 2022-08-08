@@ -8,16 +8,17 @@ import { useWeb3 } from './useWeb3';
 import { CONNECTOR_NAMES, PROVIDER_NAMES } from '../constants';
 import { Connector } from '../context';
 import {
-  isDappBrowserProvider,
-  isImTokenProvider,
-  isMetamaskProvider,
-  isCoin98Provider,
-  isTrustProvider,
-  isMathWalletProvider,
-  isCoinbaseProvider,
-  isTallyProvider,
   isBraveWalletProvider,
+  isCoin98Provider,
+  isCoinbaseProvider,
+  isDappBrowserProvider,
   isExodusProvider,
+  isImTokenProvider,
+  isMathWalletProvider,
+  isMetamaskProvider,
+  isOperaWalletProvider,
+  isTallyProvider,
+  isTrustProvider,
 } from '../helpers';
 
 type ConnectorInfo = {
@@ -59,6 +60,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
   const isTrust = isInjected && isTrustProvider();
   const isTally = isInjected && isTallyProvider();
   const isBraveWallet = isInjected && isBraveWalletProvider();
+  const isOperaWallet = isInjected && isOperaWalletProvider();
   const isExodus = isInjected && isExodusProvider();
 
   const providerName = (() => {
@@ -78,6 +80,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
     if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isCoin98) return PROVIDER_NAMES.COIN98;
     if (isCoinbase) return PROVIDER_NAMES.COINBASE;
+    if (isOperaWallet) return PROVIDER_NAMES.OPERA;
     if (isBraveWallet) return PROVIDER_NAMES.BRAVE;
     // Metamask should be last in this list because almost all EIP-1193 wallets
     // are trying to mimic Metamask by setting isMetamask = true
