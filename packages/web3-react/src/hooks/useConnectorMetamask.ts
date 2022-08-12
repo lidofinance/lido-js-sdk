@@ -12,14 +12,14 @@ import {
 import { useForceDisconnect } from './useDisconnect';
 import { InjectedConnector } from '@web3-react/injected-connector';
 
-type Connector = {
+type ConnectorHookResult = {
   connect: () => Promise<void>;
   connector: InjectedConnector;
 };
 
-const METAMASK_URL = 'https://metamask.app.link/dapp/';
+const WALLET_URL = 'https://metamask.app.link/dapp/';
 
-export const useConnectorMetamask = (): Connector => {
+export const useConnectorMetamask = (): ConnectorHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
@@ -28,7 +28,7 @@ export const useConnectorMetamask = (): Connector => {
     try {
       const { host, pathname, search } = window.location;
       const pageUrlWithoutProtocol = encodeURI(host + pathname + search);
-      openWindow(`${METAMASK_URL}${pageUrlWithoutProtocol}`);
+      openWindow(`${WALLET_URL}${pageUrlWithoutProtocol}`);
     } catch (error) {
       warning(false, 'Failed to open the link');
     }

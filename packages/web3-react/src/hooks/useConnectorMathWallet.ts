@@ -14,36 +14,36 @@ import {
 import { useForceDisconnect } from './useDisconnect';
 import { InjectedConnector } from '@web3-react/injected-connector';
 
-type Connector = {
+type ConnectorHookResult = {
   connect: () => Promise<void>;
   connector: InjectedConnector;
 };
 
-const androidAppLink =
+const WALLET_URL_ANDROID =
   'https://play.google.com/store/apps/details?id=com.mathwallet.android';
-const iosAppLink = 'https://apps.apple.com/ru/app/mathwallet5/id1582612388';
-const chromeAppLink =
+const WALLET_URL_IOS = 'https://apps.apple.com/ru/app/mathwallet5/id1582612388';
+const WALLET_URL_CHROME =
   'https://chrome.google.com/webstore/detail/math-wallet/afbcbjpbpfadlkmhmclhkeeodmamcflc';
-const edgeAppLink =
+const WALLET_URL_EDGE =
   'https://microsoftedge.microsoft.com/addons/detail/math-wallet/dfeccadlilpndjjohbjdblepmjeahlmm';
-const firefoxAppLink = 'https://mathwallet.org/en-us/#extension';
+const WALLET_URL_FIREFOX = 'https://mathwallet.org/en-us/#extension';
 
-export const useConnectorMathWallet = (): Connector => {
+export const useConnectorMathWallet = (): ConnectorHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
 
   const suggestApp = useCallback(() => {
     if (isAndroid) {
-      openWindow(androidAppLink);
+      openWindow(WALLET_URL_ANDROID);
     } else if (isIOS) {
-      openWindow(iosAppLink);
+      openWindow(WALLET_URL_IOS);
     } else if (isEdge) {
-      openWindow(edgeAppLink);
+      openWindow(WALLET_URL_EDGE);
     } else if (isFirefox) {
-      openWindow(firefoxAppLink);
+      openWindow(WALLET_URL_FIREFOX);
     } else {
-      openWindow(chromeAppLink);
+      openWindow(WALLET_URL_CHROME);
     }
   }, []);
 

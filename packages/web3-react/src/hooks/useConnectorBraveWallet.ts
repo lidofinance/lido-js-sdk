@@ -8,21 +8,21 @@ import { hasInjected, isBraveWalletProvider } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 import { InjectedConnector } from '@web3-react/injected-connector';
 
-type Connector = {
+type ConnectorHookResult = {
   connect: () => Promise<void>;
   connector: InjectedConnector;
 };
 
-const BRAVE_URL = 'https://brave.com/download/';
+const WALLET_URL = 'https://brave.com/download/';
 
-export const useConnectorBraveWallet = (): Connector => {
+export const useConnectorBraveWallet = (): ConnectorHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
 
   const suggestApp = useCallback(() => {
     try {
-      openWindow(BRAVE_URL);
+      openWindow(WALLET_URL);
     } catch (error) {
       warning(false, 'Failed to open the link');
     }

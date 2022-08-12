@@ -8,14 +8,14 @@ import { useWeb3 } from './useWeb3';
 import { hasInjected, isTrustProvider } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 
-type Connector = {
+type ConnectorHookResult = {
   connect: () => Promise<void>;
   connector: InjectedConnector;
 };
 
-const TRUST_URL = 'https://link.trustwallet.com/open_url?url=';
+const WALLET_URL = 'https://link.trustwallet.com/open_url?url=';
 
-export const useConnectorTrust = (): Connector => {
+export const useConnectorTrust = (): ConnectorHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
@@ -23,7 +23,7 @@ export const useConnectorTrust = (): Connector => {
   const openInWallet = useCallback(() => {
     try {
       const pageUrl = encodeURIComponent(window.location.href);
-      openWindow(`${TRUST_URL}${pageUrl}`);
+      openWindow(`${WALLET_URL}${pageUrl}`);
     } catch (error) {
       warning(false, 'Failed to open the link');
     }

@@ -4,12 +4,12 @@ import { useForceDisconnect } from './useDisconnect';
 import { useWeb3 } from './useWeb3';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 
-type Connector = {
+type ConnectorHookResult = {
   connect: () => Promise<void>;
   connector: WalletConnectConnector;
 };
 
-export const useConnectorWalletConnectNoLinks = (): Connector => {
+export const useConnectorWalletConnectNoLinks = (): ConnectorHookResult => {
   const { WalletConnectNoLinks: connector } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
