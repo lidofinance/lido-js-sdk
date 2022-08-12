@@ -8,21 +8,21 @@ import { hasInjected, isOperaWalletProvider } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 import { InjectedConnector } from '@web3-react/injected-connector';
 
-type Connector = {
+type ConnectorHookResult = {
   connect: () => Promise<void>;
   connector: InjectedConnector;
 };
 
-const OPERA_URL = 'https://www.opera.com/crypto/next';
+const WALLET_URL = 'https://www.opera.com/crypto/next';
 
-export const useConnectorOperaWallet = (): Connector => {
+export const useConnectorOperaWallet = (): ConnectorHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
 
   const suggestApp = useCallback(() => {
     try {
-      openWindow(OPERA_URL);
+      openWindow(WALLET_URL);
     } catch (error) {
       warning(false, 'Failed to open the link');
     }

@@ -8,14 +8,14 @@ import { hasInjected, isImTokenProvider } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 import { InjectedConnector } from '@web3-react/injected-connector';
 
-type Connector = {
+type ConnectorHookResult = {
   connect: () => Promise<void>;
   connector: InjectedConnector;
 };
 
-const IM_TOKEN_URL = 'imtokenv2://navigate/DappView?url=';
+const WALLET_URL = 'imtokenv2://navigate/DappView?url=';
 
-export const useConnectorImToken = (): Connector => {
+export const useConnectorImToken = (): ConnectorHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
@@ -23,7 +23,7 @@ export const useConnectorImToken = (): Connector => {
   const openInWallet = useCallback(() => {
     try {
       const pageUrl = encodeURIComponent(window.location.href);
-      openWindow(`${IM_TOKEN_URL}${pageUrl}`);
+      openWindow(`${WALLET_URL}${pageUrl}`);
     } catch (error) {
       warning(false, 'Failed to open the link');
     }

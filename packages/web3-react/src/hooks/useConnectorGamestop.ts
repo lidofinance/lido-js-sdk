@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { openWindow } from '@lido-sdk/helpers';
 import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
-import { hasInjected, isBraveWalletProvider } from '../helpers';
+import { hasInjected, isGamestopProvider } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 import { InjectedConnector } from '@web3-react/injected-connector';
 
@@ -13,9 +13,9 @@ type ConnectorHookResult = {
   connector: InjectedConnector;
 };
 
-const WALLET_URL = 'https://brave.com/download/';
+const WALLET_URL = 'https://wallet.gamestop.com/';
 
-export const useConnectorBraveWallet = (): ConnectorHookResult => {
+export const useConnectorGamestop = (): ConnectorHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
@@ -31,7 +31,7 @@ export const useConnectorBraveWallet = (): ConnectorHookResult => {
   const connect = useCallback(async () => {
     invariant(injected, 'Connector is required');
 
-    if (hasInjected() && isBraveWalletProvider()) {
+    if (hasInjected() && isGamestopProvider()) {
       await disconnect();
       activate(injected);
     } else {

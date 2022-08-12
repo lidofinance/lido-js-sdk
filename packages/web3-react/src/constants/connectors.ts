@@ -15,6 +15,7 @@ export enum PROVIDER_NAMES {
   BRAVE = 'Brave Wallet',
   EXODUS = 'Exodus',
   OPERA = 'Opera Crypto Wallet',
+  GAMESTOP = 'GameStop Wallet',
 }
 
 export enum CONNECTOR_NAMES {

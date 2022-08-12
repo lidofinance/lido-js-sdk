@@ -8,21 +8,21 @@ import { hasInjected, isExodusProvider } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 import { InjectedConnector } from '@web3-react/injected-connector';
 
-type Connector = {
+type ConnectorHookResult = {
   connect: () => Promise<void>;
   connector: InjectedConnector;
 };
 
-const EXODUS_URL = 'https://www.exodus.com/browser-extension/';
+const WALLET_URL = 'https://www.exodus.com/browser-extension/';
 
-export const useConnectorExodus = (): Connector => {
+export const useConnectorExodus = (): ConnectorHookResult => {
   const { injected } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
 
   const suggestApp = useCallback(() => {
     try {
-      openWindow(EXODUS_URL);
+      openWindow(WALLET_URL);
     } catch (error) {
       warning(false, 'Failed to open the link');
     }

@@ -13,6 +13,7 @@ import {
   isCoinbaseProvider,
   isDappBrowserProvider,
   isExodusProvider,
+  isGamestopProvider,
   isImTokenProvider,
   isMathWalletProvider,
   isMetamaskProvider,
@@ -62,6 +63,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
   const isBraveWallet = isInjected && isBraveWalletProvider();
   const isOperaWallet = isInjected && isOperaWalletProvider();
   const isExodus = isInjected && isExodusProvider();
+  const isGamestop = isInjected && isGamestopProvider();
 
   const providerName = (() => {
     if (isGnosis) return PROVIDER_NAMES.GNOSIS;
@@ -72,14 +74,14 @@ export const useConnectorInfo = (): ConnectorInfo => {
     if (isTrust) return PROVIDER_NAMES.TRUST;
 
     // Wallets which has conflicts with each other.
-    // The order of wallets here must correspond to the order of disabling
-    // the wallet connection buttons. Most "aggressive" wallet,
-    // which disables other wallets, goes first here.
+    // The order of wallets checks here is important.
+    // Most "aggressive" wallet, which overrides other wallets, goes first.
     if (isTally) return PROVIDER_NAMES.TALLY;
     if (isExodus) return PROVIDER_NAMES.EXODUS;
     if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isCoin98) return PROVIDER_NAMES.COIN98;
     if (isCoinbase) return PROVIDER_NAMES.COINBASE;
+    if (isGamestop) return PROVIDER_NAMES.GAMESTOP;
     if (isOperaWallet) return PROVIDER_NAMES.OPERA;
     if (isBraveWallet) return PROVIDER_NAMES.BRAVE;
     // Metamask should be last in this list because almost all EIP-1193 wallets

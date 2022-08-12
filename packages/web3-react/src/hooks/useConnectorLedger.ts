@@ -4,12 +4,12 @@ import { useConnectors } from './useConnectors';
 import { useForceDisconnect } from './useDisconnect';
 import { useWeb3 } from './useWeb3';
 
-type Connector = {
+type ConnectorHookResult = {
   connect: () => Promise<void>;
   connector: LedgerHQConnector;
 };
 
-export const useConnectorLedger = (): Connector => {
+export const useConnectorLedger = (): ConnectorHookResult => {
   const { ledger } = useConnectors();
   const { activate } = useWeb3();
   const { disconnect } = useForceDisconnect();
