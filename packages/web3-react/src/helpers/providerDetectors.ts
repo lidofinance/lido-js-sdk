@@ -14,6 +14,7 @@ declare global {
       isBraveWallet?: boolean;
       isExodus?: boolean;
       isOpera?: boolean;
+      isGamestop?: boolean;
     };
   }
 }
@@ -105,6 +106,14 @@ export const isOperaWalletProvider = (): boolean => {
 export const isExodusProvider = (): boolean => {
   try {
     return !!window.ethereum?.isExodus;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const isGamestopProvider = (): boolean => {
+  try {
+    return !!window.ethereum?.isGamestop;
   } catch (error) {
     return false;
   }
