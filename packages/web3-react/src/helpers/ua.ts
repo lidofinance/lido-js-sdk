@@ -15,3 +15,8 @@ export const isMobileOrTablet = isMobile || isTablet;
 
 export const isFirefox = browser.name === 'Firefox';
 export const isEdge = browser.name === 'Edge';
+
+export const checkIfBraveBrowser = async (): Promise<boolean> =>
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  (navigator.brave && (await navigator.brave.isBrave())) || false;
