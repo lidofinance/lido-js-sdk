@@ -78,10 +78,10 @@ export const useConnectorInfo = (): ConnectorInfo => {
     // Most "aggressive" wallet, which overrides other wallets, goes first.
     if (isTally) return PROVIDER_NAMES.TALLY;
     if (isExodus) return PROVIDER_NAMES.EXODUS;
+    if (isGamestop) return PROVIDER_NAMES.GAMESTOP;
     if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isCoin98) return PROVIDER_NAMES.COIN98;
     if (isCoinbase) return PROVIDER_NAMES.COINBASE;
-    if (isGamestop) return PROVIDER_NAMES.GAMESTOP;
     if (isOperaWallet) return PROVIDER_NAMES.OPERA;
     if (isBraveWallet) return PROVIDER_NAMES.BRAVE;
     // Metamask should be last in this list because almost all EIP-1193 wallets
