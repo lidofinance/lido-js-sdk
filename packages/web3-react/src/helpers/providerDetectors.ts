@@ -15,6 +15,7 @@ declare global {
       isExodus?: boolean;
       isOpera?: boolean;
       isGamestop?: boolean;
+      providers?: { isCoinbaseWallet?: boolean }[];
     };
   }
 }
@@ -73,7 +74,17 @@ export const isDappBrowserProvider = (): boolean => {
 
 export const isCoinbaseProvider = (): boolean => {
   try {
-    return !!window.ethereum?.isCoinbaseWallet;
+    if (window.ethereum) {
+      const { isCoinbaseWallet, providers } = window.ethereum;
+      if (isCoinbaseWallet !== undefined) return isCoinbaseWallet;
+
+      // Handle the case when Coinbase knows that other wallets extensions
+      // are installed too, so it changes its behaviour and adds `providers`.
+      if (providers?.length) {
+        return providers.some((provider) => provider.isCoinbaseWallet);
+      }
+    }
+    return false;
   } catch (error) {
     return false;
   }
