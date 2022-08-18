@@ -38,7 +38,7 @@ export const isMetamaskProvider = (): boolean => {
 
 export const isCoin98Provider = (): boolean => {
   try {
-    return !!window.coin98 || !!window.ethereum?.isCoin98;
+    return !!window.ethereum?.isCoin98;
   } catch (error) {
     return false;
   }
