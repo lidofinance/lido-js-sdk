@@ -6,7 +6,13 @@ import {
   isMathWalletProvider,
   isTrustProvider,
   isDappBrowserProvider,
-} from '../../src/helpers/providerDetectors';
+  isCoinbaseProvider,
+  isTallyProvider,
+  isBraveWalletProvider,
+  isOperaWalletProvider,
+  isExodusProvider,
+  isGamestopProvider,
+} from '../../src/helpers';
 
 const windowSpy = jest.spyOn(global, 'window', 'get');
 const mockIsMobileOrTablet = jest.fn();
@@ -70,6 +76,25 @@ describe('isMathWalletProvider', () => {
   });
 });
 
+describe('isCoinbaseProvider', () => {
+  test('should detect Coinbase when it is the only wallet installed', async () => {
+    windowSpy.mockReturnValue({ ethereum: { isCoinbaseWallet: true } } as any);
+    expect(isCoinbaseProvider()).toBe(true);
+  });
+
+  test('should detect Coinbase when it is installed with other wallets', async () => {
+    windowSpy.mockReturnValue({
+      ethereum: { providers: [{ isCoinbaseWallet: true }] },
+    } as any);
+    expect(isCoinbaseProvider()).toBe(true);
+  });
+
+  test('should not detect Coinbase', async () => {
+    expect(() => isCoinbaseProvider()).not.toThrowError();
+    expect(isCoinbaseProvider()).toBe(false);
+  });
+});
+
 describe('isImTokenProvider', () => {
   test('should detect imToken', async () => {
     windowSpy.mockReturnValue({ ethereum: { isImToken: true } } as any);
@@ -103,5 +128,65 @@ describe('isDappBrowserProvider', () => {
 
   test('should not detect dapp browser', async () => {
     expect(isDappBrowserProvider()).toBe(false);
+  });
+});
+
+describe('isTallyProvider', () => {
+  test('should detect Tally wallet', async () => {
+    windowSpy.mockReturnValue({ ethereum: { isTally: true } } as any);
+    expect(isTallyProvider()).toBe(true);
+  });
+
+  test('should not detect Tally wallet', async () => {
+    expect(() => isTallyProvider()).not.toThrowError();
+    expect(isTallyProvider()).toBe(false);
+  });
+});
+
+describe('isBraveProvider', () => {
+  test('should detect Brave wallet', async () => {
+    windowSpy.mockReturnValue({ ethereum: { isBraveWallet: true } } as any);
+    expect(isBraveWalletProvider()).toBe(true);
+  });
+
+  test('should not detect Brave wallet', async () => {
+    expect(() => isBraveWalletProvider()).not.toThrowError();
+    expect(isBraveWalletProvider()).toBe(false);
+  });
+});
+
+describe('isOperaProvider', () => {
+  test('should detect Opera Crypto wallet', async () => {
+    windowSpy.mockReturnValue({ ethereum: { isOpera: true } } as any);
+    expect(isOperaWalletProvider()).toBe(true);
+  });
+
+  test('should not detect Opera Crypto wallet', async () => {
+    expect(() => isOperaWalletProvider()).not.toThrowError();
+    expect(isOperaWalletProvider()).toBe(false);
+  });
+});
+
+describe('isExodusProvider', () => {
+  test('should detect Exodus wallet', async () => {
+    windowSpy.mockReturnValue({ ethereum: { isExodus: true } } as any);
+    expect(isExodusProvider()).toBe(true);
+  });
+
+  test('should not detect Exodus wallet', async () => {
+    expect(() => isExodusProvider()).not.toThrowError();
+    expect(isExodusProvider()).toBe(false);
+  });
+});
+
+describe('isGamestopProvider', () => {
+  test('should detect Gamestop wallet', async () => {
+    windowSpy.mockReturnValue({ ethereum: { isGamestop: true } } as any);
+    expect(isGamestopProvider()).toBe(true);
+  });
+
+  test('should not detect Gamestop wallet', async () => {
+    expect(() => isGamestopProvider()).not.toThrowError();
+    expect(isGamestopProvider()).toBe(false);
   });
 });
