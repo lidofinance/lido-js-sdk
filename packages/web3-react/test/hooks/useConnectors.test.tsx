@@ -9,9 +9,7 @@ import { Web3Provider } from '@ethersproject/providers';
 import { renderHook as renderHookOnServer } from '@testing-library/react-hooks/server';
 import { SafeAppConnector } from '@gnosis.pm/safe-apps-web3-react';
 import { CHAINS } from '@lido-sdk/constants';
-import { useAutoConnect } from '../../src/hooks/useAutoConnect';
-import { useConnectors } from '../../src/hooks/useConnectors';
-import { useWeb3 } from '../../src/hooks/useWeb3';
+import { useAutoConnect, useConnectors, useWeb3 } from '../../src';
 import { ProviderWeb3 } from '../../src/context';
 
 const mockSafeAppConnector = SafeAppConnector as jest.MockedClass<

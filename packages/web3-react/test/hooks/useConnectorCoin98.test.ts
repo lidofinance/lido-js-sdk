@@ -27,7 +27,7 @@ describe('useConnectorCoin98', () => {
     const injected = {};
 
     window.ethereum = {};
-    window.coin98 = true;
+    window.ethereum.isCoin98 = true;
     mockUseWeb3.mockReturnValue({ activate: mockActivate } as any);
     mockUseConnectors.mockReturnValue({ injected } as any);
 

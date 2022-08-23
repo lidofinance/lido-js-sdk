@@ -6,8 +6,8 @@ import { useConnectors } from './useConnectors';
 import { useWeb3 } from './useWeb3';
 import {
   hasInjected,
-  isMetamaskProvider,
   isBraveWalletProvider,
+  checkIfBraveBrowser,
 } from '../helpers';
 import { useForceDisconnect } from './useDisconnect';
 import { InjectedConnector } from '@web3-react/injected-connector';
@@ -40,8 +40,17 @@ export const useConnectorMetamask = (): ConnectorHookResult => {
     // Brave Wallet mimics MetaMask.
     // If a user has the Brave Browser without the MetaMask extension we want
     // to redirect the user to the MetaMask website.
-    // TODO: refactor
-    if (hasInjected() && isMetamaskProvider() && !isBraveWalletProvider()) {
+    // If MetaMask is installed, the isBraveWallet property will be false.
+    if ((await checkIfBraveBrowser()) && isBraveWalletProvider()) {
+      openInWallet();
+      return;
+    }
+
+    // Do not check for isMetamaskProvider here,
+    // it will break an ability to connect with other EIP-1193 wallets,
+    // which do not have their branded connection button
+    // and recommend to click on MetaMask button in such case.
+    if (hasInjected()) {
       await disconnect();
       activate(injected);
     } else {
