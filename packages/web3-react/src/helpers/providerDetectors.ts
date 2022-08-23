@@ -3,6 +3,7 @@ import { isMobileOrTablet } from './ua';
 declare global {
   interface Window {
     coin98?: boolean;
+    gamestop?: Record<string, unknown>;
     ethereum?: {
       isMetaMask?: boolean;
       isTrust?: boolean;
@@ -117,6 +118,14 @@ export const isOperaWalletProvider = (): boolean => {
 export const isExodusProvider = (): boolean => {
   try {
     return !!window.ethereum?.isExodus;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const isGamestopInstalled = (): boolean => {
+  try {
+    return !!window.gamestop;
   } catch (error) {
     return false;
   }
