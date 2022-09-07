@@ -12,6 +12,9 @@ import {
   isOperaWalletProvider,
   isExodusProvider,
   isGamestopProvider,
+  isGamestopInstalled,
+  isXdefiProvider,
+  isXdefiInstalled,
 } from '../../src/helpers';
 
 const windowSpy = jest.spyOn(global, 'window', 'get');
@@ -179,14 +182,51 @@ describe('isExodusProvider', () => {
   });
 });
 
-describe('isGamestopProvider', () => {
-  test('should detect Gamestop wallet', async () => {
+describe('Gamestop', () => {
+  test('should not detect Gamestop wallet', async () => {
+    expect(() => isGamestopProvider()).not.toThrowError();
+    expect(() => isGamestopInstalled()).not.toThrowError();
+    expect(isGamestopProvider()).toBe(false);
+    expect(isGamestopInstalled()).toBe(false);
+  });
+
+  test('should detect Gamestop provider', async () => {
     windowSpy.mockReturnValue({ ethereum: { isGamestop: true } } as any);
     expect(isGamestopProvider()).toBe(true);
   });
 
-  test('should not detect Gamestop wallet', async () => {
-    expect(() => isGamestopProvider()).not.toThrowError();
-    expect(isGamestopProvider()).toBe(false);
+  test('should detect Gamestop installed', async () => {
+    windowSpy.mockReturnValue({ gamestop: {} } as any);
+    expect(isGamestopInstalled()).toBe(true);
+  });
+});
+
+describe('XDEFI', () => {
+  test('should not detect XDEFI installed', async () => {
+    expect(() => isXdefiInstalled()).not.toThrowError();
+    expect(isXdefiInstalled()).toBe(false);
+  });
+
+  test('should not detect XDEFI provider', async () => {
+    expect(() => isXdefiProvider()).not.toThrowError();
+    expect(isXdefiProvider()).toBe(false);
+  });
+
+  test('should not detect XDEFI provider if ethereum is undefined', async () => {
+    windowSpy.mockReturnValue({ ethereum: undefined } as any);
+    expect(isXdefiProvider()).toBe(false);
+  });
+
+  test('should detect XDEFI provider', async () => {
+    windowSpy.mockReturnValue({
+      xfi: {},
+      ethereum: { isXDEFI: false, __XDEFI: true },
+    } as any);
+    expect(isXdefiProvider()).toBe(true);
+  });
+
+  test('should detect XDEFI installed', async () => {
+    windowSpy.mockReturnValue({ xfi: {} } as any);
+    expect(isXdefiInstalled()).toBe(true);
   });
 });

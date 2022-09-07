@@ -17,6 +17,7 @@ export * from './useConnectorBraveWallet';
 export * from './useConnectorOperaWallet';
 export * from './useConnectorExodus';
 export * from './useConnectorGamestop';
+export * from './useConnectorXdefi';
 export * from './useDisconnect';
 export * from './useSupportedChains';
 export * from './useWeb3';

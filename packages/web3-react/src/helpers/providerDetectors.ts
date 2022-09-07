@@ -4,6 +4,7 @@ declare global {
   interface Window {
     coin98?: boolean;
     gamestop?: Record<string, unknown>;
+    xfi?: Record<string, unknown>;
     ethereum?: {
       isMetaMask?: boolean;
       isTrust?: boolean;
@@ -16,6 +17,7 @@ declare global {
       isExodus?: boolean;
       isOpera?: boolean;
       isGamestop?: boolean;
+      isXDEFI?: boolean;
       providers?: { isCoinbaseWallet?: boolean }[];
     };
   }
@@ -134,6 +136,36 @@ export const isGamestopInstalled = (): boolean => {
 export const isGamestopProvider = (): boolean => {
   try {
     return !!window.ethereum?.isGamestop;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const isXdefiInstalled = (): boolean => {
+  try {
+    return !!window.xfi;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const isXdefiProvider = (): boolean => {
+  try {
+    const { ethereum } = window;
+    if (ethereum) {
+      // At the moment of writing, `isXDEFI` and `__XDEFI` options are not documented.
+      // If XDEFI is installed and the "Prioritise XDEFI" setting is true,
+      // then `isXDEFI` option becomes unexpectedly set to `false`.
+      // So, we can just check if this option is in `ethereum` provider object.
+      // `__XDEFI` option is used as a fallback.
+      const { hasOwnProperty } = Object.prototype;
+      return (
+        isXdefiInstalled() &&
+        (hasOwnProperty.call(ethereum, 'isXDEFI') ||
+          hasOwnProperty.call(ethereum, '__XDEFI'))
+      );
+    }
+    return false;
   } catch (error) {
     return false;
   }
