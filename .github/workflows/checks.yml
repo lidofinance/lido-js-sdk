@@ -1,0 +1,7 @@
+name: Tests and Checks
+
+on: push
+
+jobs:
+  security:
+    uses: lidofinance/linters/.github/workflows/security.yml@master
