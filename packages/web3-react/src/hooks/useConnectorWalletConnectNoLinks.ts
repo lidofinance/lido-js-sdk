@@ -16,7 +16,7 @@ export const useConnectorWalletConnectNoLinks = (): ConnectorHookResult => {
 
   const connect = useCallback(async () => {
     await disconnect();
-    activate(connector);
+    await activate(connector);
   }, [activate, disconnect, connector]);
 
   return { connect, connector };
