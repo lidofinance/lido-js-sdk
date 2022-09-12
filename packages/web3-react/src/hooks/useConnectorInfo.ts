@@ -20,22 +20,31 @@ import {
   isOperaWalletProvider,
   isTallyProvider,
   isTrustProvider,
+  isXdefiProvider,
 } from '../helpers';
 
 type ConnectorInfo = {
-  isDappBrowser: boolean;
-  isInjected: boolean;
-  isImToken: boolean;
-  isTrust: boolean;
-  isMetamask: boolean;
-  isCoin98: boolean;
+  providerName?: string;
+  connectorName?: Connector;
   isGnosis: boolean;
   isLedger: boolean;
   isLedgerLive: boolean;
   isWalletConnect: boolean;
+  isWalletLink: boolean;
   isCoinbase: boolean;
-  providerName?: string;
-  connectorName?: Connector;
+  isMetamask: boolean;
+  isCoin98: boolean;
+  isMathWallet: boolean;
+  isImToken: boolean;
+  isTrust: boolean;
+  isTally: boolean;
+  isBraveWallet: boolean;
+  isOperaWallet: boolean;
+  isExodus: boolean;
+  isGamestop: boolean;
+  isXdefi: boolean;
+  isDappBrowser: boolean;
+  isInjected: boolean;
 };
 
 export const useConnectorInfo = (): ConnectorInfo => {
@@ -64,6 +73,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
   const isOperaWallet = isInjected && isOperaWalletProvider();
   const isExodus = isInjected && isExodusProvider();
   const isGamestop = isInjected && isGamestopProvider();
+  const isXdefi = isInjected && isXdefiProvider();
 
   const providerName = (() => {
     if (isGnosis) return PROVIDER_NAMES.GNOSIS;
@@ -78,6 +88,7 @@ export const useConnectorInfo = (): ConnectorInfo => {
     // Most "aggressive" wallet, which overrides other wallets, goes first.
     if (isTally) return PROVIDER_NAMES.TALLY;
     if (isExodus) return PROVIDER_NAMES.EXODUS;
+    if (isXdefi) return PROVIDER_NAMES.XDEFI;
     if (isGamestop) return PROVIDER_NAMES.GAMESTOP;
     if (isMathWallet) return PROVIDER_NAMES.MATH_WALLET;
     if (isCoin98) return PROVIDER_NAMES.COIN98;
@@ -115,16 +126,25 @@ export const useConnectorInfo = (): ConnectorInfo => {
     connectorName,
     providerName,
 
-    isCoinbase,
     isGnosis,
     isLedger,
     isLedgerLive,
     isWalletConnect,
 
-    isImToken,
+    isWalletLink,
+    isCoinbase,
+
     isMetamask,
     isCoin98,
+    isMathWallet,
+    isImToken,
     isTrust,
+    isTally,
+    isBraveWallet,
+    isOperaWallet,
+    isExodus,
+    isGamestop,
+    isXdefi,
 
     isDappBrowser,
     isInjected,

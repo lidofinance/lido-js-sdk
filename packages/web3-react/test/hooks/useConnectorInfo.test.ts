@@ -68,7 +68,8 @@ describe('useConnectorInfo', () => {
     window.ethereum = { isCoinbaseWallet: true };
 
     const { result } = renderHook(() => useConnectorInfo());
-    const { connectorName, providerName, isCoinbase, ...rest } = result.current;
+    const { connectorName, providerName, isCoinbase, isWalletLink, ...rest } =
+      result.current;
 
     expect(isCoinbase).toBe(true);
     expect(Object.values(rest).includes(true)).toBeFalsy();
