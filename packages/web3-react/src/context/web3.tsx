@@ -71,9 +71,22 @@ const ProviderSDK: FC<ProviderWeb3Props> = (props) => {
 };
 
 const ProviderWeb3: FC<ProviderWeb3Props> = (props) => {
-  const { children, rpc, appName, appLogoUrl, ...sdkProps } = props;
+  const {
+    children,
+    rpc,
+    appName,
+    appLogoUrl,
+    autoConnectEnabled,
+    ...sdkProps
+  } = props;
   const { defaultChainId } = props;
-  const connectorsProps = { rpc, appName, appLogoUrl, defaultChainId };
+  const connectorsProps = {
+    rpc,
+    appName,
+    appLogoUrl,
+    defaultChainId,
+    autoConnectEnabled,
+  };
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
