@@ -7,7 +7,7 @@ import { CHAINS } from '@lido-sdk/constants';
 import { useSDK } from '@lido-sdk/react';
 import { LedgerHQFrameConnector } from 'web3-ledgerhq-frame-connector';
 import { LedgerHQConnector } from 'web3-ledgerhq-connector';
-import { useAutoConnect } from '../hooks/useAutoConnect';
+import { useAutoConnect } from '../hooks';
 import { CONNECTOR_NAMES } from '../constants';
 import { isUrl } from '../helpers';
 
@@ -16,6 +16,7 @@ export interface ConnectorsContextProps {
   rpc: Record<number, string>;
   appName?: string;
   appLogoUrl?: string;
+  autoConnectEnabled?: boolean;
 }
 
 export type ConnectorsContextValue = {
@@ -34,6 +35,11 @@ export type Connector = keyof ConnectorsContextValue;
 
 export const ConnectorsContext = createContext({} as ConnectorsContextValue);
 
+const AutoConnect = (props: { connectors: ConnectorsContextValue }) => {
+  useAutoConnect(props.connectors);
+  return null;
+};
+
 const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
   const BASE_URL = typeof window === 'undefined' ? '' : window.location.origin;
   const DEFAULT_LOGO = `${BASE_URL}/apple-touch-icon.png`;
@@ -45,6 +51,7 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
     defaultChainId,
     appName = DEFAULT_NAME,
     appLogoUrl = DEFAULT_LOGO,
+    autoConnectEnabled = true,
   } = props;
 
   const { supportedChainIds } = useSDK();
@@ -147,10 +154,9 @@ const ProviderConnectors: FC<ConnectorsContextProps> = (props) => {
     ],
   );
 
-  useAutoConnect(connectors);
-
   return (
     <ConnectorsContext.Provider value={connectors}>
+      {autoConnectEnabled && <AutoConnect connectors={connectors} />}
       {children}
     </ConnectorsContext.Provider>
   );
