@@ -50,8 +50,8 @@ export const getRPCUrls = (
 ): string[] => {
   const urls = [];
 
-  if (keys.infura) urls.push(getInfuraRPCUrl(chainId, keys.infura));
   if (keys.alchemy) urls.push(getAlchemyRPCUrl(chainId, keys.alchemy));
+  if (keys.infura) urls.push(getInfuraRPCUrl(chainId, keys.infura));
 
   return urls;
 };
