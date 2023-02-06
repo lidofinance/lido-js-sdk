@@ -39,12 +39,12 @@ describe('getRPCUrls', () => {
   test('should work correctly', () => {
     expect(
       getRPCUrls(CHAINS.Mainnet, {
-        infura: 'API_KEY',
         alchemy: 'API_KEY',
+        infura: 'API_KEY',
       }),
     ).toEqual([
-      expect.stringContaining('infura'),
       expect.stringContaining('alchemy'),
+      expect.stringContaining('infura'),
     ]);
   });
 
