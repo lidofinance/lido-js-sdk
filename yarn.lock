@@ -2470,6 +2470,7 @@ __metadata:
   resolution: "@lido-sdk/react@workspace:packages/react"
   dependencies:
     "@ethersproject/bignumber": ^5.4.2
+    "@ethersproject/bytes": ^5.4.0
     "@ethersproject/constants": ^5.4.0
     "@ethersproject/contracts": ^5.4.1
     "@ethersproject/providers": ^5.4.5
@@ -2488,6 +2489,7 @@ __metadata:
     tiny-warning: ^1.0.3
   peerDependencies:
     "@ethersproject/bignumber": 5
+    "@ethersproject/bytes": 5
     "@ethersproject/constants": 5
     "@ethersproject/contracts": 5
     "@ethersproject/providers": 5

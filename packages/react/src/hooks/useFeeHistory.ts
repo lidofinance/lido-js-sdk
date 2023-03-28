@@ -9,6 +9,7 @@ import {
   Web3Provider,
 } from '@ethersproject/providers';
 import { BigNumber } from '@ethersproject/bignumber';
+import { hexValue } from '@ethersproject/bytes';
 import { useSDK } from './useSDK';
 import { useLidoSWR, SWRResponse } from './useLidoSWR';
 import { useDebounceCallback } from './useDebounceCallback';
@@ -60,7 +61,7 @@ export const getChunksArguments = <T extends [number, string, number[]]>(
     const newestBlock = toBlock - chunkSize * index;
     const blocks = Math.min(1 + newestBlock - fromBlock, chunkSize);
 
-    return [blocks, BigNumber.from(newestBlock).toHexString(), []];
+    return [blocks, hexValue(BigNumber.from(newestBlock)), []];
   }).reverse() as T[];
 };
 

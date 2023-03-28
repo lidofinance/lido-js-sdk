@@ -3,6 +3,7 @@ jest.mock('tiny-warning');
 import warning from 'tiny-warning';
 import { FC } from 'react';
 import { BigNumber } from '@ethersproject/bignumber';
+import { hexValue } from '@ethersproject/bytes';
 import { renderHook, act } from '@testing-library/react-hooks';
 import {
   combineHistory,
@@ -17,7 +18,7 @@ import { ProviderWrapper } from './testUtils';
 
 const mockWarning = warning as jest.MockedFunction<typeof warning>;
 
-const hex = (number: number) => BigNumber.from(number).toHexString();
+const hex = (number: number) => hexValue(BigNumber.from(number));
 
 describe('getBlockNumber', () => {
   test('should use cached data', async () => {
@@ -46,14 +47,14 @@ describe('getChunksArguments', () => {
     const chunksArgs = getChunksArguments(0, 3, chunkSize);
 
     expect(chunksArgs).toEqual([
-      [chunkSize, '0x01', []],
-      [chunkSize, '0x03', []],
+      [chunkSize, '0x1', []],
+      [chunkSize, '0x3', []],
     ]);
   });
 
   test('should work if from == to', () => {
     const chunksArgs = getChunksArguments(0, 0, 1000);
-    expect(chunksArgs).toEqual([[1, '0x00', []]]);
+    expect(chunksArgs).toEqual([[1, '0x0', []]]);
   });
 
   test('should work if the first chunk is smaller than the others', () => {
@@ -61,9 +62,9 @@ describe('getChunksArguments', () => {
     const chunksArgs = getChunksArguments(0, 7, chunkSize);
 
     expect(chunksArgs).toEqual([
-      [2, '0x01', []],
-      [3, '0x04', []],
-      [3, '0x07', []],
+      [2, '0x1', []],
+      [3, '0x4', []],
+      [3, '0x7', []],
     ]);
   });
 
@@ -308,7 +309,7 @@ describe('useFeeHistory', () => {
     });
     expect(mockSend).toBeCalledTimes(1);
     expect(mockSendSecond).toBeCalledTimes(1);
-    expect(mockSendSecond).toBeCalledWith('eth_feeHistory', [1, '0x03', []]);
+    expect(mockSendSecond).toBeCalledWith('eth_feeHistory', [1, '0x3', []]);
   });
 
   test('should use providerRpc from SDK', async () => {
