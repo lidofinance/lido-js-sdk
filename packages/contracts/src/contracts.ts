@@ -7,6 +7,7 @@ import {
   StethAbiFactory,
   WstethAbiFactory,
   LdoAbiFactory,
+  WithdrawalQueueAbiFactory,
 } from './factories';
 
 export interface Factory<C extends BaseContract> {
@@ -46,3 +47,6 @@ export const getERC20Contract = createContractGetter(Erc20AbiFactory);
 export const getSTETHContract = createContractGetter(StethAbiFactory);
 export const getWSTETHContract = createContractGetter(WstethAbiFactory);
 export const getLDOContract = createContractGetter(LdoAbiFactory);
+export const getWithdrawalQueueContract = createContractGetter(
+  WithdrawalQueueAbiFactory,
+);

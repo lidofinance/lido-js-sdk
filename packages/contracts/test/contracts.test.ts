@@ -2,6 +2,7 @@ import {
   CHAINS,
   getTokenAddress,
   getAggregatorAddress,
+  getWithdrawalQueueAddress,
   TOKENS,
 } from '@lido-sdk/constants';
 import { getRpcProvider } from '@lido-sdk/providers';
@@ -10,6 +11,7 @@ import {
   getERC20Contract,
   getSTETHContract,
   getWSTETHContract,
+  getWithdrawalQueueContract,
 } from '../src/contracts';
 
 describe('getAggregatorContract', () => {
@@ -17,6 +19,17 @@ describe('getAggregatorContract', () => {
     const address = getAggregatorAddress(CHAINS.Mainnet);
     const provider = getRpcProvider(CHAINS.Mainnet, '/api/rpc');
     const contract = getAggregatorContract(address, provider);
+
+    expect(contract).toBeInstanceOf(Object);
+    expect(contract).toEqual(expect.objectContaining({ address }));
+  });
+});
+
+describe('getWithdrawalQueueContract', () => {
+  test('should create a contract', () => {
+    const address = getWithdrawalQueueAddress(CHAINS.Mainnet);
+    const provider = getRpcProvider(CHAINS.Mainnet, '/api/rpc');
+    const contract = getWithdrawalQueueContract(address, provider);
 
     expect(contract).toBeInstanceOf(Object);
     expect(contract).toEqual(expect.objectContaining({ address }));
