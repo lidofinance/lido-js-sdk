@@ -7,7 +7,6 @@ export enum CHAINS {
   Goerli = 5,
   Kovan = 42,
   Kintsugi = 1337702,
-  Zhejiang = 1337803,
   Kiln = 1337802,
   Moonbeam = 1284,
   Moonriver = 1285,

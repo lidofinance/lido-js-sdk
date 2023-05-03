@@ -171,6 +171,41 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "DOMAIN_SEPARATOR",
+    "outputs": [{ "name": "", "type": "bytes32" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [{ "name": "owner", "type": "address" }],
+    "name": "nonces",
+    "outputs": [{ "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      { "name": "_owner", "type": "address" },
+      { "name": "_spender", "type": "address" },
+      { "name": "_value", "type": "uint256" },
+      { "name": "_deadline", "type": "uint256" },
+      { "name": "_v", "type": "uint8" },
+      { "name": "_r", "type": "bytes32" },
+      { "name": "_s", "type": "bytes32" }
+    ],
+    "name": "permit",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "payable": true,
     "stateMutability": "payable",
     "type": "fallback"
