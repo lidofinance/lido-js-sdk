@@ -1,12 +1,11 @@
 import invariant from 'tiny-invariant';
 import warning from 'tiny-warning';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { BigNumber } from '@ethersproject/bignumber';
 import { getERC20Contract } from '@lido-sdk/contracts';
 import { useContractSWR } from './useContractSWR';
 import { SWRResponse } from './useLidoSWR';
 import { useSDK } from './useSDK';
-import { useDebounceCallback } from './useDebounceCallback';
 
 export const useAllowance = (
   token: string,
@@ -31,28 +30,24 @@ export const useAllowance = (
     params: [mergedOwner, spender],
   });
 
-  const updateAllowance = useDebounceCallback(result.update);
-
-  const subscribeToUpdates = useCallback(() => {
+  useEffect(() => {
     if (!mergedOwner || !providerWeb3 || !contractWeb3) return;
-
+    const updatedAllowance = result.update;
     try {
       const transfer = contractWeb3.filters.Transfer(mergedOwner, spender);
       const approve = contractWeb3.filters.Approval(mergedOwner, spender);
 
-      providerWeb3.on(transfer, updateAllowance);
-      providerWeb3.on(approve, updateAllowance);
+      providerWeb3.on(transfer, updatedAllowance);
+      providerWeb3.on(approve, updatedAllowance);
 
       return () => {
-        providerWeb3.off(transfer, updateAllowance);
-        providerWeb3.off(approve, updateAllowance);
+        providerWeb3.off(transfer, updatedAllowance);
+        providerWeb3.off(approve, updatedAllowance);
       };
     } catch (error) {
       return warning(false, 'Cannot subscribe to event');
     }
-  }, [providerWeb3, contractWeb3, mergedOwner, spender, updateAllowance]);
-
-  useEffect(subscribeToUpdates, [subscribeToUpdates]);
+  }, [contractWeb3, mergedOwner, providerWeb3, result.update, spender]);
 
   return result;
 };

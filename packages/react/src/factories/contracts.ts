@@ -1,11 +1,17 @@
 import { BaseContract } from '@ethersproject/contracts';
-import { TOKENS, CHAINS, getTokenAddress } from '@lido-sdk/constants';
+import {
+  TOKENS,
+  CHAINS,
+  getTokenAddress,
+  getWithdrawalQueueAddress,
+} from '@lido-sdk/constants';
 import {
   WstethAbiFactory,
   StethAbiFactory,
   LdoAbiFactory,
   Factory,
   createContractGetter,
+  WithdrawalQueueAbiFactory,
 } from '@lido-sdk/contracts';
 import { useMemo } from 'react';
 import { useSDK } from '../hooks';
@@ -57,3 +63,10 @@ const ldo = contractHooksFactory(LdoAbiFactory, (chainId) =>
 );
 export const useLDOContractRPC = ldo.useContractRPC;
 export const useLDOContractWeb3 = ldo.useContractWeb3;
+
+const withdrawalQueue = contractHooksFactory(
+  WithdrawalQueueAbiFactory,
+  (chainId) => getWithdrawalQueueAddress(chainId),
+);
+export const useWithdrawalQueueContractRPC = withdrawalQueue.useContractRPC;
+export const useWithdrawalQueueContractWeb3 = withdrawalQueue.useContractWeb3;

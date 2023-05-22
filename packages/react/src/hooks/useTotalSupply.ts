@@ -1,14 +1,17 @@
 import invariant from 'tiny-invariant';
 import warning from 'tiny-warning';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { BigNumber } from '@ethersproject/bignumber';
 import { getERC20Contract } from '@lido-sdk/contracts';
 import { useContractSWR } from './useContractSWR';
 import { SWRResponse } from './useLidoSWR';
 import { useSDK } from './useSDK';
-import { useDebounceCallback } from './useDebounceCallback';
+import { SWRConfiguration } from 'swr';
 
-export const useTotalSupply = (token: string): SWRResponse<BigNumber> => {
+export const useTotalSupply = (
+  token: string,
+  config?: SWRConfiguration<BigNumber>,
+): SWRResponse<BigNumber> => {
   const { providerRpc, providerWeb3 } = useSDK();
 
   invariant(token != null, 'Token is required');
@@ -21,13 +24,12 @@ export const useTotalSupply = (token: string): SWRResponse<BigNumber> => {
   const result = useContractSWR({
     contract: contractRpc,
     method: 'totalSupply',
+    config,
   });
 
-  const updateTotal = useDebounceCallback(result.update);
-
-  const subscribeToUpdates = useCallback(() => {
+  useEffect(() => {
     if (!providerWeb3 || !contractWeb3) return;
-
+    const updateTotal = result.update;
     try {
       const transfer = contractWeb3.filters.Transfer();
       providerWeb3.on(transfer, updateTotal);
@@ -38,9 +40,7 @@ export const useTotalSupply = (token: string): SWRResponse<BigNumber> => {
     } catch (error) {
       return warning(false, 'Cannot subscribe to events');
     }
-  }, [providerWeb3, contractWeb3, updateTotal]);
-
-  useEffect(subscribeToUpdates, [subscribeToUpdates]);
+  }, [providerWeb3, contractWeb3, result.update]);
 
   return result;
 };

@@ -43,7 +43,7 @@ const ProviderSDK: FC<SDKContextProps> = (props) => {
     swrConfig,
   } = props;
 
-  invariant(chainId !== null, 'Chain is not supported');
+  invariant(chainId, 'invalid chainId');
   invariant(supportedChainIds?.length, 'Supported chains are required');
 
   const providerRpc = useMemo(() => {

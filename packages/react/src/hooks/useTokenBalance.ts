@@ -1,16 +1,17 @@
 import invariant from 'tiny-invariant';
 import warning from 'tiny-warning';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { BigNumber } from '@ethersproject/bignumber';
 import { getERC20Contract } from '@lido-sdk/contracts';
 import { useContractSWR } from './useContractSWR';
 import { SWRResponse } from './useLidoSWR';
 import { useSDK } from './useSDK';
-import { useDebounceCallback } from './useDebounceCallback';
+import { SWRConfiguration } from 'swr';
 
 export const useTokenBalance = (
   token: string,
   account?: string,
+  config?: SWRConfiguration<BigNumber>,
 ): SWRResponse<BigNumber> => {
   const { providerRpc, providerWeb3, account: sdkAccount } = useSDK();
   const mergedAccount = account ?? sdkAccount;
@@ -27,13 +28,12 @@ export const useTokenBalance = (
     contract: contractRpc,
     method: 'balanceOf',
     params: [mergedAccount],
+    config,
   });
 
-  const updateBalance = useDebounceCallback(result.update);
-
-  const subscribeToUpdates = useCallback(() => {
+  useEffect(() => {
     if (!mergedAccount || !providerWeb3 || !contractWeb3) return;
-
+    const updateBalance = result.update;
     try {
       const fromMe = contractWeb3.filters.Transfer(mergedAccount, null);
       const toMe = contractWeb3.filters.Transfer(null, mergedAccount);
@@ -48,9 +48,7 @@ export const useTokenBalance = (
     } catch (error) {
       return warning(false, 'Cannot subscribe to events');
     }
-  }, [providerWeb3, contractWeb3, mergedAccount, updateBalance]);
-
-  useEffect(subscribeToUpdates, [subscribeToUpdates]);
+  }, [providerWeb3, contractWeb3, mergedAccount, result.update]);
 
   return result;
 };

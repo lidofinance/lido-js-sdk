@@ -1,13 +1,14 @@
 import warning from 'tiny-warning';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { BigNumber } from '@ethersproject/bignumber';
 import { useSDK } from './useSDK';
 import { useEthereumSWR } from './useEthereumSWR';
 import { SWRResponse } from './useLidoSWR';
-import { useDebounceCallback } from './useDebounceCallback';
+import { SWRConfiguration } from 'swr';
 
 export const useEthereumBalance = (
   account?: string,
+  config?: SWRConfiguration<BigNumber, unknown>,
 ): SWRResponse<BigNumber> => {
   const { providerWeb3, account: sdkAccount } = useSDK();
   const mergedAccount = account ?? sdkAccount;
@@ -16,25 +17,22 @@ export const useEthereumBalance = (
     shouldFetch: !!mergedAccount,
     method: 'getBalance',
     params: [mergedAccount, 'latest'],
+    config,
   });
 
-  const updateBalance = useDebounceCallback(result.update);
-
-  const subscribeToUpdates = useCallback(() => {
+  useEffect(() => {
     if (!mergedAccount || !providerWeb3) return;
 
     try {
-      providerWeb3.on('block', updateBalance);
+      providerWeb3.on('block', result.update);
 
       return () => {
-        providerWeb3.off('block', updateBalance);
+        providerWeb3.off('block', result.update);
       };
     } catch (error) {
       return warning(false, 'Cannot subscribe to Block event');
     }
-  }, [providerWeb3, mergedAccount, updateBalance]);
-
-  useEffect(subscribeToUpdates, [subscribeToUpdates]);
+  }, [providerWeb3, mergedAccount, result.update]);
 
   return result;
 };
