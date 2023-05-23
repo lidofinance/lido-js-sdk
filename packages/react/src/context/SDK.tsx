@@ -31,7 +31,8 @@ export interface SDKContextValue {
   onError: (error: unknown) => void;
 }
 
-export const SDKContext = createContext({} as SDKContextValue);
+export const SDKContext = createContext<SDKContextValue | null>(null);
+SDKContext.displayName = 'LidoSDKContext';
 
 const ProviderSDK: FC<SDKContextProps> = (props) => {
   const {

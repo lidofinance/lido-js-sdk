@@ -8,7 +8,7 @@ import { SWRConfiguration } from 'swr';
 
 export const useEthereumBalance = (
   account?: string,
-  config?: SWRConfiguration<BigNumber, unknown>,
+  config?: SWRConfiguration<BigNumber, Error>,
 ): SWRResponse<BigNumber> => {
   const { providerWeb3, account: sdkAccount } = useSDK();
   const mergedAccount = account ?? sdkAccount;

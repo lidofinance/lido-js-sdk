@@ -2,11 +2,14 @@ import { renderHook } from '@testing-library/react-hooks';
 import { act, fireEvent } from '@testing-library/react';
 import { useLidoSWRImmutable } from '../../src/hooks/useLidoSWRImmutable';
 
+import { ProviderWrapper as wrapper } from './testUtils';
+
 describe('useLidoSWRImmutable', () => {
   test('should fetch data', async () => {
     const expected = 1;
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLidoSWRImmutable('/data', () => expected),
+    const { result, waitForNextUpdate } = renderHook(
+      () => useLidoSWRImmutable('/data', () => expected),
+      { wrapper },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -16,8 +19,9 @@ describe('useLidoSWRImmutable', () => {
 
   test('should not update data on focus', async () => {
     const fetcher = jest.fn(() => 1);
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLidoSWRImmutable('/focus', fetcher, { dedupingInterval: 0 }),
+    const { result, waitForNextUpdate } = renderHook(
+      () => useLidoSWRImmutable('/focus', fetcher, { dedupingInterval: 0 }),
+      { wrapper },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -33,8 +37,9 @@ describe('useLidoSWRImmutable', () => {
 
   test('should not update data on reconnect', async () => {
     const fetcher = jest.fn(() => 1);
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLidoSWRImmutable('/reconnect', fetcher, { dedupingInterval: 0 }),
+    const { result, waitForNextUpdate } = renderHook(
+      () => useLidoSWRImmutable('/reconnect', fetcher, { dedupingInterval: 0 }),
+      { wrapper },
     );
 
     expect(result.current.data).toBeUndefined();

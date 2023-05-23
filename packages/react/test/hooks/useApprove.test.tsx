@@ -44,21 +44,35 @@ describe('useApprove', () => {
   });
 
   test('should return allowance', async () => {
-    const { result } = renderHook(() => useApprove(Zero, 'token', 'spender'));
+    const wrapper: FC = (props) => (
+      <ProviderWrapper providerWeb3={providerWeb3} {...props} />
+    );
+    const { result } = renderHook(() => useApprove(Zero, 'token', 'spender'), {
+      wrapper,
+    });
     expect(result.current.allowance).toBe(allowance);
   });
 
   test('should need approve', async () => {
-    const { result } = renderHook(() =>
-      useApprove(allowance.add(1), 'token', 'spender'),
+    const wrapper: FC = (props) => (
+      <ProviderWrapper providerWeb3={providerWeb3} {...props} />
     );
+    const { result } = renderHook(
+      () => useApprove(allowance.add(1), 'token', 'spender'),
+      { wrapper },
+    );
+
     expect(result.current.needsApprove).toBe(true);
   });
 
   test('should not need approve', async () => {
+    const wrapper: FC = (props) => (
+      <ProviderWrapper providerWeb3={providerWeb3} {...props} />
+    );
     [Zero, allowance.sub(1), allowance].forEach((amount) => {
-      const { result } = renderHook(() =>
-        useApprove(amount, 'token', 'spender'),
+      const { result } = renderHook(
+        () => useApprove(amount, 'token', 'spender'),
+        { wrapper },
       );
       expect(result.current.needsApprove).toBe(false);
     });
@@ -101,14 +115,24 @@ describe('useApprove', () => {
   });
 
   test('should inherit allowance errors', async () => {
+    const wrapper: FC = (props) => (
+      <ProviderWrapper providerWeb3={providerWeb3} {...props} />
+    );
     mockUseAllowance.mockReturnValue({ error: new Error() } as any);
-    const { result } = renderHook(() => useApprove(Zero, 'token', 'spender'));
+    const { result } = renderHook(() => useApprove(Zero, 'token', 'spender'), {
+      wrapper,
+    });
     expect(result.current.error).toBeInstanceOf(Error);
   });
 
   test('should inherit allowance loading', async () => {
+    const wrapper: FC = (props) => (
+      <ProviderWrapper providerWeb3={providerWeb3} {...props} />
+    );
     mockUseAllowance.mockReturnValue({ loading: true } as any);
-    const { result } = renderHook(() => useApprove(Zero, 'token', 'spender'));
+    const { result } = renderHook(() => useApprove(Zero, 'token', 'spender'), {
+      wrapper,
+    });
     expect(result.current.loading).toBe(true);
   });
 });

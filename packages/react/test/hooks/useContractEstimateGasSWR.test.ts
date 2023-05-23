@@ -1,13 +1,14 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useContractEstimateGasSWR } from '../../src/hooks/useContractEstimateGasSWR';
-
+import { ProviderWrapper as wrapper } from './testUtils';
 describe('useContractEstimateGasSWR', () => {
   test('should fetch data', async () => {
     const expected = 1;
     const contract = { estimateGas: { test: async () => expected } } as any;
 
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useContractEstimateGasSWR({ method: 'test', contract }),
+    const { result, waitForNextUpdate } = renderHook(
+      () => useContractEstimateGasSWR({ method: 'test', contract }),
+      { wrapper },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -20,12 +21,14 @@ describe('useContractEstimateGasSWR', () => {
     const mockMethod = jest.fn(() => expected);
     const contract = { estimateGas: { test: mockMethod } } as any;
 
-    const { result } = renderHook(() =>
-      useContractEstimateGasSWR({
-        shouldFetch: false,
-        method: 'test',
-        contract,
-      }),
+    const { result } = renderHook(
+      () =>
+        useContractEstimateGasSWR({
+          shouldFetch: false,
+          method: 'test',
+          contract,
+        }),
+      { wrapper },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -33,8 +36,9 @@ describe('useContractEstimateGasSWR', () => {
   });
 
   test('should not throw an error if contract is undefined', async () => {
-    const { result } = renderHook(() =>
-      useContractEstimateGasSWR({ method: 'test' }),
+    const { result } = renderHook(
+      () => useContractEstimateGasSWR({ method: 'test' }),
+      { wrapper },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -47,7 +51,7 @@ describe('useContractEstimateGasSWR', () => {
 
     const { result, rerender, waitForNextUpdate } = renderHook(
       ({ contract }) => useContractEstimateGasSWR({ method: 'test', contract }),
-      { initialProps: { contract: contractFirst } },
+      { initialProps: { contract: contractFirst }, wrapper },
     );
 
     expect(result.current.data).toBeUndefined();
