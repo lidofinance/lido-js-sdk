@@ -10,6 +10,6 @@ export const WITHDRAWAL_QUEUE_BY_NETWORK: {
 
 export const getWithdrawalQueueAddress = (chainId: CHAINS): string => {
   const address = WITHDRAWAL_QUEUE_BY_NETWORK[chainId];
-  invariant(address != null, 'Chain is not supported');
+  invariant(address, 'Chain is not supported');
   return address;
 };
