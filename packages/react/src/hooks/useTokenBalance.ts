@@ -7,6 +7,7 @@ import { useContractSWR } from './useContractSWR';
 import { SWRResponse } from './useLidoSWR';
 import { useSDK } from './useSDK';
 import { SWRConfiguration } from 'swr';
+import { useDebounceCallback } from './useDebounceCallback';
 
 export const useTokenBalance = (
   token: string,
@@ -31,24 +32,26 @@ export const useTokenBalance = (
     config,
   });
 
+  const updateBalanceDebounced = useDebounceCallback(result.update, 1000);
+
   useEffect(() => {
     if (!mergedAccount || !providerWeb3 || !contractWeb3) return;
-    const updateBalance = result.update;
+
     try {
       const fromMe = contractWeb3.filters.Transfer(mergedAccount, null);
       const toMe = contractWeb3.filters.Transfer(null, mergedAccount);
 
-      providerWeb3.on(fromMe, updateBalance);
-      providerWeb3.on(toMe, updateBalance);
+      providerWeb3.on(fromMe, updateBalanceDebounced);
+      providerWeb3.on(toMe, updateBalanceDebounced);
 
       return () => {
-        providerWeb3.off(fromMe, updateBalance);
-        providerWeb3.off(toMe, updateBalance);
+        providerWeb3.off(fromMe, updateBalanceDebounced);
+        providerWeb3.off(toMe, updateBalanceDebounced);
       };
     } catch (error) {
       return warning(false, 'Cannot subscribe to events');
     }
-  }, [providerWeb3, contractWeb3, mergedAccount, result.update]);
+  }, [providerWeb3, contractWeb3, mergedAccount, updateBalanceDebounced]);
 
   return result;
 };

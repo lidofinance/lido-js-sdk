@@ -5,6 +5,7 @@ import { useSDK } from './useSDK';
 import { useEthereumSWR } from './useEthereumSWR';
 import { SWRResponse } from './useLidoSWR';
 import { SWRConfiguration } from 'swr';
+import { useDebounceCallback } from './useDebounceCallback';
 
 export const useEthereumBalance = (
   account?: string,
@@ -20,19 +21,21 @@ export const useEthereumBalance = (
     config,
   });
 
+  const updateBalanceDebounced = useDebounceCallback(result.update, 1000);
+
   useEffect(() => {
     if (!mergedAccount || !providerWeb3) return;
 
     try {
-      providerWeb3.on('block', result.update);
+      providerWeb3.on('block', updateBalanceDebounced);
 
       return () => {
-        providerWeb3.off('block', result.update);
+        providerWeb3.off('block', updateBalanceDebounced);
       };
     } catch (error) {
       return warning(false, 'Cannot subscribe to Block event');
     }
-  }, [providerWeb3, mergedAccount, result.update]);
+  }, [providerWeb3, mergedAccount, updateBalanceDebounced]);
 
   return result;
 };

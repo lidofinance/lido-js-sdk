@@ -7,6 +7,7 @@ import { useContractSWR } from './useContractSWR';
 import { SWRResponse } from './useLidoSWR';
 import { useSDK } from './useSDK';
 import { SWRConfiguration } from 'swr';
+import { useDebounceCallback } from './useDebounceCallback';
 
 export const useTotalSupply = (
   token: string,
@@ -27,20 +28,21 @@ export const useTotalSupply = (
     config,
   });
 
+  const updateSupplyDebounced = useDebounceCallback(result.update, 1000);
+
   useEffect(() => {
     if (!providerWeb3 || !contractWeb3) return;
-    const updateTotal = result.update;
     try {
       const transfer = contractWeb3.filters.Transfer();
-      providerWeb3.on(transfer, updateTotal);
+      providerWeb3.on(transfer, updateSupplyDebounced);
 
       return () => {
-        providerWeb3.off(transfer, updateTotal);
+        providerWeb3.off(transfer, updateSupplyDebounced);
       };
     } catch (error) {
       return warning(false, 'Cannot subscribe to events');
     }
-  }, [providerWeb3, contractWeb3, result.update]);
+  }, [providerWeb3, contractWeb3, updateSupplyDebounced]);
 
   return result;
 };

@@ -3,7 +3,7 @@ import { SDKContext, SDKContextValue } from '../context';
 import invariant from 'tiny-invariant';
 
 export const useSDK = (): SDKContextValue => {
-  const r = useContext(SDKContext);
-  invariant(r, 'useSDK was used outside of SDKContext');
-  return r;
+  const contextValue = useContext(SDKContext);
+  invariant(contextValue, 'useSDK was used outside of SDKContext');
+  return contextValue;
 };
