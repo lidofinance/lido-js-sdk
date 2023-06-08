@@ -31,7 +31,8 @@ export interface SDKContextValue {
   onError: (error: unknown) => void;
 }
 
-export const SDKContext = createContext({} as SDKContextValue);
+export const SDKContext = createContext<SDKContextValue | null>(null);
+SDKContext.displayName = 'LidoSDKContext';
 
 const ProviderSDK: FC<SDKContextProps> = (props) => {
   const {
@@ -43,7 +44,7 @@ const ProviderSDK: FC<SDKContextProps> = (props) => {
     swrConfig,
   } = props;
 
-  invariant(chainId !== null, 'Chain is not supported');
+  invariant(chainId, 'invalid chainId');
   invariant(supportedChainIds?.length, 'Supported chains are required');
 
   const providerRpc = useMemo(() => {

@@ -1,1 +1,7 @@
-export { AggregatorAbi, Erc20Abi, StethAbi, WstethAbi } from './generated';
+export {
+  AggregatorAbi,
+  Erc20Abi,
+  StethAbi,
+  WstethAbi,
+  WithdrawalQueueAbi,
+} from './generated';

@@ -33,7 +33,10 @@ export type ConnectorsContextValue = {
 
 export type Connector = keyof ConnectorsContextValue;
 
-export const ConnectorsContext = createContext({} as ConnectorsContextValue);
+export const ConnectorsContext = createContext<ConnectorsContextValue | null>(
+  null,
+);
+ConnectorsContext.displayName = 'ConnectorsContext';
 
 const AutoConnect = (props: { connectors: ConnectorsContextValue }) => {
   useAutoConnect(props.connectors);

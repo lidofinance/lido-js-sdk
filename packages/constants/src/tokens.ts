@@ -26,21 +26,16 @@ export const TOKENS_BY_NETWORK: {
   [CHAINS.Goerli]: {
     [TOKENS.WSTETH]: '0x6320cD32aA674d2898A68ec82e869385Fc5f7E2f',
     [TOKENS.STETH]: '0x1643e812ae58766192cf7d2cf9567df2c37e9b7f',
-    [TOKENS.LDO]: '0xc3e39834c92c90463fab675a99def1bdd195fb04',
-  },
-  [CHAINS.Zhejiang]: {
-    [TOKENS.WSTETH]: '0x9E4e17458c8A7C51939ec0d4e3aA736Ce423FD12',
-    [TOKENS.STETH]: '0xDe82ADEd58dA35add75Ea4676239Ca169c8dCD15',
-    [TOKENS.LDO]: '0xadBFF2718dB9A76429848F31a724DdA6b8e8c8Cd',
+    [TOKENS.LDO]: '0x56340274fB5a72af1A3C6609061c451De7961Bd4',
   },
 };
 
 export const getTokenAddress = (chainId: CHAINS, token: TOKENS): string => {
   const tokens = TOKENS_BY_NETWORK[chainId];
-  invariant(tokens != null, 'Chain is not supported');
+  invariant(tokens, 'Chain is not supported');
 
   const address = tokens[token];
-  invariant(address != null, 'Token is not supported');
+  invariant(address, 'Token is not supported');
 
   return address;
 };

@@ -7,21 +7,25 @@ import {
   useSTETHContractRPC,
   useWSTETHContractRPC,
   useLDOContractRPC,
+  useWithdrawalQueueContractRPC,
   useSTETHContractWeb3,
   useWSTETHContractWeb3,
   useLDOContractWeb3,
+  useWithdrawalQueueContractWeb3,
 } from '../../src/factories/contracts';
 
 const hooksRpc = {
   useSTETHContractRPC,
   useWSTETHContractRPC,
   useLDOContractRPC,
+  useWithdrawalQueueContractRPC,
 };
 
 const hooksWeb3 = {
   useSTETHContractWeb3,
   useWSTETHContractWeb3,
   useLDOContractWeb3,
+  useWithdrawalQueueContractWeb3,
 };
 
 describe('web3 contracts', () => {

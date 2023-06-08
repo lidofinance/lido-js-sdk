@@ -21,7 +21,7 @@ export type SWRResponse<Data, Error = unknown> = {
 };
 
 export const useLidoSWR = <Data = unknown, Error = unknown>(
-  key: Key,
+  key: Key | null,
   fetcher: Fetcher<Data> | null,
   config?: SWRConfiguration<Data, Error>,
 ): SWRResponse<Data, Error> => {

@@ -57,30 +57,6 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      { "name": "_depositContract", "type": "address" },
-      { "name": "_oracle", "type": "address" },
-      { "name": "_operators", "type": "address" },
-      { "name": "_treasury", "type": "address" },
-      { "name": "_insuranceFund", "type": "address" }
-    ],
-    "name": "initialize",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getInsuranceFund",
-    "outputs": [{ "name": "", "type": "address" }],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [],
     "name": "totalSupply",
@@ -122,15 +98,6 @@
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "getOperators",
-    "outputs": [{ "name": "", "type": "address" }],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
     "inputs": [{ "name": "_script", "type": "bytes" }],
     "name": "getEVMScriptExecutor",
     "outputs": [{ "name": "", "type": "address" }],
@@ -160,6 +127,18 @@
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      { "name": "_lidoLocator", "type": "address" },
+      { "name": "_eip712StETH", "type": "address" }
+    ],
+    "name": "finalizeUpgrade_v2",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [],
     "name": "decimals",
@@ -180,17 +159,8 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "DEPOSIT_ROLE",
+    "name": "DOMAIN_SEPARATOR",
     "outputs": [{ "name": "", "type": "bytes32" }],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "DEPOSIT_SIZE",
-    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -202,6 +172,15 @@
     "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [{ "name": "_newDepositedValidators", "type": "uint256" }],
+    "name": "unsafeChangeDepositedValidators",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -246,19 +225,22 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "MANAGE_WITHDRAWAL_KEY",
-    "outputs": [{ "name": "", "type": "bytes32" }],
+    "name": "getBufferedEther",
+    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "getBufferedEther",
-    "outputs": [{ "name": "", "type": "uint256" }],
-    "payable": false,
-    "stateMutability": "view",
+    "constant": false,
+    "inputs": [
+      { "name": "_lidoLocator", "type": "address" },
+      { "name": "_eip712StETH", "type": "address" }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -268,24 +250,6 @@
     "outputs": [],
     "payable": true,
     "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getELRewardsWithdrawalLimit",
-    "outputs": [{ "name": "", "type": "uint256" }],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "SIGNATURE_LENGTH",
-    "outputs": [{ "name": "", "type": "uint256" }],
-    "payable": false,
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -307,27 +271,6 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [{ "name": "_limitPoints", "type": "uint16" }],
-    "name": "setELRewardsWithdrawalLimit",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      { "name": "_beaconValidators", "type": "uint256" },
-      { "name": "_beaconBalance", "type": "uint256" }
-    ],
-    "name": "handleOracleReport",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [],
     "name": "getStakeLimitFullInfo",
@@ -345,21 +288,16 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "SET_EL_REWARDS_WITHDRAWAL_LIMIT_ROLE",
-    "outputs": [{ "name": "", "type": "bytes32" }],
+    "constant": false,
+    "inputs": [
+      { "name": "_sender", "type": "address" },
+      { "name": "_recipient", "type": "address" },
+      { "name": "_sharesAmount", "type": "uint256" }
+    ],
+    "name": "transferSharesFrom",
+    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getELRewardsVault",
-    "outputs": [{ "name": "", "type": "address" }],
-    "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -394,21 +332,21 @@
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [],
+    "name": "receiveWithdrawals",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [{ "name": "_sharesAmount", "type": "uint256" }],
     "name": "getPooledEthByShares",
     "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [{ "name": "_executionLayerRewardsVault", "type": "address" }],
-    "name": "setELRewardsVault",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -422,9 +360,9 @@
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "MANAGE_PROTOCOL_CONTRACTS_ROLE",
-    "outputs": [{ "name": "", "type": "bytes32" }],
+    "inputs": [{ "name": "owner", "type": "address" }],
+    "name": "nonces",
+    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -450,32 +388,33 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "getInitializationBlock",
+    "name": "eip712Domain",
+    "outputs": [
+      { "name": "name", "type": "string" },
+      { "name": "version", "type": "string" },
+      { "name": "chainId", "type": "uint256" },
+      { "name": "verifyingContract", "type": "address" }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getContractVersion",
     "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      { "name": "_treasuryFeeBasisPoints", "type": "uint16" },
-      { "name": "_insuranceFeeBasisPoints", "type": "uint16" },
-      { "name": "_operatorsFeeBasisPoints", "type": "uint16" }
-    ],
-    "name": "setFeeDistribution",
-    "outputs": [],
+    "constant": true,
+    "inputs": [],
+    "name": "getInitializationBlock",
+    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [{ "name": "_feeBasisPoints", "type": "uint16" }],
-    "name": "setFee",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -486,15 +425,6 @@
     ],
     "name": "transferShares",
     "outputs": [{ "name": "", "type": "uint256" }],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [{ "name": "_maxDeposits", "type": "uint256" }],
-    "name": "depositBufferedEther",
-    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -511,15 +441,15 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "MANAGE_FEE",
-    "outputs": [{ "name": "", "type": "bytes32" }],
+    "name": "getEIP712StETH",
+    "outputs": [{ "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
     "constant": false,
-    "inputs": [{ "name": "_token", "type": "address" }],
+    "inputs": [{ "name": "", "type": "address" }],
     "name": "transferToVault",
     "outputs": [],
     "payable": false,
@@ -549,15 +479,6 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "WITHDRAWAL_CREDENTIALS_LENGTH",
-    "outputs": [{ "name": "", "type": "uint256" }],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       { "name": "_spender", "type": "address" },
@@ -579,24 +500,6 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "PUBKEY_LENGTH",
-    "outputs": [{ "name": "", "type": "uint256" }],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "SET_EL_REWARDS_VAULT_ROLE",
-    "outputs": [{ "name": "", "type": "bytes32" }],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       { "name": "_recipient", "type": "address" },
@@ -609,10 +512,23 @@
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      { "name": "_maxDepositsCount", "type": "uint256" },
+      { "name": "_stakingModuleId", "type": "uint256" },
+      { "name": "_depositCalldata", "type": "bytes" }
+    ],
+    "name": "deposit",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [],
-    "name": "getDepositContract",
-    "outputs": [{ "name": "", "type": "address" }],
+    "name": "UNSAFE_CHANGE_DEPOSITED_VALIDATORS_ROLE",
+    "outputs": [{ "name": "", "type": "bytes32" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -640,19 +556,29 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "BURN_ROLE",
-    "outputs": [{ "name": "", "type": "bytes32" }],
+    "constant": false,
+    "inputs": [
+      { "name": "_reportTimestamp", "type": "uint256" },
+      { "name": "_timeElapsed", "type": "uint256" },
+      { "name": "_clValidators", "type": "uint256" },
+      { "name": "_clBalance", "type": "uint256" },
+      { "name": "_withdrawalVaultBalance", "type": "uint256" },
+      { "name": "_elRewardsVaultBalance", "type": "uint256" },
+      { "name": "_sharesRequestedToBurn", "type": "uint256" },
+      { "name": "_withdrawalFinalizationBatches", "type": "uint256[]" },
+      { "name": "_simulatedShareRate", "type": "uint256" }
+    ],
+    "name": "handleOracleReport",
+    "outputs": [{ "name": "postRebaseAmounts", "type": "uint256[4]" }],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "constant": true,
     "inputs": [],
     "name": "getFee",
-    "outputs": [{ "name": "feeBasisPoints", "type": "uint16" }],
+    "outputs": [{ "name": "totalFee", "type": "uint16" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -673,6 +599,23 @@
     "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      { "name": "_owner", "type": "address" },
+      { "name": "_spender", "type": "address" },
+      { "name": "_value", "type": "uint256" },
+      { "name": "_deadline", "type": "uint256" },
+      { "name": "_v", "type": "uint8" },
+      { "name": "_r", "type": "bytes32" },
+      { "name": "_s", "type": "bytes32" }
+    ],
+    "name": "permit",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -697,25 +640,21 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      { "name": "_oracle", "type": "address" },
-      { "name": "_treasury", "type": "address" },
-      { "name": "_insuranceFund", "type": "address" }
-    ],
-    "name": "setProtocolContracts",
-    "outputs": [],
+    "constant": true,
+    "inputs": [],
+    "name": "getLidoLocator",
+    "outputs": [{ "name": "", "type": "address" }],
     "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [{ "name": "_withdrawalCredentials", "type": "bytes32" }],
-    "name": "setWithdrawalCredentials",
-    "outputs": [],
+    "constant": true,
+    "inputs": [],
+    "name": "canDeposit",
+    "outputs": [{ "name": "", "type": "bool" }],
     "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -728,24 +667,12 @@
     "type": "function"
   },
   {
-    "constant": false,
+    "constant": true,
     "inputs": [],
-    "name": "depositBufferedEther",
-    "outputs": [],
+    "name": "getDepositableEther",
+    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      { "name": "_account", "type": "address" },
-      { "name": "_sharesAmount", "type": "uint256" }
-    ],
-    "name": "burnShares",
-    "outputs": [{ "name": "newTotalShares", "type": "uint256" }],
-    "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -778,6 +705,120 @@
   { "payable": true, "stateMutability": "payable", "type": "fallback" },
   {
     "anonymous": false,
+    "inputs": [],
+    "name": "StakingPaused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "StakingResumed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": false, "name": "maxStakeLimit", "type": "uint256" },
+      {
+        "indexed": false,
+        "name": "stakeLimitIncreasePerBlock",
+        "type": "uint256"
+      }
+    ],
+    "name": "StakingLimitSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "StakingLimitRemoved",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "reportTimestamp", "type": "uint256" },
+      { "indexed": false, "name": "preCLValidators", "type": "uint256" },
+      { "indexed": false, "name": "postCLValidators", "type": "uint256" }
+    ],
+    "name": "CLValidatorsUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": false, "name": "depositedValidators", "type": "uint256" }
+    ],
+    "name": "DepositedValidatorsChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "reportTimestamp", "type": "uint256" },
+      { "indexed": false, "name": "preCLBalance", "type": "uint256" },
+      { "indexed": false, "name": "postCLBalance", "type": "uint256" },
+      { "indexed": false, "name": "withdrawalsWithdrawn", "type": "uint256" },
+      {
+        "indexed": false,
+        "name": "executionLayerRewardsWithdrawn",
+        "type": "uint256"
+      },
+      { "indexed": false, "name": "postBufferedEther", "type": "uint256" }
+    ],
+    "name": "ETHDistributed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "reportTimestamp", "type": "uint256" },
+      { "indexed": false, "name": "timeElapsed", "type": "uint256" },
+      { "indexed": false, "name": "preTotalShares", "type": "uint256" },
+      { "indexed": false, "name": "preTotalEther", "type": "uint256" },
+      { "indexed": false, "name": "postTotalShares", "type": "uint256" },
+      { "indexed": false, "name": "postTotalEther", "type": "uint256" },
+      { "indexed": false, "name": "sharesMintedAsFees", "type": "uint256" }
+    ],
+    "name": "TokenRebased",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{ "indexed": false, "name": "lidoLocator", "type": "address" }],
+    "name": "LidoLocatorSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{ "indexed": false, "name": "amount", "type": "uint256" }],
+    "name": "ELRewardsReceived",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{ "indexed": false, "name": "amount", "type": "uint256" }],
+    "name": "WithdrawalsReceived",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "sender", "type": "address" },
+      { "indexed": false, "name": "amount", "type": "uint256" },
+      { "indexed": false, "name": "referral", "type": "address" }
+    ],
+    "name": "Submitted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{ "indexed": false, "name": "amount", "type": "uint256" }],
+    "name": "Unbuffered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
     "inputs": [
       { "indexed": true, "name": "executor", "type": "address" },
       { "indexed": false, "name": "script", "type": "bytes" },
@@ -795,6 +836,12 @@
       { "indexed": false, "name": "amount", "type": "uint256" }
     ],
     "name": "RecoverToVault",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{ "indexed": false, "name": "eip712StETH", "type": "address" }],
+    "name": "EIP712StETHInitialized",
     "type": "event"
   },
   {
@@ -842,121 +889,8 @@
   },
   {
     "anonymous": false,
-    "inputs": [],
-    "name": "StakingPaused",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [],
-    "name": "StakingResumed",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      { "indexed": false, "name": "maxStakeLimit", "type": "uint256" },
-      {
-        "indexed": false,
-        "name": "stakeLimitIncreasePerBlock",
-        "type": "uint256"
-      }
-    ],
-    "name": "StakingLimitSet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [],
-    "name": "StakingLimitRemoved",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      { "indexed": false, "name": "oracle", "type": "address" },
-      { "indexed": false, "name": "treasury", "type": "address" },
-      { "indexed": false, "name": "insuranceFund", "type": "address" }
-    ],
-    "name": "ProtocolContactsSet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      { "indexed": false, "name": "feeBasisPoints", "type": "uint16" }
-    ],
-    "name": "FeeSet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      { "indexed": false, "name": "treasuryFeeBasisPoints", "type": "uint16" },
-      { "indexed": false, "name": "insuranceFeeBasisPoints", "type": "uint16" },
-      { "indexed": false, "name": "operatorsFeeBasisPoints", "type": "uint16" }
-    ],
-    "name": "FeeDistributionSet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [{ "indexed": false, "name": "amount", "type": "uint256" }],
-    "name": "ELRewardsReceived",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [{ "indexed": false, "name": "limitPoints", "type": "uint256" }],
-    "name": "ELRewardsWithdrawalLimitSet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      { "indexed": false, "name": "withdrawalCredentials", "type": "bytes32" }
-    ],
-    "name": "WithdrawalCredentialsSet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "executionLayerRewardsVault",
-        "type": "address"
-      }
-    ],
-    "name": "ELRewardsVaultSet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      { "indexed": true, "name": "sender", "type": "address" },
-      { "indexed": false, "name": "amount", "type": "uint256" },
-      { "indexed": false, "name": "referral", "type": "address" }
-    ],
-    "name": "Submitted",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      { "indexed": true, "name": "sender", "type": "address" },
-      { "indexed": false, "name": "tokenAmount", "type": "uint256" },
-      { "indexed": false, "name": "sentFromBuffer", "type": "uint256" },
-      { "indexed": true, "name": "pubkeyHash", "type": "bytes32" },
-      { "indexed": false, "name": "etherAmount", "type": "uint256" }
-    ],
-    "name": "Withdrawal",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [{ "indexed": false, "name": "amount", "type": "uint256" }],
-    "name": "Unbuffered",
+    "inputs": [{ "indexed": false, "name": "version", "type": "uint256" }],
+    "name": "ContractVersionSet",
     "type": "event"
   }
 ]
