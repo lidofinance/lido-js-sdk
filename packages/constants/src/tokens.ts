@@ -32,10 +32,10 @@ export const TOKENS_BY_NETWORK: {
 
 export const getTokenAddress = (chainId: CHAINS, token: TOKENS): string => {
   const tokens = TOKENS_BY_NETWORK[chainId];
-  invariant(tokens != null, 'Chain is not supported');
+  invariant(tokens, 'Chain is not supported');
 
   const address = tokens[token];
-  invariant(address != null, 'Token is not supported');
+  invariant(address, 'Token is not supported');
 
   return address;
 };

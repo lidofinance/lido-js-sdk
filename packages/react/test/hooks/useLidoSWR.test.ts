@@ -1,11 +1,15 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useLidoSWR } from '../../src/hooks/useLidoSWR';
 
+import { ProviderWrapper } from './testUtils';
+
 describe('useLidoSWR', () => {
+  const wrapper = ProviderWrapper;
   test('should fetch data', async () => {
     const expected = 1;
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLidoSWR('/data', () => expected),
+    const { result, waitForNextUpdate } = renderHook(
+      () => useLidoSWR('/data', () => expected),
+      { wrapper },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -16,8 +20,9 @@ describe('useLidoSWR', () => {
   test('should update data correctly', async () => {
     const expected = 1;
     const mockFetcher = jest.fn(() => expected);
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLidoSWR('/update', mockFetcher),
+    const { result, waitForNextUpdate } = renderHook(
+      () => useLidoSWR('/update', mockFetcher),
+      { wrapper },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -33,8 +38,9 @@ describe('useLidoSWR', () => {
   });
 
   test('should set loading', async () => {
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLidoSWR('/loading', () => 1),
+    const { result, waitForNextUpdate } = renderHook(
+      () => useLidoSWR('/loading', () => 1),
+      { wrapper },
     );
 
     expect(result.current.loading).toBe(true);
@@ -43,8 +49,9 @@ describe('useLidoSWR', () => {
   });
 
   test('should set initial loading', async () => {
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLidoSWR('/initial', () => 1),
+    const { result, waitForNextUpdate } = renderHook(
+      () => useLidoSWR('/initial', () => 1),
+      { wrapper },
     );
 
     expect(result.current.initialLoading).toBe(true);
@@ -53,10 +60,12 @@ describe('useLidoSWR', () => {
   });
 
   test('should catch an error', async () => {
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLidoSWR('/error', async () => {
-        throw new Error();
-      }),
+    const { result, waitForNextUpdate } = renderHook(
+      () =>
+        useLidoSWR('/error', async () => {
+          throw new Error();
+        }),
+      { wrapper },
     );
 
     expect(result.current.error).toBeUndefined();

@@ -8,8 +8,9 @@ describe('useEthereumSWR', () => {
     const expected = 1;
     const providerRpc = { getGasPrice: async () => expected } as any;
 
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useEthereumSWR({ method: 'getGasPrice', providerRpc }),
+    const { result, waitForNextUpdate } = renderHook(
+      () => useEthereumSWR({ method: 'getGasPrice', providerRpc }),
+      { wrapper: ProviderWrapper },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -22,12 +23,14 @@ describe('useEthereumSWR', () => {
     const mockMethod = jest.fn(() => expected);
     const providerRpc = { getGasPrice: mockMethod } as any;
 
-    const { result } = renderHook(() =>
-      useEthereumSWR({
-        shouldFetch: false,
-        method: 'getGasPrice',
-        providerRpc,
-      }),
+    const { result } = renderHook(
+      () =>
+        useEthereumSWR({
+          shouldFetch: false,
+          method: 'getGasPrice',
+          providerRpc,
+        }),
+      { wrapper: ProviderWrapper },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -41,7 +44,10 @@ describe('useEthereumSWR', () => {
     const { result, rerender, waitForNextUpdate } = renderHook(
       ({ providerRpc }) =>
         useEthereumSWR({ method: 'getGasPrice', providerRpc }),
-      { initialProps: { providerRpc: providerFirst } },
+      {
+        initialProps: { providerRpc: providerFirst },
+        wrapper: ProviderWrapper,
+      },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -60,8 +66,9 @@ describe('useEthereumSWR', () => {
     const mockMethod = jest.fn(() => expected);
     const providerRpc = { getGasPrice: mockMethod } as any;
 
-    const { result, rerender, waitForNextUpdate } = renderHook(() =>
-      useEthereumSWR({ method: 'getGasPrice', providerRpc }),
+    const { result, rerender, waitForNextUpdate } = renderHook(
+      () => useEthereumSWR({ method: 'getGasPrice', providerRpc }),
+      { wrapper: ProviderWrapper },
     );
 
     expect(result.current.data).toBeUndefined();

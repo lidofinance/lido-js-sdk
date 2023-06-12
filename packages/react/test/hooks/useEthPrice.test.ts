@@ -4,6 +4,7 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import { BigNumber } from '@ethersproject/bignumber';
 import { getAggregatorContract } from '@lido-sdk/contracts';
 import { useEthPrice } from '../../src/hooks/useEthPrice';
+import { ProviderWrapper as wrapper } from './testUtils';
 
 const mockGetter = getAggregatorContract as jest.MockedFunction<
   typeof getAggregatorContract
@@ -38,11 +39,13 @@ describe('useEthPrice', () => {
   });
 
   test('should fetch data', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useEthPrice());
+    const { result, waitForNextUpdate } = renderHook(() => useEthPrice().data, {
+      wrapper,
+    });
 
-    expect(result.current.data).toBeUndefined();
+    expect(result.current).toBeUndefined();
     await waitForNextUpdate();
-    expect(result.current.data).toBe(expected);
+    expect(result.current).toBe(expected);
   });
 
   test('should update', async () => {
@@ -53,7 +56,15 @@ describe('useEthPrice', () => {
       Promise.resolve(convertToBig(expectedFirst, decimals)),
     );
 
-    const { result, waitForNextUpdate } = renderHook(() => useEthPrice());
+    const { result, waitForNextUpdate } = renderHook(
+      () => {
+        const { data, update } = useEthPrice();
+        return { data, update };
+      },
+      {
+        wrapper,
+      },
+    );
 
     expect(result.current.data).toBeUndefined();
     await waitForNextUpdate();
@@ -70,19 +81,29 @@ describe('useEthPrice', () => {
   });
 
   test('should set loading', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useEthPrice());
+    const { result, waitForNextUpdate } = renderHook(
+      () => useEthPrice().loading,
+      {
+        wrapper,
+      },
+    );
 
-    expect(result.current.loading).toBe(true);
+    expect(result.current).toBe(true);
     await waitForNextUpdate();
-    expect(result.current.loading).toBe(false);
+    expect(result.current).toBe(false);
   });
 
   test('should set initial loading', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useEthPrice());
+    const { result, waitForNextUpdate } = renderHook(
+      () => useEthPrice().initialLoading,
+      {
+        wrapper,
+      },
+    );
 
-    expect(result.current.initialLoading).toBe(true);
+    expect(result.current).toBe(true);
     await waitForNextUpdate();
-    expect(result.current.initialLoading).toBe(false);
+    expect(result.current).toBe(false);
   });
 
   test('should catch an error', async () => {
@@ -93,7 +114,9 @@ describe('useEthPrice', () => {
       latestAnswer: mockLatestAnswer,
     } as any);
 
-    const { result, waitForNextUpdate } = renderHook(() => useEthPrice());
+    const { result, waitForNextUpdate } = renderHook(() => useEthPrice(), {
+      wrapper,
+    });
 
     expect(result.current.error).toBeUndefined();
     await waitForNextUpdate();

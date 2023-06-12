@@ -43,7 +43,7 @@
     "@web3-react/walletlink-connector": "6.2.14",
     "tiny-invariant": "^1.1.0",
     "tiny-warning": "^1.0.3",
-    "ua-parser-js": "1.0.2",
+    "ua-parser-js": "1.0.33",
     "web3-ledgerhq-connector": "^1.2.3",
     "web3-ledgerhq-frame-connector": "^1.0.1"
   },

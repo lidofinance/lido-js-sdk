@@ -216,8 +216,9 @@ describe('useFeeHistory', () => {
   });
 
   test('should fetch data', async () => {
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useFeeHistory({ providerRpc, blocks: 2 }),
+    const { result, waitForNextUpdate } = renderHook(
+      () => useFeeHistory({ providerRpc, blocks: 2 }),
+      { wrapper: ProviderWrapper },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -226,8 +227,9 @@ describe('useFeeHistory', () => {
   });
 
   test('should not fetch', async () => {
-    const { result } = renderHook(() =>
-      useFeeHistory({ shouldFetch: false, providerRpc }),
+    const { result } = renderHook(
+      () => useFeeHistory({ shouldFetch: false, providerRpc }),
+      { wrapper: ProviderWrapper },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -235,8 +237,9 @@ describe('useFeeHistory', () => {
   });
 
   test('should not update on rerender', async () => {
-    const { result, rerender, waitForNextUpdate } = renderHook(() =>
-      useFeeHistory({ providerRpc, blocks: 2 }),
+    const { result, rerender, waitForNextUpdate } = renderHook(
+      () => useFeeHistory({ providerRpc, blocks: 2 }),
+      { wrapper: ProviderWrapper },
     );
 
     expect(result.current.data).toBeUndefined();
@@ -251,27 +254,26 @@ describe('useFeeHistory', () => {
 
   test('should use cache', async () => {
     const { result, rerender, waitForNextUpdate } = renderHook(
-      ({ providerRpc }) => useFeeHistory({ providerRpc, blocks: 2 }),
-      { initialProps: { providerRpc } },
+      () => useFeeHistory({ blocks: 2 }).data,
+      { initialProps: { providerRpc }, wrapper: ProviderWrapper },
     );
 
-    expect(result.current.data).toBeUndefined();
+    expect(result.current).toBeUndefined();
     await waitForNextUpdate();
-    expect(result.current.data).toEqual(historyResult);
+    expect(result.current).toEqual(historyResult);
     expect(mockSend).toBeCalledTimes(1);
 
     act(() => rerender({ providerRpc: { ...providerRpc } }));
-
-    expect(result.current.data).toBeUndefined();
+    expect(result.current).toBeUndefined();
     await waitForNextUpdate();
-    expect(result.current.data).toEqual(historyResult);
+    expect(result.current).toEqual(historyResult);
     expect(mockSend).toBeCalledTimes(1);
   });
 
   test('should merge new history with cached', async () => {
     const { result, rerender, waitForNextUpdate } = renderHook(
-      ({ providerRpc }) => useFeeHistory({ providerRpc, blocks: 3 }),
-      { initialProps: { providerRpc } },
+      () => useFeeHistory({ blocks: 3 }),
+      { initialProps: { providerRpc }, wrapper: ProviderWrapper },
     );
 
     expect(result.current.data).toBeUndefined();

@@ -50,7 +50,7 @@ const wrapper: FC = (props) => (
 
 describe('useConnectors', () => {
   test('should work', async () => {
-    const { result } = renderHook(() => useConnectors());
+    const { result } = renderHook(() => useConnectors(), { wrapper });
 
     expect(result.error).toBeUndefined();
     expect(result.current).toBeInstanceOf(Object);
