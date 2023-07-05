@@ -13,6 +13,8 @@ It uses [TypeChain](https://github.com/ethereum-ts/TypeChain) under the hood to 
   - [getWSTETHContract](#getwstethcontract)
   - [getSTETHContract](#getstethcontract)
   - [getLDOContract](#getldocontract)
+  - [getWithdrawalQueueContract](#getwithdrawalqueuecontract)
+  - [getAggregatorContract](#getaggregatorcontract)
 - [Cache](#cache)
 
 ## Install
@@ -54,6 +56,10 @@ Returns an instance of `Contract` based on wstETH contract [ABI](https://docs.et
 ### getSTETHContract
 
 Returns an instance of `Contract` based on stETH contract [ABI](https://docs.ethers.io/v5/api/utils/abi/). Available contract methods and detailed documentation can be found here: https://docs.lido.fi/contracts/lido
+
+### getLDOContract
+
+Returns an instance of `Contract` based on LDO token [ABI](https://docs.ethers.io/v5/api/utils/abi/). LDO Token docs can be found here: https://docs.lido.fi/lido-dao/#ldo-token
 
 ### getWithdrawalQueueContract
 
