@@ -1,3 +1,7 @@
+# ⚠️ Important Notice ⚠️
+
+📦 Package Deprecation: This package has been marked as deprecated and will be maintained as part of [reef-knot library](https://github.com/lidofinance/reef-knot/tree/main/packages/web3-react).
+
 # Web3 react helpers
 
 Web3 react helpers for Lido Finance projects.

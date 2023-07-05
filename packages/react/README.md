@@ -61,7 +61,7 @@ const { useContractRPC, useContractWeb3 } = contractHooksFactory(
 );
 ```
 
-Package `@lido-sdk/react` exports hooks for `WSTETH`, `STETH` and `LDO` contracts:
+Package `@lido-sdk/react` exports hooks for `WSTETH`, `STETH`, `LDO` and `WithdrawalQueue` contracts:
 
 ```ts
 useWSTETHContractRPC();
@@ -76,6 +76,11 @@ useSTETHContractWeb3();
 ```ts
 useLDOContractRPC();
 useLDOContractWeb3();
+```
+
+```ts
+useWithdrawalQueueContractRPC();
+useWithdrawalQueueContractWeb3();
 ```
 
 ### ERC20 hooks factory
@@ -165,6 +170,10 @@ const App = ({ children }) => {
 };
 ```
 
+### Hooks
+
+All request hooks accept SWR config as optional last argument.
+
 ### useTotalSupply
 
 ```tsx
@@ -172,7 +181,7 @@ import { useTotalSupply } from '@lido-sdk/react';
 
 const Component = () => {
   const token = 'token address';
-  const { data, loading } = useTotalSupply(token);
+  const { data, loading } = useTotalSupply(token, { isPaused: !token });
   const totalSupply = data?.toString();
 
   return <div>{loading ? 'loading...' : totalSupply}</div>;
