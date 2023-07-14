@@ -13,6 +13,8 @@ Part of [Lido JS SDK](https://github.com/lidofinance/lido-js-sdk/#readme)
   - [getTokenAddress](#gettokenaddress)
 - [Aggregator](#aggregator)
   - [getAggregatorAddress](#getaggregatoraddress)
+- [WithdrawalQueue](#withdrawalqueue)
+  - [getWithdrawalQueueAddress](#getWithdrawalQueueAddress)
 
 ## Install
 
@@ -90,4 +92,17 @@ import { CHAINS, getAggregatorAddress } from '@lido-sdk/constants';
 
 const aggregatorAddress = getAggregatorAddress(CHAINS.Mainnet);
 console.log(aggregatorAddress); // 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419
+```
+
+## WithdrawalQueue
+
+WithdrawalQueue contract for LIDO protocol
+
+### getWithdrawalQueueAddress
+
+```ts
+import { CHAINS, getWithdrawalQueueAddress } from '@lido-sdk/constants';
+
+const withdrawalQueueAddress = getWithdrawalQueueAddress(CHAINS.Mainnet);
+console.log(withdrawalQueueAddress); // 0x889edC2eDab5f40e902b864aD4d7AdE8E412F9B1
 ```
