@@ -13,6 +13,8 @@ It uses [TypeChain](https://github.com/ethereum-ts/TypeChain) under the hood to 
   - [getWSTETHContract](#getwstethcontract)
   - [getSTETHContract](#getstethcontract)
   - [getLDOContract](#getldocontract)
+  - [getWithdrawalQueueContract](#getwithdrawalqueuecontract)
+  - [getAggregatorContract](#getaggregatorcontract)
 - [Cache](#cache)
 
 ## Install
@@ -58,6 +60,14 @@ Returns an instance of `Contract` based on stETH contract [ABI](https://docs.eth
 ### getLDOContract
 
 Returns an instance of `Contract` based on LDO token [ABI](https://docs.ethers.io/v5/api/utils/abi/). LDO Token docs can be found here: https://docs.lido.fi/lido-dao/#ldo-token
+
+### getWithdrawalQueueContract
+
+Returns an instance of `Contract` based on WithdrawalQueue contract [ABI](https://docs.ethers.io/v5/api/utils/abi/). Contract docs here: https://docs.lido.fi/contracts/withdrawal-queue-erc721
+
+### getAggregatorContract
+
+Returns an instance of `Contract` based on ChainLink USD/ETH price oracle [ABI](https://docs.ethers.io/v5/api/utils/abi/). EACAggregatorProxy https://etherscan.io/address/0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419
 
 ## Cache
 
