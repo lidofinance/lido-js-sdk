@@ -28,6 +28,11 @@ export const TOKENS_BY_NETWORK: {
     [TOKENS.STETH]: '0x1643e812ae58766192cf7d2cf9567df2c37e9b7f',
     [TOKENS.LDO]: '0x56340274fB5a72af1A3C6609061c451De7961Bd4',
   },
+  [CHAINS.Holesky]: {
+    [TOKENS.WSTETH]: '0xHOLESKY_TODO',
+    [TOKENS.STETH]: '0xHOLESKY_TODO',
+    [TOKENS.LDO]: '0xHOLESKY_TODO',
+  },
 };
 
 export const getTokenAddress = (chainId: CHAINS, token: TOKENS): string => {
