@@ -14,10 +14,10 @@ export const ETHERSCAN_PREFIX_BY_NETWORK: {
 } = {
   [CHAINS.Mainnet]: '',
   [CHAINS.Ropsten]: 'ropsten.',
-  [CHAINS.Holesky]: '0xHOLESKY_TODO',
   [CHAINS.Rinkeby]: 'rinkeby.',
   [CHAINS.Goerli]: 'goerli.',
   [CHAINS.Kovan]: 'kovan.',
+  [CHAINS.Holesky]: 'holesky.',
 };
 
 export const getEtherscanPrefix = (chainId: CHAINS): string => {
