@@ -31,7 +31,7 @@ yarn add @lido-sdk/constants
 ```ts
 import { CHAINS } from '@lido-sdk/constants';
 
-console.log(CHAINS.Mainnet, CHAINS.Goerli); // 1, 5
+console.log(CHAINS.Mainnet, CHAINS.Holesky); // 1, 17000
 ```
 
 ### Array of chains ids
