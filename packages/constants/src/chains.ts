@@ -2,12 +2,13 @@ import invariant from 'tiny-invariant';
 
 export enum CHAINS {
   Mainnet = 1,
-  Ropsten = 3,
-  Rinkeby = 4,
-  Goerli = 5,
-  Kovan = 42,
-  Kintsugi = 1337702,
-  Kiln = 1337802,
+  Ropsten = 3, // decommissioned
+  Rinkeby = 4, // decommissioned
+  Goerli = 5, // deprecated
+  Kovan = 42, // decommissioned
+  Kintsugi = 1337702, // decommissioned
+  Kiln = 1337802, // decommissioned
+  Holesky = 17000,
   Moonbeam = 1284,
   Moonriver = 1285,
   Moonbase = 1287,

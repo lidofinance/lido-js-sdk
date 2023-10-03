@@ -28,6 +28,11 @@ export const TOKENS_BY_NETWORK: {
     [TOKENS.STETH]: '0x1643e812ae58766192cf7d2cf9567df2c37e9b7f',
     [TOKENS.LDO]: '0x56340274fB5a72af1A3C6609061c451De7961Bd4',
   },
+  [CHAINS.Holesky]: {
+    [TOKENS.WSTETH]: '0x8d09a4502Cc8Cf1547aD300E066060D043f6982D',
+    [TOKENS.STETH]: '0x3F1c547b21f65e10480dE3ad8E19fAAC46C95034',
+    [TOKENS.LDO]: '0x14ae7daeecdf57034f3E9db8564e46Dba8D97344',
+  },
 };
 
 export const getTokenAddress = (chainId: CHAINS, token: TOKENS): string => {
