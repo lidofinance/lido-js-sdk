@@ -34,7 +34,7 @@ export const CHAINS_COLORS: {
   [CHAINS.Ropsten]: '#ff4a8d',
   [CHAINS.Rinkeby]: '#f6c343',
   [CHAINS.Goerli]: '#3099f2',
-  [CHAINS.Holesky]: '#AA336A',
+  [CHAINS.Holesky]: '#AA346A',
   [CHAINS.Kovan]: '#9064ff',
 };
 
