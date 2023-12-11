@@ -11,6 +11,7 @@ import {
   useTotalSupply,
   useApprove,
 } from '../hooks';
+import { SWRConfiguration } from 'swr';
 
 export const hooksFactory = (
   getTokenAddress: (chainId: CHAINS) => string,
@@ -26,25 +27,25 @@ export const hooksFactory = (
   ) => UseApproveResponse;
 } => {
   return {
-    useTokenBalance: () => {
+    useTokenBalance: (config?: SWRConfiguration<BigNumber>) => {
       const { chainId } = useSDK();
       const tokenAddress = getTokenAddress(chainId);
-      return useTokenBalance(tokenAddress);
+      return useTokenBalance(tokenAddress, undefined, config);
     },
-    useTotalSupply: () => {
+    useTotalSupply: (config?: SWRConfiguration<BigNumber>) => {
       const { chainId } = useSDK();
       const tokenAddress = getTokenAddress(chainId);
-      return useTotalSupply(tokenAddress);
+      return useTotalSupply(tokenAddress, config);
     },
-    useDecimals: () => {
+    useDecimals: (config?: SWRConfiguration<number>) => {
       const { chainId } = useSDK();
       const tokenAddress = getTokenAddress(chainId);
-      return useDecimals(tokenAddress);
+      return useDecimals(tokenAddress, config);
     },
-    useAllowance: (spender: string) => {
+    useAllowance: (spender: string, config?: SWRConfiguration<BigNumber>) => {
       const { chainId } = useSDK();
       const tokenAddress = getTokenAddress(chainId);
-      return useAllowance(tokenAddress, spender);
+      return useAllowance(tokenAddress, spender, undefined, config);
     },
     useApprove: (
       amount: BigNumber,

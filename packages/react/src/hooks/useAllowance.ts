@@ -7,11 +7,13 @@ import { useContractSWR } from './useContractSWR';
 import { SWRResponse } from './useLidoSWR';
 import { useSDK } from './useSDK';
 import { useDebounceCallback } from './useDebounceCallback';
+import type { SWRConfiguration } from 'swr';
 
 export const useAllowance = (
   token: string,
   spender: string,
   owner?: string,
+  config?: SWRConfiguration<BigNumber>,
 ): SWRResponse<BigNumber> => {
   const { providerRpc, providerWeb3, account } = useSDK();
   const mergedOwner = owner ?? account;
@@ -29,6 +31,7 @@ export const useAllowance = (
     contract: contractRpc,
     method: 'allowance',
     params: [mergedOwner, spender],
+    config,
   });
 
   const updateAllowanceDebounced = useDebounceCallback(result.update, 1000);
