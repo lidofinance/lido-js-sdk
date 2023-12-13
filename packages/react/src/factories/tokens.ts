@@ -16,10 +16,17 @@ import { SWRConfiguration } from 'swr';
 export const hooksFactory = (
   getTokenAddress: (chainId: CHAINS) => string,
 ): {
-  useTokenBalance: () => SWRResponse<BigNumber>;
-  useTotalSupply: () => SWRResponse<BigNumber>;
-  useDecimals: () => SWRResponse<number>;
-  useAllowance: (spender: string) => SWRResponse<BigNumber>;
+  useTokenBalance: (
+    config?: SWRConfiguration<BigNumber>,
+  ) => SWRResponse<BigNumber>;
+  useTotalSupply: (
+    config?: SWRConfiguration<BigNumber>,
+  ) => SWRResponse<BigNumber>;
+  useDecimals: (config?: SWRConfiguration<number>) => SWRResponse<number>;
+  useAllowance: (
+    spender: string,
+    config?: SWRConfiguration<BigNumber>,
+  ) => SWRResponse<BigNumber>;
   useApprove: (
     amount: BigNumber,
     spender: string,
@@ -27,31 +34,27 @@ export const hooksFactory = (
   ) => UseApproveResponse;
 } => {
   return {
-    useTokenBalance: (config?: SWRConfiguration<BigNumber>) => {
+    useTokenBalance: (config) => {
       const { chainId } = useSDK();
       const tokenAddress = getTokenAddress(chainId);
       return useTokenBalance(tokenAddress, undefined, config);
     },
-    useTotalSupply: (config?: SWRConfiguration<BigNumber>) => {
+    useTotalSupply: (config) => {
       const { chainId } = useSDK();
       const tokenAddress = getTokenAddress(chainId);
       return useTotalSupply(tokenAddress, config);
     },
-    useDecimals: (config?: SWRConfiguration<number>) => {
+    useDecimals: (config) => {
       const { chainId } = useSDK();
       const tokenAddress = getTokenAddress(chainId);
       return useDecimals(tokenAddress, config);
     },
-    useAllowance: (spender: string, config?: SWRConfiguration<BigNumber>) => {
+    useAllowance: (spender, config) => {
       const { chainId } = useSDK();
       const tokenAddress = getTokenAddress(chainId);
       return useAllowance(tokenAddress, spender, undefined, config);
     },
-    useApprove: (
-      amount: BigNumber,
-      spender: string,
-      wrapper?: UseApproveWrapper,
-    ) => {
+    useApprove: (amount, spender, wrapper) => {
       const { chainId, account } = useSDK();
       const tokenAddress = getTokenAddress(chainId);
       return useApprove(amount, tokenAddress, spender, account, wrapper);
