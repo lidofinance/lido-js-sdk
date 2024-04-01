@@ -17,6 +17,8 @@ export const getInfuraRPCUrl = (chainId: CHAINS, apiKey: string): string => {
       return `https://kovan.infura.io/v3/${apiKey}`;
     case CHAINS.Holesky:
       return `https://holesky.infura.io/v3/${apiKey}`;
+    case CHAINS.Sepolia:
+      return `https://sepolia.infura.io/v3/${apiKey}`;
     default:
       invariant(false, 'Chain is not supported');
   }
@@ -38,6 +40,8 @@ export const getAlchemyRPCUrl = (chainId: CHAINS, apiKey: string): string => {
       return `https://eth-kovan.alchemyapi.io/v2/${apiKey}`;
     case CHAINS.Holesky:
       return `https://eth-holesky.alchemyapi.io/v2/${apiKey}`;
+    case CHAINS.Sepolia:
+      return `https://eth-sepolia.g.alchemy.com/v2/${apiKey}`;
     default:
       invariant(false, 'Chain is not supported');
   }

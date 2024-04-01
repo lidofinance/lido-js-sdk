@@ -16,6 +16,7 @@ export enum CHAINS {
   Optimism = 10,
   Fuji = 43113,
   Avalanche = 43114,
+  Sepolia = 11155111,
 }
 
 export const CHAINS_IDS = [
@@ -25,6 +26,7 @@ export const CHAINS_IDS = [
   CHAINS.Rinkeby,
   CHAINS.Goerli,
   CHAINS.Kovan,
+  CHAINS.Sepolia,
 ];
 
 export const CHAINS_COLORS: {
@@ -36,6 +38,7 @@ export const CHAINS_COLORS: {
   [CHAINS.Goerli]: '#3099f2',
   [CHAINS.Holesky]: '#AA346A',
   [CHAINS.Kovan]: '#9064ff',
+  [CHAINS.Sepolia]: '#FFD700',
 };
 
 export const getChainColor = (chainId: CHAINS): string => {
