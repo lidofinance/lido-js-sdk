@@ -1,3 +1,8 @@
+# ⚠️DEPRECATION WARNING⚠️
+
+This project is being slowly deprecated and may not receive further updates.
+Check out [modern Lido SDK](https://github.com/lidofinance/lido-ethereum-sdk/pulls) to access latest functionality. It is actively maintained and is built for interacting with Lido Protocol.
+
 # Providers
 
 Providers for Lido Finance projects.
