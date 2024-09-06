@@ -60,5 +60,6 @@
     "./**/*.{ts,tsx,js,jsx,md,json}": [
       "prettier --write"
     ]
-  }
+  },
+  "packageManager": "yarn@3.8.5"
 }
