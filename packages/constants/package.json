@@ -23,7 +23,8 @@
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "workspaces-update": false
   },
   "devDependencies": {
     "@types/jest": "^27.0.2"
