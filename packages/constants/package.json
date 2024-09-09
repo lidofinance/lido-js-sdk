@@ -21,11 +21,6 @@
     "lido-js-sdk",
     "lidofinance"
   ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public",
-    "workspaces-update": false
-  },
   "devDependencies": {
     "@types/jest": "^27.0.2"
   },

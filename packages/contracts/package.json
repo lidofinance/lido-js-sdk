@@ -24,11 +24,6 @@
   "scripts": {
     "typechain": "typechain --target=ethers-v5 --out-dir ./src/generated './src/abi/*.json'"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public",
-    "workspaces-update": false
-  },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.1",
     "@ethersproject/abstract-signer": "^5.4.0",
