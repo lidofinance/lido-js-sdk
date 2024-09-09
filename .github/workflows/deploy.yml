@@ -33,12 +33,10 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
           echo "workspaces-update=false" >> .npmrc
-          echo "provenance=true" >> .npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish to NPM
         env:
-          NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: yarn multi-semantic-release --deps.bump=override --deps.release=patch --sequential-init
