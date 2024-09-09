@@ -29,6 +29,12 @@ jobs:
         run: yarn build
       - name: Run tests
         run: yarn test
+      - name: Setup .npmrc
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+          echo "workspaces-update=false" >> .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish to NPM
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

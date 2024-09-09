@@ -21,13 +21,12 @@
     "lido-js-sdk",
     "lidofinance"
   ],
-  "scripts": {
-    "typechain": "typechain --target=ethers-v5 --out-dir ./src/generated './src/abi/*.json'"
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public",
-    "workspaces-update": false
+    "access": "public"
+  },
+  "scripts": {
+    "typechain": "typechain --target=ethers-v5 --out-dir ./src/generated './src/abi/*.json'"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.1",
