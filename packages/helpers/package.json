@@ -23,7 +23,8 @@
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "workspaces-update": false
   },
   "devDependencies": {
     "@ethersproject/bignumber": "^5.4.2",

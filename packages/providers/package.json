@@ -23,7 +23,8 @@
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "workspaces-update": false
   },
   "devDependencies": {
     "@ethersproject/logger": "^5.4.0",
