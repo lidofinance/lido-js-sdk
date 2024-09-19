@@ -38,6 +38,11 @@ export const TOKENS_BY_NETWORK: {
     [TOKENS.STETH]: '0x3e3FE7dBc6B4C189E7128855dD526361c49b40Af',
     [TOKENS.LDO]: '0xd06dF83b8ad6D89C86a187fba4Eae918d497BdCB',
   },
+  [CHAINS.OptimismSepolia]: {
+    [TOKENS.WSTETH]: '0x24B47cd3A74f1799b32B2de11073764Cb1bb318B',
+    [TOKENS.STETH]: '0xf49d208b5c7b10415c7beafe9e656f2df9edfe3b',
+    [TOKENS.LDO]: undefined,
+  },
 };
 
 export const getTokenAddress = (chainId: CHAINS, token: TOKENS): string => {
