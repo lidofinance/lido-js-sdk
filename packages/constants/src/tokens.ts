@@ -8,7 +8,7 @@ export enum TOKENS {
 }
 
 export const TOKENS_BY_NETWORK: {
-  [key in CHAINS]?: { [key in TOKENS]?: string };
+  [key in CHAINS]?: { [key in TOKENS]?: string | null };
 } = {
   [CHAINS.Mainnet]: {
     [TOKENS.WSTETH]: '0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0',
@@ -41,16 +41,19 @@ export const TOKENS_BY_NETWORK: {
   [CHAINS.OptimismSepolia]: {
     [TOKENS.WSTETH]: '0x24B47cd3A74f1799b32B2de11073764Cb1bb318B',
     [TOKENS.STETH]: '0xf49d208b5c7b10415c7beafe9e656f2df9edfe3b',
-    [TOKENS.LDO]: undefined,
+    [TOKENS.LDO]: null,
   },
 };
 
-export const getTokenAddress = (chainId: CHAINS, token: TOKENS): string => {
+export const getTokenAddress = (
+  chainId: CHAINS,
+  token: TOKENS,
+): string | null => {
   const tokens = TOKENS_BY_NETWORK[chainId];
   invariant(tokens, 'Chain is not supported');
 
   const address = tokens[token];
-  invariant(address, 'Token is not supported');
+  invariant(address !== undefined, 'Token is not supported');
 
   return address;
 };
