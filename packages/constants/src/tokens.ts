@@ -49,7 +49,7 @@ export const L2_TOKENS_BY_NETWORK: {
   },
 };
 
-export const getTokenAddress = (chainId: CHAINS, token: TOKENS): string => {
+export const getL1TokenAddress = (chainId: CHAINS, token: TOKENS): string => {
   const tokens = TOKENS_BY_NETWORK[chainId];
   invariant(tokens, 'Chain is not supported');
 
@@ -67,4 +67,16 @@ export const getL2TokenAddress = (chainId: CHAINS, token: TOKENS): string => {
   invariant(address, 'L2 token is not supported');
 
   return address;
+};
+
+export const getTokenAddress = (chainId: CHAINS, token: TOKENS): string => {
+  if (token === TOKENS.LDO) {
+    const _chainId =
+      chainId === CHAINS.OptimismSepolia ? CHAINS.Sepolia : chainId;
+    return getL1TokenAddress(_chainId, token);
+  } else {
+    return chainId === CHAINS.OptimismSepolia
+      ? getL2TokenAddress(chainId, token)
+      : getL1TokenAddress(chainId, token);
+  }
 };
