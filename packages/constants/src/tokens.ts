@@ -40,7 +40,16 @@ export const TOKENS_BY_NETWORK: {
   },
 };
 
-export const getTokenAddress = (chainId: CHAINS, token: TOKENS): string => {
+export const L2_TOKENS_BY_NETWORK: {
+  [key in CHAINS]?: { [key in TOKENS]?: string };
+} = {
+  [CHAINS.OptimismSepolia]: {
+    [TOKENS.WSTETH]: '0x24B47cd3A74f1799b32B2de11073764Cb1bb318B',
+    [TOKENS.STETH]: '0xf49d208b5c7b10415c7beafe9e656f2df9edfe3b',
+  },
+};
+
+export const getL1TokenAddress = (chainId: CHAINS, token: TOKENS): string => {
   const tokens = TOKENS_BY_NETWORK[chainId];
   invariant(tokens, 'Chain is not supported');
 
@@ -48,4 +57,26 @@ export const getTokenAddress = (chainId: CHAINS, token: TOKENS): string => {
   invariant(address, 'Token is not supported');
 
   return address;
+};
+
+export const getL2TokenAddress = (chainId: CHAINS, token: TOKENS): string => {
+  const tokens = L2_TOKENS_BY_NETWORK[chainId];
+  invariant(tokens, 'L2 chain is not supported');
+
+  const address = tokens[token];
+  invariant(address, 'L2 token is not supported');
+
+  return address;
+};
+
+export const getTokenAddress = (chainId: CHAINS, token: TOKENS): string => {
+  if (token === TOKENS.LDO) {
+    const _chainId =
+      chainId === CHAINS.OptimismSepolia ? CHAINS.Sepolia : chainId;
+    return getL1TokenAddress(_chainId, token);
+  } else {
+    return chainId === CHAINS.OptimismSepolia
+      ? getL2TokenAddress(chainId, token)
+      : getL1TokenAddress(chainId, token);
+  }
 };
