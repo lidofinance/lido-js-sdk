@@ -17,6 +17,7 @@ export enum CHAINS {
   Fuji = 43113,
   Avalanche = 43114,
   Sepolia = 11155111,
+  Hoodi = 560048,
 }
 
 export const CHAINS_IDS = [
@@ -27,6 +28,7 @@ export const CHAINS_IDS = [
   CHAINS.Goerli,
   CHAINS.Kovan,
   CHAINS.Sepolia,
+  CHAINS.Hoodi,
 ];
 
 export const CHAINS_COLORS: {
@@ -37,6 +39,7 @@ export const CHAINS_COLORS: {
   [CHAINS.Rinkeby]: '#f6c343',
   [CHAINS.Goerli]: '#3099f2',
   [CHAINS.Holesky]: '#AA346A',
+  [CHAINS.Hoodi]: '#AA346A',
   [CHAINS.Kovan]: '#9064ff',
   [CHAINS.Sepolia]: '#FFD700',
 };
