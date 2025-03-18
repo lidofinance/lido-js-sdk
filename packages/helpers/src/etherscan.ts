@@ -19,6 +19,7 @@ export const ETHERSCAN_PREFIX_BY_NETWORK: {
   [CHAINS.Kovan]: 'kovan.',
   [CHAINS.Holesky]: 'holesky.',
   [CHAINS.Sepolia]: 'sepolia.',
+  [CHAINS.Hoodi]: 'hoodi.',
 };
 
 export const getEtherscanPrefix = (chainId: CHAINS): string => {
