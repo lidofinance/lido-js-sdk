@@ -1,6 +1,6 @@
 {
   "name": "@lido-sdk/providers",
-  "version": "0.0.3-semantic-release",
+  "version": "0.0.0-semantic-release",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
