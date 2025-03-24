@@ -6,9 +6,6 @@
   "types": "dist/esm/index.d.ts",
   "license": "MIT",
   "homepage": "https://github.com/lidofinance/lido-js-sdk",
-  "bundledDependencies": [
-    "tslib"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lidofinance/lido-js-sdk.git",
