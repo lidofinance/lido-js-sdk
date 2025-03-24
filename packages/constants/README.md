@@ -36,7 +36,7 @@ yarn add @lido-sdk/constants
 ```ts
 import { CHAINS } from '@lido-sdk/constants';
 
-console.log(CHAINS.Mainnet, CHAINS.Holesky); // 1, 17000
+console.log(CHAINS.Mainnet, CHAINS.Hoodi); // 1, 560048
 ```
 
 ### Array of chains ids
@@ -54,8 +54,8 @@ Color getter by chain id
 ```ts
 import { CHAINS, getChainColor } from '@lido-sdk/constants';
 
-const goerliChainColor = getChainColor(CHAINS.Goerli);
-console.log(goerliChainColor); // #3099f2
+const hoodiChainColor = getChainColor(CHAINS.Hoodi);
+console.log(hoodiChainColor); // #AA346A
 ```
 
 ## Tokens
