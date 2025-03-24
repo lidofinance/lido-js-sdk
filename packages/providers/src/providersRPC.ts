@@ -6,6 +6,7 @@ import {
 } from '@ethersproject/providers';
 import { StaticJsonRpcBatchProvider } from './staticJsonRpcBatchProvider';
 
+// function factory for creating a provider getter
 const createProviderGetter = <P extends typeof JsonRpcProvider>(
   Provider: P,
 ) => {
