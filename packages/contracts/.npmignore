@@ -3,3 +3,4 @@ tsconfig.json
 *.test.ts
 test
 src
+!node_modules/

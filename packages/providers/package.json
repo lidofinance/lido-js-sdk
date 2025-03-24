@@ -1,14 +1,17 @@
 {
   "name": "@lido-sdk/providers",
-  "version": "0.0.0-semantic-release",
+  "version": "0.0.3-semantic-release",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "license": "MIT",
   "homepage": "https://github.com/lidofinance/lido-js-sdk",
+  "bundledDependencies": [
+    "tslib"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/lidofinance/lido-js-sdk.git",
+    "url": "git+https://github.com/lidofinance/lido-js-sdk.git",
     "directory": "packages/providers"
   },
   "bugs": {
