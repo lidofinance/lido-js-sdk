@@ -39,6 +39,7 @@ import { CHAINS } from '@lido-sdk/constants';
 import { getRpcProvider } from '@lido-sdk/providers';
 
 const provider = getRpcProvider(CHAINS.Mainnet, '/rpc/url');
+const hoodiProvider = getRpcProvider(CHAINS.Hoodi, '/rpc/hoodi-url');
 ```
 
 ### getRpcBatchProvider
